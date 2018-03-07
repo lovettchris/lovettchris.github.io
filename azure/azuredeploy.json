@@ -9,7 +9,7 @@
       }
     },
     "adminUsername": {
-      "type": "ELLbuild",
+      "type": "string",
       "metadata": {
         "description": "Username for the Virtual Machine."
       }
