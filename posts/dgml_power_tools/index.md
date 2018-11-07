@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Software Complexity
+title: DGML Power Tools for Visual Studio 2017
 permalink: /posts/dgml_power_tools/
 ---
 
@@ -14,7 +14,7 @@ See my [Demo Video](http://lovettsoftware.com/videos/DGMLPowerTools.mp4).
 You will see the “Save as SVG” command in the Share menu on the Directed Graph Document toolbar.
 
 ![menu](menu.png)
-
+ 
 ## Neighborhood mode
 
 ![toolbar](toolbar.png)
