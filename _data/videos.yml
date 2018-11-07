@@ -1,0 +1,25 @@
+links:
+    - {  text: 'Ble Lights', url: 'http://lovettsoftware.com/videos/BleLights.mp4', icon: 'BleLights.png' }
+    - {  text: 'Wifi Lights', url: 'http://lovettsoftware.com/videos/WifiLights.mp4', icon: 'WifiLights.png' }
+    - {  text: 'Outlook Sync', url: 'http://lovettsoftware.com/videos/OutlookSync.mp4', icon: 'OutlookSync.png' }
+    - {  text: 'Password Vault', url: 'http://lovettsoftware.com/videos/PasswordVault.mp4', icon: 'PasswordVault.png' }
+    - {  text: 'Pinweight Devices', url: 'http://lovettsoftware.com/videos/PinweightDev.mp4', icon: 'PinweightDev.png' }
+    - {  text: 'Dgml Test Modeling', url: 'http://lovettsoftware.com/videos/DgmlTestModel.mp4', icon: 'DgmlTestModel.png' }
+    - {  text: 'Software Trails', url: 'http://lovettsoftware.com/videos/SoftwareTrails.mp4', icon: 'SoftwareTrails.png' }
+    - {  text: 'Energy Hub', url: 'http://lovettsoftware.com/videos/EnergyHub.mp4', icon: 'EnergyHub.png'}
+    - {  text: 'FIRST Event Planner', url: 'http://lovettsoftware.com/videos/FIRST%20Event%20Planner.mp4', icon: 'FIRST Event Planner.png' }
+    - {  text: 'GC Root Demo', url: 'http://lovettsoftware.com/videos/GCRootDemo.mp4', icon: 'GCRootDemo.png' }
+    - {  text: 'Large Graphs', url: 'http://lovettsoftware.com/videos/LargeGraphs.mp4', icon: 'LargeGraphs.png' }
+    - {  text: 'What’s new with DGML', url: 'http://lovettsoftware.com/videos/WhatsNew.mp4', icon: 'WhatsNew.png' }
+    - {  text: 'Architecture Explorer', url: 'http://lovettsoftware.com/videos/ArchitectureExplorer.mp4', icon: 'ArchitectureExplorer.png' }
+    - {  text: 'Standard Graphs', url: 'http://lovettsoftware.com/videos/StandardGraphs.mp4', icon: 'StandardGraphs.png' }
+    - {  text: 'Graph Documents', url: 'http://lovettsoftware.com/videos/GraphDocuments.mp4', icon: 'GraphDocuments.png' }
+
+    
+
+
+
+
+
+
+
