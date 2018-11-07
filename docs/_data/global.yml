@@ -1,0 +1,8 @@
+# Site Settings
+title: 'Software Complexity'
+description: "Simplicity is not the opposite of complexity. Simplicity is too often an excuse for being simplistic. The world doesn't need any more stupid software. The opposite of complexity is beautiful, elegant design."
+footer_text: "&copy; 2018 Lovett Software"
+
+# Admin Settings
+admin_name: 'Chris Lovett'
+admin_email: 'chris@lovettsoftware.com'
