@@ -13,8 +13,6 @@ destination: ./_site
 layouts_dir:     ./_layouts
 data_dir: ./_data
 
-source: docs
-
 relative_links:
   enabled:     true
   collections: false
