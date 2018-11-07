@@ -8,3 +8,5 @@ title: Software Complexity
 [Fun with ELL](/posts/fun_with_ell/)
 
 [Visual Studio’s lesser-known Xml Schema features](/posts/vs_xml_schemas/)
+
+[AirSim is "live"!!](/posts/airsim_is_live/)
