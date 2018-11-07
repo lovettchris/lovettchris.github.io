@@ -10,3 +10,7 @@ title: Software Complexity
 [Visual Studio’s lesser-known Xml Schema features](/posts/vs_xml_schemas/)
 
 [AirSim is "live"!!](/posts/airsim_is_live/)
+
+[MyMoney.Net is now open source…](/posts/mymoney.net/)
+
+[I love Mylio](/posts/i_love_mylio/)
