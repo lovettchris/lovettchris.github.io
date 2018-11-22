@@ -6,13 +6,13 @@ permalink: /posts/wireless_remote/
 
 # Wireless Remote Hack
 
-An arduino hack on a cheap Wireless Remote Light Switch from Home Depot.
+_An Arduino hack on a cheap Wireless Remote Light Switch from Home Depot._
 
 So I bought this remote control switch from Home Depot a couple years ago:
 
 [![](Assets/Logo.png)](https://www.homedepot.com/p/Defiant-Wireless-Indoor-Outdoor-Remote-Plug-RC-009A-1/202296039)
 
-And the battery died in the remote, so I could go find a replacement A53G 12V battery, or I could hack it and control the remote using Arduino.  That way I can turn the lights on and off by computer, based on time of sunset, etc, and get exactly what I want.  How hard could it be right?
+And the battery died in the remote, so I could go find a replacement A53G 12V battery, or I could hack it and control the remote using Arduino.  That way I can turn the lights on and off by computer, based on time of sunset, etc, which is even better than the remote and exactly what I want.  How hard could it be right?
 
 When you open up the remote it looks like a nice simple circuit, unfortunately no one seems to be able to find a datasheet for that IC labelled AUT980202-B1.  But the transmitter is a common 315 MHz transmitter that you can even [get from sparkfun](https://www.sparkfun.com/products/10535), so that's promising.
 
@@ -22,21 +22,19 @@ But since we don't know how the IC is driving the transmitter, it is time to bre
 
 ![traces](Assets/traces.png)
 
-Pretty soon you will see a set of simple signals at around 20 kHz, what looks like an initial preamble, then the Off and On buttons produce the sequence 0x6814 and 0x6824.  
+Pretty soon you will see a set of simple signals at around 20 kHz, and it looks like there is an initial preamble, then the Off and On buttons produce the sequence 0x6814 and 0x6824.  
 
-I had 3 of these remotes and look at all of them I could see 0x68 prefix was in common, the next nibble 0x1 or 0x2 was the on off switch and the last nibble 0x0 to 0xF was the address of the remote switch, so you can do up to 16 unique remotes with this I guess.
+I had 3 of these remotes and when I looked at all of them I could see 0x68 prefix was in common, the next nibble 0x1 or 0x2 was the on off switch and the last nibble 0x0 to 0xF was the address of the remote switch, so you can do up to 16 unique remotes with this I guess.
 
-Ok, then I grabbed my trusty Arduino Leonardo and bit-banged out a similar signal until the logic analyzer matched as closely as possible.  Here's the arduino version:
+Ok, then I grabbed my trusty Arduino Leonardo and bit-banged out a similar signal until the logic analyzer matched as closely as possible.  Here's the Arduino version:
 
 ![arduino](Assets/arduino.png)
 
-I noticed the original signal did the preable, then the on or off sequence about 4 times with about 4 ms between each, then repeated with the preamble again.  So I coded up a similar pattern and tried it out.
-
-Didn't work the first time, had to adjust the timing to be as close as possible, then bingo, it worked as shown in this demo vide0:
+I noticed the original signal did the preamble, then the on or off sequence about 4 times with about 4 ms between each, then repeated with the preamble again.  So I coded up a similar pattern and tried it out.   It didn't work the first time, so I adjusted the timing to be as close as possible, then bingo, it worked as shown in this demo video:
 
 [![demo video](Assets/thumbnail.png)](https://youtu.be/AfYIgU1gyn8):
 
-In this video I'm using the button to power the transmitter, but the signal is coming from the Arduino, since I severed the link from the AUT980202 chip.  The next step is to bypass the buttons on the remote so the Arduino can decide when to turn the lights on or off.
+In this video I'm using the button to power the transmitter, but the signal is coming from the Arduino, since I severed the link from the AUT980202 chip.  The next step is to bypass the buttons on the remote so the Arduino can decide when to turn the lights on or off, you can also hard wire the 5 volt output from the Arduino and remote the battery.  Turns out 5 volts is enough and it still works.  It may not have the same range, however, when I looked at the actual transmitted signal using my trusty software defined radio, I could saw the 12V batterh drives a more powerful signal.  So for best results, you could get another 12V power source instead of the battery, and step that down to 5 volts to power the Arduino.
 
 Lastly, I found that the older version of the remote I bought a couple years ago was essentially the same but it runs the signal at about 2.7 times slower. Perhaps they change the signal speed every now and then to stop the devices from clashing, so no guarentee this code will work on your remote.  But if you find the right scaling factor then you might get lucky.
 
@@ -158,6 +156,6 @@ void writeBits(uint16_t signal, float scale)
 }
 ```
 
-The exact numbers used in these `delayMicroseconds` calls is needed to match the signal from the IC chip, and the lack of neat round numbers here is probably because the internal oscillators on the IC versus the arduino are slightly different.  But this seems to work.  The scale factor in the code is just so that I can control old and new remote switches with the same code.
+The exact numbers used in these `delayMicroseconds` calls is needed to match the signal from the IC chip, and the lack of neat round numbers here is probably because the internal oscillators on the IC versus the Arduino are slightly different.  But this seems to work.  The scale factor in the code is just so that I can control old and new remote switches with the same code.
 
 See [Full Source Code](Remote.ino).
