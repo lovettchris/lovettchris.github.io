@@ -1,4 +1,5 @@
 links:
+    - { text: "Arduino controlled Remote Light Switch", url: "/posts/wireless_remote/" }
     - { text: "DGML Power Tools for Visual Studio 2017", url: "/posts/dgml_power_tools/" }
     - { text: "Fun with ELL", url: "/posts/fun_with_ell/" }
     - { text: "Visual Studio’s lesser-known Xml Schema features", url: "/posts/vs_xml_schemas/" }
