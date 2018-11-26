@@ -1,9 +1,17 @@
-
+#!/usr/bin/env python3
+# ####################################################################################################
+#
+# Project:  Wireless remote light switch
+# File:     Lights.py
+# Authors:  Chris Lovett
+#
+# Requires: Python 3.5+
+#
+####################################################################################################
 import argparse
 from datetime import datetime
 import time
 import typing
-#import pyserial
 import sys
 import serial
 
@@ -33,6 +41,7 @@ class LightController:
     def run(self):
         while True:
             secondsToNextEvent = self.checkLights()
+            sys.stdout.flush()
             time.sleep(secondsToNextEvent)
 
     def turnOff(self):    
