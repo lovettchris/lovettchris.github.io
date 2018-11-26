@@ -32,7 +32,7 @@ Ok, then I grabbed my trusty Arduino Leonardo and bit-banged out a similar signa
 
 I noticed the original signal did the preamble, then the on or off sequence about 4 times with about 4 ms between each, then repeated with the preamble again.  So I coded up a similar pattern and tried it out.   It didn't work the first time, so I adjusted the timing to be as close as possible, then bingo, it worked as shown in this demo video:
 
-[![demo video](Assets/thumbnail.png)](https://youtu.be/AfYIgU1gyn8):
+[![demo video](Assets/thumbnail.png)](https://youtu.be/wQw-xsnpP8o):
 
 In this video I'm using the button to power the transmitter, but the signal is coming from the Arduino, since I severed the link from the AUT980202 chip.  The next step is to bypass the buttons on the remote so the Arduino can decide when to turn the lights on or off, you can also hard wire the 5 volt output from the Arduino and remote the battery.  Turns out 5 volts is enough and it still works.  It may not have the same range, however, when I looked at the actual transmitted signal using my trusty software defined radio, I could see that the 12V battery drives a more powerful signal.  So for best results, you could get another 12V power source instead of the battery, and step that down to 5 volts to power the Arduino.
 
