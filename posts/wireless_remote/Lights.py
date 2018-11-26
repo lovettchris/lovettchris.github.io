@@ -23,6 +23,7 @@ class LightController:
         self.southLights = 4; # south lights
         self.northLights = 12; # north lights
 
+        self.log = open("lights.log", "w")
         self.port = port
         self.serial = serial.Serial()
         self.serial.port = port
@@ -33,36 +34,44 @@ class LightController:
             response = self.serial.readline().decode()
             response2 = self.serial.readline().decode()
             if response2.strip() == "Remote Light Controller:":
-                print("connected")
+                self.writeln("connected")
             else:
-                print("Unexpected response from controller: {}".format(response2))
+                self.writeln("Unexpected response from controller: {}".format(response2))
                 sys.exit(1)
+
+    def write(self, msg):
+        self.log.write(msg)
+        self.log.flush()
+
+    def writeln(self, msg):
+        self.log.write(msg)
+        self.log.write("\n")
+        self.log.flush()
 
     def run(self):
         while True:
             secondsToNextEvent = self.checkLights()
-            sys.stdout.flush()
             time.sleep(secondsToNextEvent)
 
     def turnOff(self):    
         self.serial.write("off:{}\r".format(self.southLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        print("south:" + response.strip())
+        self.writeln("south:" + response.strip())
         self.serial.write("off:{}\r".format(self.northLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        print("north:" + response.strip())
+        self.writeln("north:" + response.strip())
 
     def turnOn(self):
         self.serial.write("on:{}\r".format(self.southLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        print("south:" + response.strip())
+        self.writeln("south:" + response.strip())
         self.serial.write("on:{}\r".format(self.northLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        print("north:" + response.strip())
+        self.writeln("north:" + response.strip())
 
     def checkLights(self):
         # Get sunrise and sunset for Woodinville, WA
@@ -75,45 +84,45 @@ class LightController:
         sunrise = sunrise.replace(tzinfo=None)
         sunrise_hour = sunrise.strftime('%H')
         sunrise_minute = sunrise.strftime('%M')
-        print('sunrise {}:{}'.format(sunrise_hour, sunrise_minute))
+        self.writeln('sunrise {}:{}'.format(sunrise_hour, sunrise_minute))
 
         sunset = l.sun()['sunset']
         sunset = sunset.replace(tzinfo=None)
         sunset_hour = sunset.strftime('%H')
         sunset_minute = sunset.strftime('%M')
-        print('sunset {}:{}'.format(sunset_hour, sunset_minute))
+        self.writeln('sunset {}:{}'.format(sunset_hour, sunset_minute))
 
         current_time = datetime.now()
         current_hour = current_time.hour
         current_minute = current_time.minute
 
-        print('current time={}:{}'.format(current_hour, current_minute))
+        self.writeln('current time={}:{}'.format(current_hour, current_minute))
 
         sunrise_delta = sunrise - current_time
         sunrise_seconds = sunrise_delta.total_seconds()
-        print('time till sunrise is {} seconds'.format(sunrise_seconds))
+        self.writeln('time till sunrise is {} seconds'.format(sunrise_seconds))
 
         sunset_delta = sunset - current_time
         sunset_seconds = sunset_delta.total_seconds()
-        print('time till sunset is {} seconds'.format(sunset_seconds))
+        self.writeln('time till sunset is {} seconds'.format(sunset_seconds))
 
         if sunrise_seconds < 0 and sunset_seconds <= 0:
-            print("Turning on the lights")
+            self.writeln("Turning on the lights")
             self.turnOn()
-            print("Turning off the lights in {} seconds".format(-sunrise_seconds))
+            self.writeln("Turning off the lights in {} seconds".format(-sunrise_seconds))
             return -sunrise_seconds
         elif sunrise_seconds > 0 and sunset_seconds > 0:
-            print("Turning on the lights")
+            self.writeln("Turning on the lights")
             self.turnOn()
-            print("Turning off the lights in {} seconds".format(sunrise_seconds))
+            self.writeln("Turning off the lights in {} seconds".format(sunrise_seconds))
             return sunrise_seconds
         elif sunrise_seconds <= 0 and sunset_seconds > 0:
-            print("Turning off the lights")
+            self.writeln("Turning off the lights")
             self.turnOff()
-            print("Turning on the lights in {} seconds".format(sunset_seconds))
+            self.writeln("Turning on the lights in {} seconds".format(sunset_seconds))
             return sunset_seconds
         
-if __name__ == "__main__":
+if __name__ == "__main__":    
     parser = argparse.ArgumentParser("Control the lights on given serial port so they turn on at sunset and off at sunrise")
     parser.add_argument("port", help="Name of COM port to talk to Arduino")
     args = parser.parse_args()    
