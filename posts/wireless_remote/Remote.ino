@@ -97,8 +97,6 @@ int length = 0;
 
 void loop() {
   float scale = 2.77; // old remote is slower.
-  uint8_t southLights = 0x4; // south lights
-  uint8_t northLights = 0xC; // north lights
   
   //float scale = 1; 
   //uint8_t addr = 0x0; // new switch
@@ -111,22 +109,22 @@ void loop() {
     {
       buffer[length] = '\0';
       Serial.println(buffer);
-      if (strcmp(buffer, "on") == 0)
+      if (strncmp(buffer, "on:", 3) == 0)
       {    
-        Serial.println("Turning on");
-        turnOn(southLights, scale);        
-        delay(100); 
-        turnOn(northLights, scale);
+        int id = atoi(&buffer[3]);
+        sprintf(buffer, "Turning on lights id: %d", id);
+        Serial.println(buffer);
+        turnOn(id, scale);
       }
-      else if (strcmp(buffer, "off") == 0)
+      else if (strncmp(buffer, "off:", 4) == 0)
       {
-        Serial.println("Turning off");
-        turnOff(southLights, scale);        
-        delay(100); 
-        turnOff(northLights, scale);
+        int id = atoi(&buffer[4]);
+        sprintf(buffer, "Turning off lights id: %d", id);
+        Serial.println(buffer);
+        turnOff(id, scale);
       }
       else {
-        Serial.print("Unknown command:");
+        Serial.print("Remote Light Controller:");
         Serial.print(buffer);
         Serial.println();
       }

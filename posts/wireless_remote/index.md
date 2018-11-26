@@ -159,3 +159,7 @@ void writeBits(uint16_t signal, float scale)
 The exact numbers used in these `delayMicroseconds` calls is needed to match the signal from the IC chip, and the lack of neat round numbers here is probably because the internal oscillators on the IC versus the Arduino are slightly different.  But this seems to work.  The scale factor in the code is just so that I can control old and new remote switches with the same code.
 
 See [Full Source Code](Remote.ino).
+
+Now hook that up to a nice little Python script to toggle the lights at sunrise and sunset: [Source Code](Lights.py).
+
+Fun!
