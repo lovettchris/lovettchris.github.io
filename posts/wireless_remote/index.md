@@ -18,7 +18,7 @@ When you open up the remote it looks like a nice simple circuit, unfortunately n
 
 ![circuit](Assets/circuit.jpg)
 
-But since we don't know how the IC is driving the transmitter, it is time to break out the logic analyzer and take a look at the signal coming from the IC.  The IC pin 2 seems to be the pin connected to the transmitter.  There's a couple 0 ohm resistors connected to that trace, so let's probe there.
+But since I don't know how the IC is driving the transmitter, it is time to break out the logic analyzer and take a look at the signal coming from the IC.  The IC pin 2 seems to be the pin connected to the transmitter.  There's a couple 0 ohm resistors connected to that trace, so let's probe there.
 
 ![traces](Assets/traces.png)
 
@@ -34,18 +34,20 @@ I noticed the original signal did the preamble, then the on or off sequence abou
 
 [![demo video](Assets/thumbnail.png)](https://youtu.be/wQw-xsnpP8o):
 
-In this video I'm using the button to power the transmitter, but the signal is coming from the Arduino, since I severed the link from the AUT980202 chip.  The next step is to bypass the buttons on the remote so the Arduino can decide when to turn the lights on or off, you can also hard wire the 5 volt output from the Arduino and remote the battery.  Turns out 5 volts is enough and it still works.  It may not have the same range, however, when I looked at the actual transmitted signal using my trusty software defined radio, I could see that the 12V battery drives a more powerful signal.  So for best results, you could get another 12V power source instead of the battery, and step that down to 5 volts to power the Arduino.
+I severed the link from the AUT980202 chip by removing a diode from the signal pin.  This way I could use the Arduino to drive the signal instead.  The next step was to bypass the buttons on the remote by soldering a wire to the transitor that controls the transmitter directly so the Arduino can decide when to turn the lights on or off, you can also hard wire the 5 volt output from the Arduino and remove the battery.  Turns out 5 volts is enough and it still works.  
 
 Lastly, I found that the older version of the remote, that I bought a couple years ago, was essentially the same but it runs the signal at about 2.7 times slower. Perhaps they change the signal speed every now and then to stop the devices from clashing, so no guarentee this code will work on your remote.  But if you find the right scaling factor then you might get lucky.
 
-I used GPIO pin 13 on my board, so the setup is simple:
+We need to use two GPIO pins on the Arduino, one to turn on or off the transmitter and another to drive the transmitted signal. 
 
 ```cpp
-#define CONTROL_PIN LED_BUILTIN
+#define SIGNAL_PIN 12
+#define POWER_PIN 3
 
 void setup() {
-  // initialize digital pin CONTROL_PIN as an output.
-  pinMode(CONTROL_PIN, OUTPUT);
+  // initialize digital pin SIGNAL_PIN as an output.
+  pinMode(SIGNAL_PIN, OUTPUT);
+  pinMode(POWER_PIN, OUTPUT);
 }
 ```
 
@@ -69,19 +71,25 @@ void loop()
 }
 ```
 
-The cool thing is this hacked remote can now turn on any of my remote switches simply by changing the address, and/or the scale on the speed depending on whether I'm controlling old or new switches.  The `turnOn` and `turnOff` functions look similar:
+The cool thing is this hacked remote can now turn on any of my remote switches simply by changing the 16 bit address, and/or the scale on the speed depending on whether I'm controlling old or new switches.  The `turnOn` and `turnOff` functions look similar:
 
 ```cpp
 void turnOn(uint8_t addr, float scale)
 {
+  digitalWrite(POWER_PIN, TOGGLE_ON);
+  delay(1);
   uint16_t onSignal = makeSignal(true, addr);
   sendSignal(onSignal, scale);
+  digitalWrite(POWER_PIN, TOGGLE_OFF);
 }
 
 void turnOff(uint8_t addr, float scale)
 {
+  digitalWrite(POWER_PIN, TOGGLE_ON);
+  delay(1); 
   uint16_t offSignal = makeSignal(false, addr);
   sendSignal(offSignal, scale);
+  digitalWrite(POWER_PIN, TOGGLE_OFF);
 }
 ```
 
@@ -125,9 +133,9 @@ void writePreamble(int len, float scale)
 {
   for (int i = 0; i < len ; i++)
   {
-    digitalWrite(CONTROL_PIN, HIGH);
+    digitalWrite(SIGNAL_PIN, HIGH);
     delayMicroseconds((int)(200.0 * scale));
-    digitalWrite(CONTROL_PIN, LOW); 
+    digitalWrite(SIGNAL_PIN, LOW); 
     delayMicroseconds((int)(200.0 * scale));
   }
 }
@@ -141,15 +149,15 @@ void writeBits(uint16_t signal, float scale)
   for (int i = 0; i < 16 ; i++)
   {
     int bit = (signal & 0x8000);
-    digitalWrite(CONTROL_PIN, HIGH);
+    digitalWrite(SIGNAL_PIN, HIGH);
     if (bit) {      
       delayMicroseconds((int)(610.0 * scale));
     } else {
       delayMicroseconds((int)(200.0 * scale));
-      digitalWrite(CONTROL_PIN, LOW); 
+      digitalWrite(SIGNAL_PIN, LOW); 
       delayMicroseconds((int)(410.0 * scale));
     }
-    digitalWrite(CONTROL_PIN, LOW);
+    digitalWrite(SIGNAL_PIN, LOW);
     delayMicroseconds((int)(210.0 * scale));
     signal <<= 1; 
   }

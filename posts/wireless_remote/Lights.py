@@ -11,7 +11,6 @@
 import argparse
 from datetime import datetime
 import time
-import typing
 import sys
 import serial
 

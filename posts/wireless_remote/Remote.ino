@@ -1,7 +1,7 @@
 #include <stdint.h>
 
-#define CONTROL_PIN 12
-#define TOGGLE_PIN 3
+#define SIGNAL_PIN 12
+#define POWER_PIN 3
 
 #define TOGGLE_ON HIGH
 #define TOGGLE_OFF LOW
@@ -14,18 +14,18 @@ void setup() {
   }
   Serial.println("Arduino Leonardo is ready!");   // send an initial string
 
-  // initialize digital pin CONTROL_PIN as an output.
-  pinMode(CONTROL_PIN, OUTPUT);
-  pinMode(TOGGLE_PIN, OUTPUT);
+  // initialize digital pin SIGNAL_PIN as an output.
+  pinMode(SIGNAL_PIN, OUTPUT);
+  pinMode(POWER_PIN, OUTPUT);
 }
 
 void writePreamble(int len, float scale)
 {
   for (int i = 0; i < len ; i++)
   {
-    digitalWrite(CONTROL_PIN, HIGH);
+    digitalWrite(SIGNAL_PIN, HIGH);
     delayMicroseconds((int)(200.0 * scale));
-    digitalWrite(CONTROL_PIN, LOW); 
+    digitalWrite(SIGNAL_PIN, LOW); 
     delayMicroseconds((int)(200.0 * scale));
   }
 }
@@ -35,15 +35,15 @@ void writeBits(uint16_t signal, float scale)
   for (int i = 0; i < 16 ; i++)
   {
     int bit = (signal & 0x8000);
-    digitalWrite(CONTROL_PIN, HIGH);
+    digitalWrite(SIGNAL_PIN, HIGH);
     if (bit) {      
       delayMicroseconds((int)(610.0 * scale));
     } else {
       delayMicroseconds((int)(200.0 * scale));
-      digitalWrite(CONTROL_PIN, LOW); 
+      digitalWrite(SIGNAL_PIN, LOW); 
       delayMicroseconds((int)(410.0 * scale));
     }
-    digitalWrite(CONTROL_PIN, LOW);
+    digitalWrite(SIGNAL_PIN, LOW);
     delayMicroseconds((int)(210.0 * scale));
     signal <<= 1; 
   }
@@ -76,20 +76,20 @@ void sendSignal(uint16_t signal, float scale)
 
 void turnOn(uint8_t addr, float scale)
 {
-  digitalWrite(TOGGLE_PIN, TOGGLE_ON);
+  digitalWrite(POWER_PIN, TOGGLE_ON);
   delay(1); // allow some settle time
   uint16_t onSignal = makeSignal(true, addr);
   sendSignal(onSignal, scale);
-  digitalWrite(TOGGLE_PIN, TOGGLE_OFF);
+  digitalWrite(POWER_PIN, TOGGLE_OFF);
 }
 
 void turnOff(uint8_t addr, float scale)
 {
-  digitalWrite(TOGGLE_PIN, TOGGLE_ON);
+  digitalWrite(POWER_PIN, TOGGLE_ON);
   delay(1); 
   uint16_t offSignal = makeSignal(false, addr);
   sendSignal(offSignal, scale);
-  digitalWrite(TOGGLE_PIN, TOGGLE_OFF);
+  digitalWrite(POWER_PIN, TOGGLE_OFF);
 }
 
 char buffer[1000];
