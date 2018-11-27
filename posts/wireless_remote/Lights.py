@@ -13,16 +13,32 @@ from datetime import datetime
 import time
 import sys
 import serial
+import serial.tools.list_ports
 
 from astral import Location
 
+class Log:
+    def __init__(self):
+         self.logfile = open("lights.log", "w")
+        
+    def write(self, msg):
+        self.logfile.write(msg)
+        print(msg, end='')
+        self.logfile.flush()
+
+    def writeln(self, msg):
+        self.logfile.write(msg)
+        self.logfile.write("\n")
+        print(msg)        
+        self.logfile.flush()
+
+
 class LightController:
-    def __init__(self, port):
+    def __init__(self, port, log):
         
         self.southLights = 4; # south lights
-        self.northLights = 12; # north lights
-
-        self.log = open("lights.log", "w")
+        self.northLights = 12; # north lights        
+        self.log = log
         self.port = port
         self.serial = serial.Serial()
         self.serial.port = port
@@ -33,19 +49,10 @@ class LightController:
             response = self.serial.readline().decode()
             response2 = self.serial.readline().decode()
             if response2.strip() == "Remote Light Controller:":
-                self.writeln("connected")
+                self.log.writeln("connected")
             else:
-                self.writeln("Unexpected response from controller: {}".format(response2))
+                self.log.writeln("Unexpected response from controller: {}".format(response2))
                 sys.exit(1)
-
-    def write(self, msg):
-        self.log.write(msg)
-        self.log.flush()
-
-    def writeln(self, msg):
-        self.log.write(msg)
-        self.log.write("\n")
-        self.log.flush()
 
     def run(self):
         while True:
@@ -56,21 +63,21 @@ class LightController:
         self.serial.write("off:{}\r".format(self.southLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        self.writeln("south:" + response.strip())
+        self.log.writeln("south:" + response.strip())
         self.serial.write("off:{}\r".format(self.northLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        self.writeln("north:" + response.strip())
+        self.log.writeln("north:" + response.strip())
 
     def turnOn(self):
         self.serial.write("on:{}\r".format(self.southLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        self.writeln("south:" + response.strip())
+        self.log.writeln("south:" + response.strip())
         self.serial.write("on:{}\r".format(self.northLights).encode())
         response = self.serial.readline().decode()
         response = self.serial.readline().decode()
-        self.writeln("north:" + response.strip())
+        self.log.writeln("north:" + response.strip())
 
     def checkLights(self):
         # Get sunrise and sunset for Woodinville, WA
@@ -83,48 +90,62 @@ class LightController:
         sunrise = sunrise.replace(tzinfo=None)
         sunrise_hour = sunrise.strftime('%H')
         sunrise_minute = sunrise.strftime('%M')
-        self.writeln('sunrise {}:{}'.format(sunrise_hour, sunrise_minute))
+        self.log.writeln('sunrise {}:{}'.format(sunrise_hour, sunrise_minute))
 
         sunset = l.sun()['sunset']
         sunset = sunset.replace(tzinfo=None)
         sunset_hour = sunset.strftime('%H')
         sunset_minute = sunset.strftime('%M')
-        self.writeln('sunset {}:{}'.format(sunset_hour, sunset_minute))
+        self.log.writeln('sunset {}:{}'.format(sunset_hour, sunset_minute))
 
         current_time = datetime.now()
         current_hour = current_time.hour
         current_minute = current_time.minute
 
-        self.writeln('current time={}:{}'.format(current_hour, current_minute))
+        self.log.writeln('current time={}:{}'.format(current_hour, current_minute))
 
         sunrise_delta = sunrise - current_time
         sunrise_seconds = sunrise_delta.total_seconds()
-        self.writeln('time till sunrise is {} seconds'.format(sunrise_seconds))
+        self.log.writeln('time till sunrise is {} seconds'.format(sunrise_seconds))
 
         sunset_delta = sunset - current_time
         sunset_seconds = sunset_delta.total_seconds()
-        self.writeln('time till sunset is {} seconds'.format(sunset_seconds))
+        self.log.writeln('time till sunset is {} seconds'.format(sunset_seconds))
 
         if sunrise_seconds < 0 and sunset_seconds <= 0:
-            self.writeln("Turning on the lights")
+            self.log.writeln("Turning on the lights")
             self.turnOn()
-            self.writeln("Turning off the lights in {} seconds".format(-sunrise_seconds))
+            self.log.writeln("Turning off the lights in {} seconds".format(-sunrise_seconds))
             return -sunrise_seconds
         elif sunrise_seconds > 0 and sunset_seconds > 0:
-            self.writeln("Turning on the lights")
+            self.log.writeln("Turning on the lights")
             self.turnOn()
-            self.writeln("Turning off the lights in {} seconds".format(sunrise_seconds))
+            self.log.writeln("Turning off the lights in {} seconds".format(sunrise_seconds))
             return sunrise_seconds
         elif sunrise_seconds <= 0 and sunset_seconds > 0:
-            self.writeln("Turning off the lights")
+            self.log.writeln("Turning off the lights")
             self.turnOff()
-            self.writeln("Turning on the lights in {} seconds".format(sunset_seconds))
+            self.log.writeln("Turning on the lights in {} seconds".format(sunset_seconds))
             return sunset_seconds
         
 if __name__ == "__main__":    
     parser = argparse.ArgumentParser("Control the lights on given serial port so they turn on at sunset and off at sunrise")
-    parser.add_argument("port", help="Name of COM port to talk to Arduino")
+    parser.add_argument("--port", help="Name of COM port to talk to Arduino (default is first Arduino device found)", default=None)
     args = parser.parse_args()    
 
-    controller = LightController(args.port)
-    controller.run()
+    log = Log()
+
+    port = args.port
+    if port is None:
+        ports = list(serial.tools.list_ports.comports())
+        for p in ports:
+            if "Arduino" in p.manufacturer:                
+                port = p.device                
+                break
+    
+    if port is None:
+        log.writeln("### Error: No port found connected to an Arduino")
+    else:
+        log.writeln("Using COM port: {}".format(port))
+        controller = LightController(port, log)
+        controller.run()
