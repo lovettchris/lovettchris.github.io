@@ -36,48 +36,76 @@ class Log:
 class LightController:
     def __init__(self, port, log):
         
-        self.southLights = 4; # south lights
+        self.southLights = 0; # 4; # south lights
         self.northLights = 12; # north lights        
+
+        self.southFrequency = 1 # new remote
+        self.northFrequency = 2.77 # old remote is slower.
+
         self.log = log
         self.port = port
         self.serial = serial.Serial()
         self.serial.port = port
         self.baudrate = 115200
         self.serial.open()
-        if self.serial.isOpen():
+        retries = 5
+        self.connected = False
+        while self.serial.isOpen() and retries > 0:
             self.serial.write("\r".encode())
-            response = self.serial.readline().decode()
-            response2 = self.serial.readline().decode()
-            if response2.strip() == "Remote Light Controller:":
+            response = self.serial.readline().decode().strip()
+            response2 = self.serial.readline().decode().strip()
+            if response == "Remote Light Controller" or response2 == "Remote Light Controller":
                 self.log.writeln("connected")
-            else:
-                self.log.writeln("Unexpected response from controller: {}".format(response2))
-                sys.exit(1)
+                self.connected = True
+                break
+            retries -= 1
+
+        if not self.connected:
+            self.log.writeln("Unexpected response from controller: {}".format(response2))
+            sys.exit(1)
 
     def run(self):
         while True:
             secondsToNextEvent = self.checkLights()
             time.sleep(secondsToNextEvent)
 
-    def turnOff(self):    
-        self.serial.write("off:{}\r".format(self.southLights).encode())
+    def sendCommand(self, cmd):
+        self.serial.write(cmd.encode())
+        # we are expecting an echo response
         response = self.serial.readline().decode()
+        # and a command response
         response = self.serial.readline().decode()
-        self.log.writeln("south:" + response.strip())
-        self.serial.write("off:{}\r".format(self.northLights).encode())
-        response = self.serial.readline().decode()
-        response = self.serial.readline().decode()
-        self.log.writeln("north:" + response.strip())
+        return response.strip()
 
-    def turnOn(self):
-        self.serial.write("on:{}\r".format(self.southLights).encode())
-        response = self.serial.readline().decode()
-        response = self.serial.readline().decode()
-        self.log.writeln("south:" + response.strip())
-        self.serial.write("on:{}\r".format(self.northLights).encode())
-        response = self.serial.readline().decode()
-        response = self.serial.readline().decode()
-        self.log.writeln("north:" + response.strip())
+    def setFrequency(self, freq):    
+        response = self.sendCommand("freq:{}\r".format(freq))
+        self.log.writeln("frequency:" + response)
+
+    def turnOff(self):    
+        self.setFrequency(self.southFrequency)
+        for i in range(2):
+            response = self.sendCommand("off:{}\r".format(self.southLights))
+            self.log.writeln("south:" + response)
+            time.sleep(0.5)
+        time.sleep(1)
+        self.setFrequency(self.northFrequency)
+        for i in range(2):
+            response = self.sendCommand("off:{}\r".format(self.northLights))
+            self.log.writeln("north:" + response)
+            time.sleep(0.5)
+
+    def turnOn(self):        
+        self.setFrequency(self.southFrequency)
+        for i in range(2):
+            response = self.sendCommand("on:{}\r".format(self.southLights))
+            self.log.writeln("south:" + response)
+            time.sleep(0.5)
+        time.sleep(1)
+        self.setFrequency(self.northFrequency)
+        for i in range(2):
+            response = self.sendCommand("on:{}\r".format(self.northLights))
+            self.log.writeln("north:" + response)
+            time.sleep(0.5)
 
     def checkLights(self):
         # Get sunrise and sunset for Woodinville, WA
@@ -131,6 +159,8 @@ class LightController:
 if __name__ == "__main__":    
     parser = argparse.ArgumentParser("Control the lights on given serial port so they turn on at sunset and off at sunrise")
     parser.add_argument("--port", help="Name of COM port to talk to Arduino (default is first Arduino device found)", default=None)
+    parser.add_argument("--on", help="Turn on the lights now)", action="store_true")
+    parser.add_argument("--off", help="Turn off the lights now)", action="store_true")
     args = parser.parse_args()    
 
     log = Log()
@@ -148,4 +178,9 @@ if __name__ == "__main__":
     else:
         log.writeln("Using COM port: {}".format(port))
         controller = LightController(port, log)
-        controller.run()
+        if args.on:
+            controller.turnOn()
+        elif args.off:
+            controller.turnOff()
+        else:
+            controller.run()
