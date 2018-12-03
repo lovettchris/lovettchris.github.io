@@ -6,6 +6,10 @@
 #define TOGGLE_ON HIGH
 #define TOGGLE_OFF LOW
 
+char buffer[1000];
+int length = 0;
+float frequency = 1;
+
 // the setup function runs once when you press reset or power the board
 void setup() {
   Serial.begin(115200);
@@ -92,19 +96,20 @@ void turnOff(uint8_t addr, float scale)
   digitalWrite(POWER_PIN, TOGGLE_OFF);
 }
 
-char buffer[1000];
-int length = 0;
-float frequency = 1;
-
 struct Command
 {
-    bool on; // or off
+    bool on; 
+    bool off;
     uint8_t addr; // switch id
     float frequency; // 1 or 2.7
 };
 
-bool parse(char* buffer, struct Command& cmd)
+struct Command parse(char* buffer)
 {
+    Command cmd;
+    cmd.on = false;
+    cmd.off = false;
+    cmd.addr = 0;
     cmd.frequency = 1;
 
     // serialization format is "on:4,freq:2.7"
@@ -126,17 +131,13 @@ bool parse(char* buffer, struct Command& cmd)
     }
     else if (strncmp(buffer, "off:", 4) == 0)
     {
-      cmd.on = false;
+      cmd.off = true;
       cmd.addr = atoi(&buffer[4]);
     }
-    else 
-    {
-      return false;
-    }
-    return true;
+    return cmd;
 }
 
-void processCommand(struct Command& cmd)
+void processCommand(struct Command cmd)
 {
   // for some unknown reason sprintf with %f is not working.
   int x = (int)cmd.frequency;
@@ -147,11 +148,15 @@ void processCommand(struct Command& cmd)
     Serial.println(buffer);
     turnOn(cmd.addr, cmd.frequency);
   }
-  else
+  else if (cmd.off)
   {
-    sprintf(buffer, "Turning on lights id: %d with frequency %d.%d ", cmd.addr, x, y);
+    sprintf(buffer, "Turning off lights id: %d with frequency %d.%d ", cmd.addr, x, y);
     Serial.println(buffer);
     turnOff(cmd.addr, cmd.frequency);
+  }
+  else
+  {
+        Serial.println("Remote Light Controller");
   }
 }
 
@@ -175,19 +180,13 @@ void loop() {
       
       buffer[length] = '\0';
 
-      struct Command cmd;
-      if (parse(buffer, cmd))
-      {
-        processCommand(cmd);
-      }
-      else
-      {
-        Serial.print("Remote Light Controller");
-        Serial.println();
-      }
+      struct Command cmd = parse(buffer);
+      processCommand(cmd);
+      
       length = 0;
+      buffer[length] = '\0';
     }
-    else 
+    else if (ch != '\n')
     {
       buffer[length++] = ch;
       if (length == 1000)
