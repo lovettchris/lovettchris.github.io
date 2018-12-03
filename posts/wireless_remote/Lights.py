@@ -82,28 +82,24 @@ class LightController:
         self.log.writeln("frequency:" + response)
 
     def turnOff(self):    
-        self.setFrequency(self.southFrequency)
         for i in range(2):
-            response = self.sendCommand("off:{}\r".format(self.southLights))
+            response = self.sendCommand("off:{},freq:{}\r".format(self.southLights, self.southFrequency))
             self.log.writeln("south:" + response)
             time.sleep(0.5)
         time.sleep(1)
-        self.setFrequency(self.northFrequency)
         for i in range(2):
-            response = self.sendCommand("off:{}\r".format(self.northLights))
+            response = self.sendCommand("off:{},freq:{}\r".format(self.northLights, self.northFrequency))
             self.log.writeln("north:" + response)
             time.sleep(0.5)
 
     def turnOn(self):        
-        self.setFrequency(self.southFrequency)
         for i in range(2):
-            response = self.sendCommand("on:{}\r".format(self.southLights))
+            response = self.sendCommand("on:{},freq:{}\r".format(self.southLights, self.southFrequency))
             self.log.writeln("south:" + response)
             time.sleep(0.5)
         time.sleep(1)
-        self.setFrequency(self.northFrequency)
         for i in range(2):
-            response = self.sendCommand("on:{}\r".format(self.northLights))
+            response = self.sendCommand("on:{},freq:{}\r".format(self.northLights, self.northFrequency))
             self.log.writeln("north:" + response)
             time.sleep(0.5)
 
@@ -159,8 +155,8 @@ class LightController:
 if __name__ == "__main__":    
     parser = argparse.ArgumentParser("Control the lights on given serial port so they turn on at sunset and off at sunrise")
     parser.add_argument("--port", help="Name of COM port to talk to Arduino (default is first Arduino device found)", default=None)
-    parser.add_argument("--on", help="Turn on the lights now)", action="store_true")
-    parser.add_argument("--off", help="Turn off the lights now)", action="store_true")
+    parser.add_argument("--on", help="Turn on the lights", action="store_true")
+    parser.add_argument("--off", help="Turn off the lights", action="store_true")
     args = parser.parse_args()    
 
     log = Log()

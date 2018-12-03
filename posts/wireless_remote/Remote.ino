@@ -36,10 +36,10 @@ void writeBits(uint16_t signal, float scale)
   {
     int bit = (signal & 0x8000);
     digitalWrite(SIGNAL_PIN, HIGH);
+    delayMicroseconds((int)(200.0 * scale));
     if (bit) {      
-      delayMicroseconds((int)(610.0 * scale));
+      delayMicroseconds((int)(410.0 * scale));
     } else {
-      delayMicroseconds((int)(200.0 * scale));
       digitalWrite(SIGNAL_PIN, LOW); 
       delayMicroseconds((int)(410.0 * scale));
     }
@@ -96,7 +96,67 @@ char buffer[1000];
 int length = 0;
 float frequency = 1;
 
+struct Command
+{
+    bool on; // or off
+    uint8_t addr; // switch id
+    float frequency; // 1 or 2.7
+};
+
+bool parse(char* buffer, struct Command& cmd)
+{
+    cmd.frequency = 1;
+
+    // serialization format is "on:4,freq:2.7"
+    char* part2 = strchr(buffer, ',');
+    if (part2 != nullptr)
+    {
+      *part2 = 0;
+      part2++;
+      if (strncmp(part2, "freq:", 4) == 0)
+      {
+        cmd.frequency = (float)atof(&part2[5]);
+      }
+    }
+    
+    if (strncmp(buffer, "on:", 3) == 0)
+    {
+      cmd.on = true;
+      cmd.addr = atoi(&buffer[3]);
+    }
+    else if (strncmp(buffer, "off:", 4) == 0)
+    {
+      cmd.on = false;
+      cmd.addr = atoi(&buffer[4]);
+    }
+    else 
+    {
+      return false;
+    }
+    return true;
+}
+
+void processCommand(struct Command& cmd)
+{
+  // for some unknown reason sprintf with %f is not working.
+  int x = (int)cmd.frequency;
+  int y = (int)(cmd.frequency * 10) - (10*x);
+  if (cmd.on)
+  {
+    sprintf(buffer, "Turning on lights id: %d with frequency %d.%d ", cmd.addr, x, y);
+    Serial.println(buffer);
+    turnOn(cmd.addr, cmd.frequency);
+  }
+  else
+  {
+    sprintf(buffer, "Turning on lights id: %d with frequency %d.%d ", cmd.addr, x, y);
+    Serial.println(buffer);
+    turnOff(cmd.addr, cmd.frequency);
+  }
+}
+
 void loop() {
+
   // if we get a valid byte, read analog ins:
   if (Serial.available() > 0) {
     
@@ -114,30 +174,14 @@ void loop() {
       Serial.print(temp);
       
       buffer[length] = '\0';
-      if (strncmp(buffer, "on:", 3) == 0)
-      {    
-        int id = atoi(&buffer[3]);
-        sprintf(buffer, "Turning on lights id: %d", id);
-        Serial.println(buffer);
-        turnOn(id, frequency);
-      }
-      else if (strncmp(buffer, "off:", 4) == 0)
+
+      struct Command cmd;
+      if (parse(buffer, cmd))
       {
-        int id = atoi(&buffer[4]);
-        sprintf(buffer, "Turning off lights id: %d", id);
-        Serial.println(buffer);
-        turnOff(id, frequency);
+        processCommand(cmd);
       }
-      else if (strncmp(buffer, "freq:", 4) == 0)
+      else
       {
-        frequency = (float)atof(&buffer[5]);
-        // for some unknown reason sprintf with %f is not working.
-        int x = (int)frequency;
-        int y = (int)(frequency * 10) - (10*x);
-        sprintf(buffer, "Setting frequency to: %d.%d", x, y);
-        Serial.println(buffer);        
-      }
-      else {
         Serial.print("Remote Light Controller");
         Serial.println();
       }
