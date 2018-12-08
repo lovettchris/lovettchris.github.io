@@ -1,4 +1,5 @@
 links:
+    - {  text: 'Keyword Spotter', url: 'http://lovettsoftware.com/videos/ELL_MXCHIP_Oct2018.mp4', icon: 'KeywordSpotter.png' }
     - {  text: 'Ble Lights', url: 'http://lovettsoftware.com/videos/BleLights.mp4', icon: 'BleLights.png' }
     - {  text: 'Wifi Lights', url: 'http://lovettsoftware.com/videos/WifiLights.mp4', icon: 'WifiLights.png' }
     - {  text: 'Outlook Sync', url: 'http://lovettsoftware.com/videos/OutlookSync.mp4', icon: 'OutlookSync.png' }
