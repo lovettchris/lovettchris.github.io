@@ -82,26 +82,26 @@ class LightController:
         self.log.writeln("frequency:" + response)
 
     def turnOff(self):    
-        for i in range(2):
+        for i in range(3):
             response = self.sendCommand("off:{},freq:{}\r".format(self.southLights, self.southFrequency))
             self.log.writeln("south:" + response)
-            time.sleep(0.5)
-        time.sleep(1)
-        for i in range(2):
+            time.sleep(1)
+        time.sleep(2)
+        for i in range(3):
             response = self.sendCommand("off:{},freq:{}\r".format(self.northLights, self.northFrequency))
             self.log.writeln("north:" + response)
-            time.sleep(0.5)
+            time.sleep(1)
 
     def turnOn(self):        
-        for i in range(2):
+        for i in range(3):
             response = self.sendCommand("on:{},freq:{}\r".format(self.southLights, self.southFrequency))
             self.log.writeln("south:" + response)
-            time.sleep(0.5)
-        time.sleep(1)
-        for i in range(2):
+            time.sleep(1)
+        time.sleep(2)
+        for i in range(3):
             response = self.sendCommand("on:{},freq:{}\r".format(self.northLights, self.northFrequency))
             self.log.writeln("north:" + response)
-            time.sleep(0.5)
+            time.sleep(1)
 
     def checkLights(self):
         # Get sunrise and sunset for Woodinville, WA
