@@ -1,4 +1,5 @@
 links:
+    - { text: "Keyword Spotting", url: "/posts/keywird_spotting/" }
     - { text: "DgmlImage", url: "/posts/dgmlimage/" }
     - { text: "Arduino controlled Remote Light Switch", url: "/posts/wireless_remote/" }
     - { text: "DGML Power Tools for Visual Studio 2017", url: "/posts/dgml_power_tools/" }
