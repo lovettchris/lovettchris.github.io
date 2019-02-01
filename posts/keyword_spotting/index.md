@@ -38,7 +38,7 @@ For example, there are so many things we can do with A.I. on audio streams:
 - **relationships**: my spouse is snoring too loud, here's the proof!
 - **health**: detect the sound of sleep apnea, so people can get help
 
-It's so easy to do all this, let's just do it!
+It's so easy to do all this, let's just do it!!
 
 
 
