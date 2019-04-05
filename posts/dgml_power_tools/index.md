@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: DGML Power Tools for Visual Studio 2017
 permalink: /posts/dgml_power_tools/
 ---

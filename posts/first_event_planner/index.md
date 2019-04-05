@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: FIRST Event Planner
 permalink: /posts/first_event_planner/
 ---

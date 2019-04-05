@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Model Based UI Testing using DGML
 permalink: /posts/model-based-ui-testing-using-dgml/
 ---

@@ -1,5 +1,5 @@
 ---
-layout: homefull
+layout: fullpage
 title: Resume
 permalink: /resume/
 ---

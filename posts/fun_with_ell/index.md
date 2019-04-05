@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Fun With ELL
 permalink: /posts/fun_with_ell/
 ---

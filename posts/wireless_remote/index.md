@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Arduino Controller Wireless Remote Light Switch
 permalink: /posts/wireless_remote/
 ---

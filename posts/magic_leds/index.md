@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Magic LED Lights Rock
 permalink: /posts/magic_leds/
 ---

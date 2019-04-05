@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: DgmlImage
 permalink: /posts/dgmlimage/
 ---

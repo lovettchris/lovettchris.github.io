@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Software Trails
 permalink: /posts/software_trails/
 ---

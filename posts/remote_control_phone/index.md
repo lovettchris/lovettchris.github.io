@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Remote Control Phone
 permalink: /posts/remote_control_phone/
 ---

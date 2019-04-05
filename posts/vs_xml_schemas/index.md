@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Visual Studio's lesser-known Xml Schema features
 permalink: /posts/vs_xml_schemas/
 ---

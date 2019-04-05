@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Update to XML Notepad
 permalink: /posts/xml_notepad/
 ---

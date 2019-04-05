@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: PasswordVault
 permalink: /posts/password_vault/
 ---

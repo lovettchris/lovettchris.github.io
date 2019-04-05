@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Keyword Spotting
 permalink: /posts/keyword_spotting/
 ---

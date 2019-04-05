@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: AirSim is "live"!
 permalink: /posts/efergy_power_monitor/
 ---

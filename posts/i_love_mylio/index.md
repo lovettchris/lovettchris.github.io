@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: I love mylio
 permalink: /posts/i_love_mylio/
 ---

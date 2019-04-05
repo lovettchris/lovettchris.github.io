@@ -1,17 +1,25 @@
 {% include header.html %}
 
     <div class="container">
-
-		<article>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
-						{{ content }}
-					</div>
-				</div>
-			</div>
-		</article>
-	</div>
+		    <article>
+			      <div class="container">
+				        <div class="row">
+					          <div class="col-md-10 col-md-offset-1">
+											{{ content }}
+											
+											<h2 style="color:rgba(42, 42, 133, 0.705)">Blog Posts</h2>											
+											<div style="margin-left:10px">
+												{% for item in site.data.posts.links %}
+												<li>
+														<a href="{{ item.url }}">{{ item.text }}</a>
+												</li>
+												{% endfor %}
+											</div>	
+					          </div>
+				        </div>
+			      </div>
+		    </article>
+	  </div>
 
 {% include footer.html %}
 	
