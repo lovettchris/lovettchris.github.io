@@ -8,6 +8,7 @@ links:
     - { text: "AirSim is 'live'!!", url: "/posts/airsim_is_live/" }
     - { text: "MyMoney.Net is now open source...", url: "/posts/mymoney.net/" }
     - { text: "I love Mylio", url: "/posts/i_love_mylio/" }
+    - { text: "WinRT Extensions using RuntimeBroker", url: "/posts/winrt_broker/"}
     - { text: "Efergy Power Monitor", url: "/posts/efergy_power_monitor/" }
     - { text: "Magic LED Lights Rock", url: "/posts/magic_leds/" }
     - { text: "Update to XML Notepad", url: "/posts/xml_notepad/" }
