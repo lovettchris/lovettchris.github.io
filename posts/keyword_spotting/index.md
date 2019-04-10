@@ -7,6 +7,7 @@ permalink: /posts/keyword_spotting/
 # Fun with keyword spotting
 
 I've had a lot of fun lately playing with Deep Neural Networks (DNNs), pytorch, RNN's and keyword spotting models.
+See my [Channel 9 Video](https://channel9.msdn.com/Shows/Internet-of-Things-Show/Running-AI-on-IoT-microcontroller-devices-with-ELL).
 This whole DNN thing is rather addictive.  See my latest quick demo:
 
 [![image](../../videos/KeywordSpotter.png)](http://lovettsoftware.com/videos/ELL_MXCHIP_Oct2018.mp4)
