@@ -1,4 +1,5 @@
 links:
+    - { text: 'Using DGML to understand PX4', url: 'http://lovettsoftware.com/videos/PX4_topics.mp4', icon: 'PX4_topics.png'}
     - { text: 'AirSim with PX4 in HITL mode using Firmware version 1.9.0', url: 'http://lovettsoftware.com/videos/AirSimPx4v9.mp4', icon: 'AirSimPx4v1.9.png'}
     - { text: 'Runing AI on IoT microcontroller devices with ELL', url: 'http://lovettsoftware.com/videos/ELL_MXCHIP_Oct2018.mp4', icon: 'KeywordSpotter.png' }
     - { text: 'Ble Lights', url: 'http://lovettsoftware.com/videos/BleLights.mp4', icon: 'BleLights.png' }
