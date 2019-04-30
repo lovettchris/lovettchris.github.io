@@ -7,7 +7,7 @@ permalink: /posts/px4_topics/
 # Using DGML to understand PX4
 
 As you may know I have a soft spot for Directed Graphs and I enjoy showing off what you can do with
-[DGML diagrams and Visual Studio](http://127.0.0.1:4000/posts/dgml_power_tools/).
+[DGML diagrams and Visual Studio](https://lovettchris.github.io/posts/dgml_power_tools/).
 
 I was recently struggling to debug a new problem that showed up in the [PX4 Firmware](https://github.com/PX4/Firmware)
 with regards to Hardware in the loop (HITL) simulation and the [AirSim simulator](https://github.com/Microsoft/AirSim/).
@@ -39,7 +39,7 @@ Now you have a `graph.dgml` file which you can load up in Visual Studio.  You wi
 going on.  You can use the Legend to make the topic nodes green.
 But the graph is pretty big an horrendous to look at which is kind of why its so hard to debug the PX4 until you fully understand this picture.
 
-But if you install my [DgmlPowerTools](http://127.0.0.1:4000/posts/dgml_power_tools/) extension for Visual Studio then you can slice and dice this graph a little more easily.  For example, I was investigating a problem with `actuator_outputs`.  So I can search for this topic, then select the Neighborhood Mode button in the toolbar to hide everything that is not 1 link away from this topic and you get this nice clean sub-graph:
+But if you install my [DgmlPowerTools](https://lovettchris.github.io/posts/dgml_power_tools/) extension for Visual Studio then you can slice and dice this graph a little more easily.  For example, I was investigating a problem with `actuator_outputs`.  So I can search for this topic, then select the Neighborhood Mode button in the toolbar to hide everything that is not 1 link away from this topic and you get this nice clean sub-graph:
 
 ![actuator_outputs](/posts/px4_topics/actuator_outputs.png).
 
