@@ -13,8 +13,8 @@ by now, meaning I can now write a balanced review from my real day to day usage.
 ![image](tesla.png)
 
 While I will be the first to admit that Tesla has not achieved any huge breakthroughs in build quality, they have achieved a new level of
-customer delight because of their end-to-end `customer experience`.  The best analogy I can think of is that Tesla is what Apple is to phones.
-A revolution in user experience.  But before I get into that, let me list all the problems I have had with this car:
+customer delight because of their end-to-end `customer experience`.  The best analogy I can think of is that Tesla is to cars what Apple is to phones.
+A revolution in user experience.  But before I get into that, let me list all the problems I have had with this car.
 
 ### Paint
 
@@ -50,10 +50,10 @@ done some road trips to Oregon and Vancouver B.C.  The car and all the electroni
 I use all the auto-pilot features, adaptive cruise control; auto-steering to keep me in my lane;
 summon, to get the car out of a tight parking spot, and more.
 
-But for some reason the [NTSB is picking on Telsa](https://www.ntsb.gov/investigations/AccidentReports/Pages/HWY16FH018-preliminary.aspx)
+But for some reason the [NTSB is picking on Tesla](https://www.ntsb.gov/investigations/AccidentReports/Pages/HWY16FH018-preliminary.aspx)
 because of a few idiots that chose to ignore all of Tesla's warnings about paying attention while driving.
 The car is not `autonomous`.  Any sane driver will know this.  Those that choose to believe otherwise are just idiots.
-But blaming Telsa for these fatalities is like blaming `Ford` for making a car that someone fell asleep in.  Where are all the
+But blaming Tesla for these fatalities is like blaming `Ford` for making a car that someone fell asleep in.  Where are all the
  NTSB reports covering the other 37133 fatalities that happened in 2017?
 
 I have a completely different view than the NTSB.
