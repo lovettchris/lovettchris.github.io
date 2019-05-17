@@ -1,4 +1,5 @@
 links:
+    - { text: "My Telsa Model S", url: "/posts/tesla/" }
     - { text: "Using DGML to understand PX4", url: "/posts/px4_topics/" }
     - { text: "Keyword Spotting", url: "/posts/keyword_spotting/" }
     - { text: "DgmlImage", url: "/posts/dgmlimage/" }
