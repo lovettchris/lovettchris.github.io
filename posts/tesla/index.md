@@ -83,6 +83,18 @@ and I have to punish it with a slap on the brakes.
 The regenerative braking is also saving my brake pads big time.  When I got back home California, an 855 mile drive,
 I still had factory paint on the inside of the brake pads because I hardly ever use the brakes.
 
+### Super Charging
+
+On my way home from California I used 3 super charging stations.  Getting back to 80 % full in 20 minutes
+is  amazing.  I love how new stations keep popping up everywhere.  On my trip to Vancouver the super charger was right in the down town
+area so I could walk from there to my business appointment.  By the time I got back the car was full and ready
+for my trip home.  So I spent absolutely no time standing around picking my nose while getting high on gas fumes!
+Electric charging is actually saving me time.  This is such an amazing user experience.
+At home I have the [high power wall charger](https://www.amazon.com/Tesla-Motors-Connector-Charging-Station/dp/B01HYBZG0Q/ref=sr_1_10?hvadid=78615143777670&hvbmt=bb&hvdev=c&hvqmt=b&keywords=tesla+wall+charger+organizer&qid=1558143229&s=gateway&sr=8-10)
+which has also worked flawlessly, keeping my car topped up at all times.  I love how you can schedule when the
+car charges, and reduce the top limit so Tesla can keep all battery cells balanced and in good condition.
+I have not seen any noticeable drop in battery capacity since the day I bought the car.
+
 ### Auto-steering
 
 On roads with clear lane markings the car allows me to enter an auto-pilot mode where the car will keep
@@ -128,9 +140,10 @@ have dared to ship such crazy easter eggs?
 
 The thing I keep coming back to is that Tesla has nailed end-to-end user experience.
 The way the car greets me, interior comfort, world class navigation,
-auto-pilot keeping me relaxed and happy on the road, even the purchasing experience was way more up
-to date than everyone else.  So while they have not nailed build quality, I think everything else Tesla has done is game changing.
+auto-pilot keeping me relaxed and happy on the road, high power charging, even the purchasing experience was more
+fun than previous cars I've bought.  It was about as easy as buying a new flashlight from Amazon.
+So while they have not nailed build quality, I think everything else Tesla has done is game changing.
 I'm sure they will also revolutionize build quality one of these days as their manufacturing processes mature.
 Tesla has survived despite all the nay sayers.  I think they know what they are doing.
-Tesla is a fantastic, innovative company.  They are willing to play and have fun while they work their
+Tesla is a fast moving, innovative company.  They are willing to play and have fun while they work their
 asses off making the world's best cars.  I can't wait to see what they come up with next.
