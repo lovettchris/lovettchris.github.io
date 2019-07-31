@@ -1,6 +1,6 @@
 ---
 layout: page
-title: DGML Specs
+title: Graph Model Specifications
 permalink: /posts/GraphModel/
 ---
 
