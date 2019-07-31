@@ -527,7 +527,7 @@ The default set of metadata options is `Serializable | Removable | Browsable | S
 
 Typically applications will want to define a set of related properties and categories, give that set a name and be able to reference the set that way.  This is called a `GraphSchema`.  A Graph can contain multiple different GraphSchemas.  Typically GraphSchemas are defined statically and hooked into the common schema so they are discoverable from anywhere in the process, this ensures that properties are typed the same way throughout the process which is important.
 
-The following shows an example schema that defines a Background property of type Brush and Vegetable category that has a default typed value of Green for the Background property.
+The following shows an example schema that defines a `Background` property of type Brush and a `Vegetable` category that has a default typed value of Green for the Background property.
 
 ```csharp
 using Microsoft.VisualStudio.GraphModel.Schemas;
@@ -566,7 +566,7 @@ g.Save(@"d:\temp\graph.dgml");
 
 And the result will be serialized to the following DGML:
 
-```csharp
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
@@ -582,9 +582,8 @@ And the result will be serialized to the following DGML:
 </DirectedGraph>
 
 ```
-
 You can also fetch the metadata using the `GetMetadata` method on
-GraphProperty and GraphCategory:
+`GraphProperty` and `GraphCategory`:
 
 ```csharp
 Graph g = new Graph();
@@ -598,9 +597,9 @@ This prints the message `This is a description of the category`.
 
 Notice that to get the metadata for a given category or property you need to
 provide the owing `Graph` object.
-So the "GraphMetadata" belongs to a graph instance, it is not static.
-In this way different graphs can have different metadata for something that
-has the same name.  This makes it easier to compose Graph objects in a large product like Visual Studio without having to force every plugin to use a fixed common schema.
+
+`GraphMetadata` belongs to a graph instance, it is not static.
+This makes it easier to compose Graph objects in a large product like Visual Studio without without having to force every plugin to use a fixed common schema.
 
 ### Default Schema
 
