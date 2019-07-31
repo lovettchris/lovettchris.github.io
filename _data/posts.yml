@@ -20,3 +20,4 @@ links:
     - { text: "Model Based UI Testing using DGML", url: "/posts/model-based-ui-testing-using-dgml/" }
     - { text: "Software Trails", url: "/posts/software_trails/" }
     - { text: "Secure Password Vault", url: "/posts/password_vault/" }
+    - { text: "GraphModel Specification", url: "/posts/GraphModel/" }
