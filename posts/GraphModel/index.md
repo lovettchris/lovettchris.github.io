@@ -6,7 +6,7 @@ permalink: /posts/dgml_specs/
 
 # DGML Graph Model Specifications
 
-The Directed Graph Markup Language (.dgml) features of Visual Studio Ultimate are built on a node/link graph data model.  This data is persisted in DGML documents which is an XML format.  While it is possible to edit the XML directly, it is not fun or productive.  The Graph Model API provides an in-memory representation that is natural for manipulating directed graphs and has become the foundation of all the dependency analysis features in VS Ultimate.  For this reason the API has been made available anyone extending Visual Studio.
+The Directed Graph Markup Language (.dgml) features of Visual Studio are built on a node/link graph data model.  This data is persisted in DGML documents which is an XML format.  While it is possible to edit the XML directly, it is not fun or productive.  The Graph Model API provides an in-memory representation that is natural for manipulating directed graphs and has become the foundation of all the dependency analysis features in VS.  For this reason the API has been made available anyone extending Visual Studio.
 
 ### Goals
 
