@@ -1,7 +1,7 @@
 ---
 layout: page
 title: DGML Specs
-permalink: /posts/dgml_specs/
+permalink: /posts/GraphModel/
 ---
 
 # DGML Graph Model Specifications
