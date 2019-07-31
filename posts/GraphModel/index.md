@@ -583,6 +583,27 @@ And the result will be serialized to the following DGML:
 
 ```
 
+You can also fetch the metadata using the `GetMetadata` method on
+GraphProperty and GraphCategory:
+
+```csharp
+Graph g = new Graph();
+var node = g.Nodes.GetOrCreate("foo", null, MySchema.Vegetable);
+GraphCategory c = node.Categories.First();
+GraphMetadata m = c.GetMetadata(g);
+Console.WriteLine(m.Description);
+```
+
+This prints the message `This is a description of the category`.
+
+Notice that to get the metadata for a given category or property you need to
+provide the owing `Graph` object.
+So the "GraphMetadata" belongs to a graph instance, it is not static.
+In this way different graphs can have different metadata for something that
+has the same name.  This makes it easier to compose Graph objects in a large product like Visual Studio without having to force every plugin to use a fixed common schema.
+
+### Default Schema
+
 The following default schema is provided with every Graph by default.  It defines categories and properties that are used by the Graph Model API itself and are common enough to be shared by all Graph instances.
 
 ```csharp
@@ -615,26 +636,6 @@ public static class GraphCommonSchema
     public static GraphProperty Version { get; }
 }
 ```
-
-### Schema Usage
-
-Once you've defined your own custom schema you can use it like this:
-
-```csharp
-Graph g = new Graph();
-var node = g.Nodes.GetOrCreate("foo", null, MySchema.Vegetable);
-GraphCategory c = node.Categories.First();
-GraphMetadata m = c.GetMetadata(g);
-Console.WriteLine(m.Description);
-```
-
-This prints the message `This is a description of the category`.
-
-Notice that to get the metadata for a given category or property you need to call the `GetMetadata(owner)` method where the owner is the `Graph` object.
-So the "GraphMetadata" belongs to a graph instance, it is not static.
-In this way different graphs can have different metadata for something that
-has the same name.  This makes it easier to compose Graph objects in a large product like Visual Studio without having to force every plugin to use a fixed common schema.
-
 
 
 ### Styles
