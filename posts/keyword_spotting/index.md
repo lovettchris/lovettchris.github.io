@@ -12,7 +12,7 @@ This whole DNN thing is rather addictive.  See my latest quick demo:
 
 [![image](../../videos/KeywordSpotter.png)](http://lovettsoftware.com/videos/ELL_MXCHIP_Oct2018.mp4)
 
-This has turned into an [official sample app](https://github.com/IoTDevEnvExamples/DevKitKeywordSpotter/) for the
+This has turned into an [official sample app](https://github.com/lovettchris/IoTKeywordSpotter/) for the
 [Azure MXCHIP IOT DevKit](https://microsoft.github.io/azure-iot-developer-kit/) which is a really fun little board
 that as a nice little ARM Cortex-M4f chip and a bunch of sensors including a nice microphone.
 
@@ -40,7 +40,3 @@ For example, there are so many things we can do with A.I. on audio streams:
 - **health**: detect the sound of sleep apnea, so people can get help
 
 It's so easy to do all this, let's just do it!!
-
-
-
- 
