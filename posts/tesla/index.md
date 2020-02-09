@@ -26,7 +26,7 @@ So I found out the hard way that Tesla puts on a pretty thin paint job.  So I de
 ### Doors & Trim
 
 Early on the plastic clips holding the passenger side interior door together came off when someone slammed the door too hard.
-I took it in to get repaired, which they did quickly and for no free.  No more problems in this area.  One piece of chrome
+I took it in to get repaired, which they did quickly and for free.  No more problems in this area.  One piece of chrome
 trim wasn't aligned very well and they promptly fixed this when I pointed it out.
 
 ### Sensors
