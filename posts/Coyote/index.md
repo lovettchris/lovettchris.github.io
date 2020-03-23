@@ -7,7 +7,7 @@ permalink: /posts/coyote/
 # Coyote - solving complexity of async code
 
 I'm happy to announce the availability of a very cool new .NET Framework and testing tool from
-Microsoft Research called [Coyote](http://microsoft.github.io/coyote/).  I am super fortunate to be
+Microsoft Research called [Coyote](http://microsoft.github.io/coyote/what-is-coyote).  I am super fortunate to be
 able to work with some of the smartest people in the world at [Microsoft
 Research](https://www.microsoft.com/en-us/research/) and Coyote is a perfect example of the kind of
 really cool projects I get to play with.
