@@ -81,13 +81,13 @@ automatically scale to fit the web browser window.  Open the .svg file in notepa
 `width` and `height` properties.  You will find something like this:
 
 ```xml
-<svg width="2031.10719130029" height="1662.5614805394789" ...
+<svg width="2031.10719130029" height="1662.5614805394789"
 ```
 
 Then modify this using a `viewbox` as follows:
 
 ```xml
-<svg viewbox="0,0,2031,1662" width="100%" ...
+<svg viewbox="0,0,2031,1662" width="100%"
 ```
 
 Now the diagram nicely stretches and shrinks as you resize the browser window.  You will need to
