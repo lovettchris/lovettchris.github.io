@@ -1,4 +1,5 @@
 links:
+    - { text: 'MyMoney.Net', url: 'http://lovettsoftware.com/videos/MyMoney.mp4', icon: 'MyMoney.png'}
     - { text: 'Refactoring code the fun way', url: 'http://lovettsoftware.com/videos/CoyoteRefactoring.mp4', icon: 'CoyoteRefactoring.png'}
     - { text: 'Using DGML to understand PX4', url: 'http://lovettsoftware.com/videos/PX4_topics.mp4', icon: 'PX4_topics.png'}
     - { text: 'AirSim with PX4 in HITL mode using Firmware version 1.9.0', url: 'http://lovettsoftware.com/videos/AirSimPx4v9.mp4', icon: 'AirSimPx4v1.9.png'}
