@@ -8,7 +8,7 @@ permalink: /posts/apple_upsell/
 
 Anyone else tired of these annoying popups?
 
-![](/posts/apple_upsell/icloud_installer.png) ![](/posts/apple_upsell/iphone_backups.jpg)
+![](/posts/apple_upsell/icloud_installer.png)
 
 I'm getting pretty tired of all this... I actually tried to find customer support for the PC
 installer popup, but no luck. Anyone know who owns this ugly little Windows app? I find it
