@@ -13,4 +13,5 @@ in the simulator with max settings which I can do because I have a nice powerful
 NVidia 1080 GPU.  So far I am super impressed that I can fly the entire planet.  These guys
 have timed this perfectly what with all the covid-19 lockdowns and everything!
 
-![image](\woodinville.png)
+
+![image](woodinville.png)

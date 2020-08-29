@@ -7,6 +7,13 @@ var telemetryInitialized = false;
 function addTelemetryTag() {
     if (!telemetryInitialized) {
         telemetryInitialized = true;
+        // todo:
+    }
+}
+
+function removeTelemetryTag() {
+    if (telemetryInitialized) {
+        // todo:
     }
 }
 
@@ -21,17 +28,21 @@ function wcp_ready(err, _siteConsent){
 
 function onConsentChanged() {
     var userConsent = siteConsent.getConsentFor(WcpConsent.consentCategories.Analytics);
-    if (!siteConsent.isConsentRequired){
-        // force the dialog just for testing...
-        // todo: remove this when we are done testing...
-        siteConsent.manageConsent();
+    if (!siteConsent.isConsentRequired) {
+        // site doesn't need to prompt for cookies so go right ahead and use them!
+        addTelemetryTag();
     }
-    else if(userConsent) {
+    else if (userConsent) {
+        // user has consented to using cookies for analytics!
         addTelemetryTag();
     }
     else {
-        // todo: disable telemetry!
+        removeTelemetryTag();
     }
+}
+
+function manageCookies() {
+    siteConsent.manageConsent();
 }
 
 $(document).ready(function () {

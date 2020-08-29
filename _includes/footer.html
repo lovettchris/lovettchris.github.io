@@ -6,11 +6,12 @@
 				<div class="row">
 					<div class="col-md-12">
 						<p class="text-muted">{{ site.data.global.footer_text }}</p>
+						<p><link href="javascript:manageCookies()">manage cookies</a></p>
 					</div>
 				</div>
 			</div>
 		</footer>
-	
+
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -34,7 +35,7 @@
 		$(document).ready(function() {
 			$('.datatable').DataTable({
 				paging: false,
-				columnDefs: [ 
+				columnDefs: [
 					{
 						"targets": 0,
 						"render": function ( data, type, full, meta ) {
