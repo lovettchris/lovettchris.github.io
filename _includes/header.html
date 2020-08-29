@@ -47,6 +47,8 @@
 
 <body class="{{ post.title | downcase | replace:' ','-' | replace:',','' | strip_html }}{% if page.category %} category-{{ page.category }}{% endif %}{% if page.layout-class %} layout-{{ page.layout-class }}{% endif %}">
 
+    <div id="cookie-banner"></div>
+
     <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -77,5 +79,3 @@
             <p style="color:white">{{ site.data.global.description }}</p>
         </div>
     </div>
-
-  <div id="cookie-banner"></div>
