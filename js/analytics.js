@@ -4,15 +4,16 @@
 var siteConsent = null;
 var telemetryInitialized = false;
 
-function addTelemetryTag() {
+function enableTelemetry() {
     if (!telemetryInitialized) {
         telemetryInitialized = true;
         // todo:
     }
 }
 
-function removeTelemetryTag() {
+function disableTelemetry() {
     if (telemetryInitialized) {
+        telemetryInitialized = false;
         // todo:
     }
 }
@@ -30,14 +31,14 @@ function onConsentChanged() {
     var userConsent = siteConsent.getConsentFor(WcpConsent.consentCategories.Analytics);
     if (!siteConsent.isConsentRequired) {
         // site doesn't need to prompt for cookies so go right ahead and use them!
-        addTelemetryTag();
+        enableTelemetry();
     }
     else if (userConsent) {
         // user has consented to using cookies for analytics!
-        addTelemetryTag();
+        enableTelemetry();
     }
     else {
-        removeTelemetryTag();
+        disableTelemetry();
     }
 }
 
