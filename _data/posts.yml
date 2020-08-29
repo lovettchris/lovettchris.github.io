@@ -1,4 +1,5 @@
 links:
+    - { text: "Microsoft Flight Simulator 2020", url: "/posts/flightsim/" }
     - { text: "Apple iCloud - please stop bugging me!", url: "/posts/apple_upsell/" }
     - { text: "Coyote is released into the wild!", url: "/posts/coyote/" }
     - { text: "My Telsa Model S", url: "/posts/tesla/" }

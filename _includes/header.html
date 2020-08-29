@@ -15,12 +15,12 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
+
     <!-- ELL core CSS -->
     <link href="{{site.baseurl}}/css/theme.css" rel="stylesheet">
     <link href="{{site.baseurl}}/css/syntax.css" rel="stylesheet">
     <link href="{{site.baseurl}}/css/gallery.css" rel="stylesheet">
-    
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,6 +28,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+
+    <!-- Microsoft wcp-consent library -->
+    <script src="https://consentdeliveryfd.azurefd.net/mscc/lib/v2/wcp-consent.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
+    <script src="{{site.baseurl}}/js/analytics.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.7/vega.js"
 	    integrity="sha384-lTiihlzw56u8ddKdySsnIoGvP2wNsnPs8TJROeaYggGaXsoSsmsuwa/LrT9vIgxn"
@@ -37,9 +42,9 @@
 	    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc7/vega-embed.js"
 	    integrity="sha384-eu4jtlWUO/nh/2m8Km6pA4enzgLFAexBTyAX4ZqLnV6MVT1Y+zlHRuXMhusTaIxa"
-	    crossorigin="anonymous"></script>    
+	    crossorigin="anonymous"></script>
   </head>
-  
+
 <body class="{{ post.title | downcase | replace:' ','-' | replace:',','' | strip_html }}{% if page.category %} category-{{ page.category }}{% endif %}{% if page.layout-class %} layout-{{ page.layout-class }}{% endif %}">
 
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -72,3 +77,5 @@
             <p style="color:white">{{ site.data.global.description }}</p>
         </div>
     </div>
+
+  <div id="cookie-banner"></div>
