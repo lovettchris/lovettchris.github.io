@@ -10,6 +10,6 @@ As  XML has exploded across the planet I continue to get many requests for impro
 
 I also posted the source code on [github.com/microsoft.xmlnotepad](https://github.com/microsoft/xmlnotepad).
 
-See [Download](http://www.lovettsoftware.com/downloads/xmlnotepad/readme.htm)
+See [Install Page](https://microsoft.github.io/XmlNotepad/#install/).
 
 ![xmlnotepad.jpg](xmlnotepad.jpg)

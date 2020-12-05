@@ -9,6 +9,6 @@ links:
     - { text: "SensorTag for Windows", url: "https://github.com/clovett/SensorTag-for-Windows" }
     - { text: "Seismograph Table App", url: "https://www.microsoft.com/en-us/store/p/seismograph-tablet/9wzdncrfjqvw" }
     - { text: "Outlook Sync for PC", url: "http://lovettsoftware.com/Downloads/OutlookSync/OutlookSync.application" }
-    - { text: "XML Notepad", url: "https://github.com/microsoft/xmlnotepad/wiki" }
+    - { text: "XML Notepad", url: "https://microsoft.github.io/XmlNotepad/" }
     - { text: "RoboBackups", url: "http://lovettsoftware.com/Downloads/RoboBackups/default.html"}
     - { text: "Software Trails", url: "http://www.lovettsoftware.com/downloads/softwaretrails/softwaretrails.application"}
