@@ -1,7 +1,7 @@
 links:
     - { text: 'MyMoney.Net', url: 'https://lovettsoftwarestorage.blob.core.windows.net/videos/MyMoney.mp4', icon: 'MyMoney.png'}
     - { text: 'Refactoring code the fun way', url: 'https://lovettsoftwarestorage.blob.core.windows.net/videos/CoyoteRefactoring.mp4', icon: 'CoyoteRefactoring.png'}
-    - { text: 'Using DGML to understand PX4', url: 'https://lovettsoftwarestorage.blob.core.windows.net/videos/PX4_topics.mp4', icon: 'PX4_topics.png'}
+    - { text: 'Using DGML to understand PX4', url: 'https://lovettsoftwarestorage.blob.core.windows.net/videos/PX4_Topics.mp4', icon: 'PX4_topics.png'}
     - { text: 'AirSim with PX4 in HITL mode using Firmware version 1.9.0', url: 'https://lovettsoftwarestorage.blob.core.windows.net/videos/AirSimPx4v9.mp4', icon: 'AirSimPx4v1.9.png'}
     - { text: 'Runing AI on IoT microcontroller devices with ELL', url: 'https://lovettsoftwarestorage.blob.core.windows.net/videos/ELL_MXCHIP_Oct2018.mp4', icon: 'KeywordSpotter.png' }
     - { text: 'Ble Lights', url: 'https://lovettsoftwarestorage.blob.core.windows.net/videos/BleLights.mp4', icon: 'BleLights.png' }
