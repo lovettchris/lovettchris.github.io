@@ -25,7 +25,6 @@ extra:
   article_nav_top: false
   article_nav_bottom: true
   generator: false
-  base_url: /
 nav:
 - Home: index.md
 - Apps: apps/index.md
