@@ -1,5 +1,0 @@
-links: 
-    - { url: '/apps/', text: 'Apps' }
-    - { url: '/videos/', text: 'Videos' }
-    - { url: '/posts/', text: 'Posts' }
-    - { url: '/code/', text: 'Code' }

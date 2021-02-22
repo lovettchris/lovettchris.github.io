@@ -1,0 +1,59 @@
+site_name: Lovett Software
+site_url: https://lovettchris.github.io/
+copyright: © Lovett Software
+theme:
+  name: null
+  custom_dir: docs/windmill_dark
+  include_search_page: true
+  search_index_only: true
+  history_buttons: true
+  highlightjs: true
+  features:
+  - search.highlight
+  extra:
+markdown_extensions:
+  - meta
+  - smarty
+extra_css:
+  - css/main.css
+  - css/syntax.css
+google_analytics: ['UA-UA-89203408-1', 'lovettsoftware.com']
+
+plugins:
+  - search
+extra:
+  article_nav_top: false
+  article_nav_bottom: true
+  generator: false
+  base_url: /
+nav:
+- Home: index.md
+- Apps: apps/index.md
+- Videos: videos/index.md
+- Code: code/index.md
+- Blog:
+  - Microsoft Flight Simulator 2020: posts/flightsim/index.md
+  - Apple iCloud - please stop bugging me!: posts/apple_upsell/index.md
+  - Coyote is released into the wild!: posts/Coyote/index.md
+  - My Telsa Model S: posts/tesla/index.md
+  - Using DGML to understand PX4: posts/px4_topics/index.md
+  - Keyword Spotting: posts/keyword_spotting/index.md
+  - DgmlImage: posts/dgmlimage/index.md
+  - Arduino controlled Remote Light Switch: posts/wireless_remote/index.md
+  - DGML Power Tools for Visual Studio 2017: posts/dgml_power_tools/index.md
+  - Fun with ELL: posts/fun_with_ell/index.md
+  - Visual Studio’s lesser-known Xml Schema features: posts/vs_xml_schemas/index.md
+  - AirSim is 'live'!!: posts/airsim_is_live/index.md
+  - MyMoney.Net is now open source...: posts/mymoney.net/index.md
+  - I love Mylio: posts/i_love_mylio/index.md
+  - WinRT Extensions using RuntimeBroker: posts/winrt_broker/index.md
+  - Efergy Power Monitor: posts/efergy_power_monitor/index.md
+  - Magic LED Lights Rock: posts/magic_leds/index.md
+  - Update to XML Notepad: posts/xml_notepad/index.md
+  - Seismograph App: posts/seismograph/index.md
+  - Remote Control Phone: posts/remote_control_phone/index.md
+  - FIRST Event Planner: posts/first_event_planner/index.md
+  - Model Based UI Testing using DGML: posts/model-based-ui-testing-using-dgml/index.md
+  - Software Trails: posts/software_trails/index.md
+  - Secure Password Vault: posts/password_vault/index.md
+  - GraphModel Specification: posts/GraphModel/index.md
