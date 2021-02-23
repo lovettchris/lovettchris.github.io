@@ -3,7 +3,7 @@
 
 [ELL](https://github.com/Microsoft/ELL/) is a new Open Source library from Microsoft Research.  I'm having lots of fun working on it and learning all about Convolutional Neural Networks.  The first time you train one and try it out it definitely feels like magic.  How can a bunch of numbers correctly classify the type of object in a photo?  Granted we're talking millions of numbers, so it's not that magical, but it is still fun.
 
-Now, of course, I have to combine this with my love of [DGML graphs](http://lovettsoftware.com/wordpress/?p=30). So in this post I will outline how I've used ELL to execute neural networks trained on the MNist dataset.  MNist is a classic benchmark for neural networks and it provides a dataset for "hand written digits".  This dataset is small since each image is only 28×28 pixels, which makes for a great "first time developer experience" with neural networks, since you don't have to wait for terabytes of images to be downloaded!
+Now, of course, I have to combine this with my love of DGML graphs. So in this post I will outline how I've used ELL to execute neural networks trained on the MNist dataset.  MNist is a classic benchmark for neural networks and it provides a dataset for "hand written digits".  This dataset is small since each image is only 28×28 pixels, which makes for a great "first time developer experience" with neural networks, since you don't have to wait for terabytes of images to be downloaded!
 
 For example, here's one of their test images which contains a hand written digit "8":
 

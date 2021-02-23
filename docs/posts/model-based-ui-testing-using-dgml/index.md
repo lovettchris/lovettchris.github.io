@@ -1,9 +1,9 @@
 # Model Based UI Testing using DGML
 
 
-See [demo video: (MP4 24mb)](http://www.lovettsoftware.com/videos/DgmlTestModel.mp4).
+See [demo video: (MP4 24mb)](https://lovettsoftwarestorage.blob.core.windows.net/videos/DgmlTestModel.mp4).
 
-[![thumbnail](thumbnail.png)](http://www.lovettsoftware.com/videos/DgmlTestModel.mp4)
+[![thumbnail](thumbnail.png)](https://lovettsoftwarestorage.blob.core.windows.net/videos/DgmlTestModel.mp4)
 
 **Transcript**: In this video  I'm going to explain how to use the [DgmlTestMonitor](https://marketplace.visualstudio.com/items?itemName=ChrisLovett.DgmlTestMonitor2015) that I published to the Visual Studio Gallery. 
  

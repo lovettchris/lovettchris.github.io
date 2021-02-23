@@ -10,7 +10,7 @@ Then I remembered I have this great tool...
 
 See demo video:
 
-[![thumb](/videos/PX4_topics.png)](http://lovettsoftware.com/videos/PX4_topics.mp4)
+[![thumb](/videos/PX4_topics.png)](https://lovettsoftwarestorage.blob.core.windows.net/videos/PX4_Topics.mp4)
 
 Here's something fun for PX4 developers.  If you look in the modules/uORB folder you'll see the pub/sub infrastructure
 called the "micro-orb" which is used for pub/sub messaging throughout the PX4 firmware.  But knowing where messages are coming

@@ -5,7 +5,5 @@ I had some fun over the Christmas holiday playing with my new toy, [Magic LED Li
 
 So far the light bulb has worked perfectly!   You can get more information from the manufacturer at [www.ledmagical.com](http://www.ledmagical.com/Apps/BT001EN.html).  Of course, this is just the beginning.  Imagine the lights turn on when I walk into my office.  Or the XBox controls the lights so they turn red when I get shot in Halo. There are many fun applications of this really simple but very cool new tool.
 
-See [Demo Video of bluetooth lights](http://www.lovettsoftware.com/videos/blelights.mp4) and [Demo Video of the wifi lights](http://www.lovettsoftware.com/videos/wifilights.mp4).
-
-[![link](thumbnail.png)](http://www.lovettsoftware.com/videos/blelights.mp4)
+See [Demo Video of bluetooth lights](https://lovettsoftwarestorage.blob.core.windows.net/videos/BleLights.mp4) and [Demo Video of the wifi lights](https://lovettsoftwarestorage.blob.core.windows.net/videos/WifiLights.mp4).
 

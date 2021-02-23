@@ -13,4 +13,4 @@
 - [Outlook Sync for PC](http://lovettsoftware.com/Downloads/OutlookSync/OutlookSync.application)
 - [XML Notepad](https://microsoft.github.io/XmlNotepad/)
 - [RoboBackups](http://lovettsoftware.com/Downloads/RoboBackups/default.html)
-- [Software Trails](http://www.lovettsoftware.com/downloads/softwaretrails/softwaretrails.application)
+- [Software Trails](https://lovettsoftwarestorage.blob.core.windows.net/downloads/SoftwareTrails/SoftwareTrails.application)

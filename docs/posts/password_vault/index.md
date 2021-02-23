@@ -1,11 +1,11 @@
 
 # PasswordVault
 
-See [demo video (mp4 13mb)](http://lovettsoftware.com/videos/PasswordVault.mp4)
+See [demo video (mp4 13mb)](https://lovettsoftwarestorage.blob.core.windows.net/videos/PasswordVault.mp4)
 
 [Password Vault](http://www.lovettsoftware.com/downloads/passwordvault/PasswordVault.application) is my latest little ClickOnce app, built on the [.NET Framework 4.0.](http://www.microsoft.com/download/en/details.aspx?id=17851)
 
-NEW: I've also added a windows store app, see [Secure Password Vault app](https://www.microsoft.com/store/apps/9nblggh2l5wv) and associated [new demo video](http://www.lovettsoftware.com/videos/PasswordVault.mp4).
+NEW: I've also added a windows store app, see [Secure Password Vault app](https://www.microsoft.com/store/apps/9nblggh2l5wv) and associated [new demo video](https://lovettsoftwarestorage.blob.core.windows.net/videos/PasswordVault.mp4).
 
 Managing online accounts is a real hassle these days. I have 180 separate userids and passwords to manage. Who can remember all that? And it's not just userids and passwords any more, it's also secret questions, password images, secure credit card numbers, links to specific URLs, license keys, and all sorts of other miscellaneous information associated with my online accounts.
 

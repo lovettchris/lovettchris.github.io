@@ -3,7 +3,7 @@
 
 If you struggle with complex code dependencies then you might like my [DGML Power Tools for Visual Studio 2017](https://marketplace.visualstudio.com/items?itemName=ChrisLovett.DgmlPowerTools2017).  This addin makes it easy to slice and dice your DGML diagrams and share them with others via SVG.
 
-See my [Demo Video](http://lovettsoftware.com/videos/DGMLPowerTools.mp4).
+See my [Demo Video](https://lovettsoftwarestorage.blob.core.windows.net/videos/DGMLPowerTools.mp4).
 
 ## Save as SVG
 You will see the “Save as SVG” command in the Share menu on the Directed Graph Document toolbar.

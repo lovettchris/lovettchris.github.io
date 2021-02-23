@@ -5,7 +5,7 @@ I've had a lot of fun lately playing with Deep Neural Networks (DNNs), pytorch, 
 See my [Channel 9 Video](https://channel9.msdn.com/Shows/Internet-of-Things-Show/Running-AI-on-IoT-microcontroller-devices-with-ELL).
 This whole DNN thing is rather addictive.  See my latest quick demo:
 
-[![image](../../videos/KeywordSpotter.png)](http://lovettsoftware.com/videos/ELL_MXCHIP_Oct2018.mp4)
+[![image](../../videos/KeywordSpotter.png)](https://lovettsoftwarestorage.blob.core.windows.net/videos/ELL_MXCHIP_Oct2018.mp4)
 
 This has turned into an [official sample app](https://github.com/lovettchris/IoTKeywordSpotter/) for the
 [Azure MXCHIP IOT DevKit](https://microsoft.github.io/azure-iot-developer-kit/) which is a really fun little board

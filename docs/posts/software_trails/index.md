@@ -1,10 +1,10 @@
 # Software Trails
 
-See [demo video: (MP4 30mb)](http://lovettsoftware.com/videos/softwaretrails.mp4)
+See [demo video: (MP4 30mb)](https://lovettsoftwarestorage.blob.core.windows.net/videos/SoftwareTrails.mp4)
 
-[![thumbnail](softwaretrailsscreen.png)](http://www.lovettsoftware.com/videos/softwaretrails.mp4)
+[![thumbnail](softwaretrailsscreen.png)](https://lovettsoftwarestorage.blob.core.windows.net/videos/SoftwareTrails.mp4)
 
-Download Tool: [SoftwareTrails.application](http://www.lovettsoftware.com/downloads/softwaretrails/softwaretrails.application)
+Download Tool: [SoftwareTrails.application](https://lovettsoftwarestorage.blob.core.windows.net/downloads/SoftwareTrails/SoftwareTrails.application)
 
 **Transcript**: Hi,
 
@@ -42,4 +42,4 @@ I think this tool will also make a great testing companion.  For example, if you
 
 That's it, I hope you enjoy it, please send your comments to my blog.
 
-Download Tool: [SoftwareTrails.application](http://www.lovettsoftware.com/downloads/softwaretrails/softwaretrails.application)
+Download Tool: [SoftwareTrails.application](https://lovettsoftwarestorage.blob.core.windows.net/downloads/SoftwareTrails/SoftwareTrails.application)
