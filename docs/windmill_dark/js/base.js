@@ -13,7 +13,9 @@
 
 var mainWindow = is_top_frame ? window : (window.parent !== window ? window.parent : null);
 var iframeWindow = null;
+var base_url = getBaseUrl();
 var rootUrl = qualifyUrl(base_url);
+
 var searchIndex = null;
 var showPageToc = true;
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
@@ -24,6 +26,15 @@ var Keys = {
   UP:     38,
   DOWN:   40,
 };
+
+function getBaseUrl(){
+  var url = mainWindow.location.href;
+  var pos = url.indexOf("#");
+  if (pos > 0){
+    url = url.substr(0, pos);
+  }
+  return url;
+}
 
 function startsWith(str, prefix) { return str.lastIndexOf(prefix, 0) === 0; }
 function endsWith(str, suffix) { return str.indexOf(suffix, str.length - suffix.length) !== -1; }
@@ -379,7 +390,7 @@ function initSearch() {
   var searchResults = $('#mkdocs-search-results');
 
   // Fetch the prebuilt index data, and add to the index.
-  $.getJSON(base_url + '/search/search_index.json')
+  $.getJSON('/search/search_index.json')
   .done(function(data) {
     data.docs.forEach(function(doc) {
       searchIndex.addDoc(doc);
@@ -531,8 +542,9 @@ function doSearch(options) {
     for (var i = 0; i < len; i++) {
       var doc = searchIndex.documentStore.getDoc(results[i].ref);
       var snippet = snippetBuilder.getSnippet(doc.text, snippetLen);
+      var url = pathJoin(base_url, doc.location);
       resultsElem.append(
-        $('<li>').append($('<a class="search-link">').attr('href', pathJoin(base_url, doc.location))
+        $('<li>').append($('<a class="search-link">').attr('href', url)
           .append($('<div class="search-title">').text(doc.title))
           .append($('<div class="search-text">').html(snippet)))
       );
