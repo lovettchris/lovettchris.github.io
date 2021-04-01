@@ -1,3 +1,7 @@
+---
+blogs: true
+---
+
 <div class="jumbotron" style="background-image:url(images/background.png);background-position:0px 0px;background-size:1184px;margin-top:-20px;">
     <div class="container">
         <h1 style="color:white">Software Complexity</h1>

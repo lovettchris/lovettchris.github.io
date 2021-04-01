@@ -127,6 +127,26 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       {% endif %}
 
       {{ page.content }}
+          
+      {%- if page.meta.blogs %}
+        {%- for nav_item in nav %}
+          {%- if nav_item.title == 'Blog' %}
+          <h3>Blog Posts</h3>
+          <ul>
+            {%- for blog_item in nav_item.children %}
+              <li>
+                {%- if blog_item.url -%}
+                  <a href="{{ blog_item.url }}">{{ blog_item.title }}</a>
+                {%- else -%}
+                  <span>{{ blog_item.title }}</span>
+                {%- endif %}
+              </li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}          
+        {%- endfor %}
+      {%- endif %}         
+  
     {%- endblock %}
 
     <br>

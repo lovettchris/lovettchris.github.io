@@ -31,6 +31,7 @@ nav:
 - Videos: videos/index.md
 - Code: code/index.md
 - Blog:
+  - AirSim with PX4 on WSL 2: posts/airsim_on_wsl2/index.md
   - Microsoft Flight Simulator 2020: posts/flightsim/index.md
   - Apple iCloud - please stop bugging me!: posts/apple_upsell/index.md
   - Coyote is released into the wild!: posts/Coyote/index.md
