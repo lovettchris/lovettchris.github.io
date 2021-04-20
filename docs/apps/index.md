@@ -5,7 +5,7 @@
 - [Secure Password Vault](https://www.microsoft.com/en-us/p/secure-password-vault/9nblggh2l5wv)
 - [MyMoney.Net](https://github.com/clovett/MyMoney.Net/wiki)
 - [Magic LED Lights](https://www.microsoft.com/en-us/store/p/magic-led-lights/9nblggh10fch)
-- [PX4 Log Viewer](https://lovettsoftwarestorage.blob.core.windows.net/downloads/Px4LogViewer/publish.htm)
+- [PX4 Log Viewer](https://lovettsoftwarestorage.blob.core.windows.net/downloads/Px4LogViewer/Px4LogViewer.application)
 - [Firefly](https://github.com/clovett/firefly)
 - [SensorTag for Windows](https://github.com/clovett/SensorTag-for-Windows)
 - [Seismograph Table App](https://www.microsoft.com/en-us/store/p/seismograph-tablet/9wzdncrfjqvw)
