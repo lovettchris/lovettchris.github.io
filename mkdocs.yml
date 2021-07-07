@@ -32,6 +32,7 @@ nav:
 - Videos: videos/index.md
 - Code: code/index.md
 - Blog:
+  - Windows Phone - Lessons Learned: posts/windows_phone/index.md
   - VirtualCanvas: posts/virtualcanvas/index.md
   - Ada Design: posts/ada/index.md
   - AirSim with PX4 on WSL 2: posts/airsim_on_wsl2/index.md
