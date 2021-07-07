@@ -77,3 +77,13 @@ So, what killed Windows Phone?
 
 In other words a spectacular string of business and technical mistakes which should make a great
 case study for business schools.
+
+To highlight the lack of vision - I have a sneaking suspicion that Steve Jobs had a brilliant all up
+strategy where iPhone was only part of the overall vision.  Starting with the most personal of
+devices, like iPods then iPhones, then building on the really strong personal attach these devices
+have, leverage that to create pull up into tablets, laptops and media centers.  This has pulled
+Apple laptops from negligible numbers up into a respectable 9.5% of total laptops sold in 2017.  Of
+both desktops + laptops, Apple had 12% of the global market share in 2018.  That's a LOT of laptops.
+So if it was Steve Jobs' strategy to make macOS relevant by putting a phone in everyone's pocket,
+then it was a brilliant strategy that is clearly working.  Did Steve Jobs really envision all this?
+If so, Microsoft really needs to step up their game in the vision and strategy department.
