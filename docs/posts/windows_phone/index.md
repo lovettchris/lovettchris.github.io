@@ -45,25 +45,25 @@ Along came Windows Phone 8 in 2012 with a C++ SDK, but the Kernel was Windows ba
 again, all those Linux friendly open-source libraries used in iOS and Android apps could not be
 easily ported to Windows Phone.  Microsoft recognized this problem and tried to create their own
 open source libraries, but it was too little too late. Also, UWP was not Win32 so folks couldn't
-even use established Win32 code either.  When we saw iOS kernel was Linux like, we should have
-started off with a Linux compatible phone from the got go, but back then Ballmer was very
-anti-Linux, and that is where Microsoft really shot themselves in the foot on the technical side.
+even use established Win32 code either.  Microsoft should have followed Android and started off with
+a Linux compatible phone, but back then Ballmer was very anti-Linux, and that is where Microsoft
+really shot themselves in the foot on the technical side.
 
 Apple had taken the high road, Google took the low road, which was traditionally Microsoft's strong
 position with the open PC industry, where anyone can build a PC and apps for it.  So, there was no
 room for Microsoft.  Oddly, Microsoft tried to copy Apple but could never deliver the same premium
 quality.  Nokia turned out could not compete with Samsung on phone specs, and Qualcomm really
-screwed Microsoft with very bad windows drivers, no support for them and full of bugs so the phones
-would hang and freeze and with 3 companies in the picture all pointing fingers at each other - it
-was a real mess. So, Microsoft was stuck in the middle between Apple and Android, squeezed on both
-ends. It was really a huge business mistake to try and copy Apple.  A free OS to compete with
-Android that was able to fully leverage the huge Win32 app platform, with C++ support from day one
-would have attracted better phone makers, and many more app developers.  If the kernel was also
-Linux-based then developers could share app code across the 3 platforms and have a more manageable
-story for building, testing and shipping their apps on the 3 app stores. Microsoft could have
-acquired 3rd party libraries that emulate Win32 on Linux to enable easy porting of Win32 libraries
-so app developers could leverage the huge Windows legacy.  This would have been a big job but if
-they started in 2003 they would have had time to do it right.
+screwed Microsoft with very bad windows drivers, full of bugs, and little to no support, so the
+phones would hang and freeze and with 3 companies in the picture all pointing fingers at each other
+- it was a real mess. So, Microsoft was stuck in the middle between Apple and Android, squeezed on
+both ends and with serious quality problems. It was really a huge business mistake to try and copy
+Apple.  A free OS to compete with Android that was able to fully leverage the huge Win32 app
+platform, with C++ support from day one would have attracted better phone makers, and many more app
+developers.  If the kernel was also Linux-based then developers could share app code across the 3
+platforms and have a more manageable story for building, testing and shipping their apps on the 3
+app stores. Microsoft could have acquired 3rd party libraries that emulate Win32 on Linux to enable
+easy porting of Win32 libraries so app developers could leverage the huge Windows legacy. This would
+have been a big job but if they started in 2003 they would have had time to do it right.
 
 So, what killed Windows Phone?
 
