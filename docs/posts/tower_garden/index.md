@@ -1,4 +1,4 @@
-# Tower Garden
+# Tower Garden Yumminess!
 
 I love gardening and I first learned about this really good [Tower
 Garden](https://www.towergarden.com/) at Microsoft where they have a bunch of them around campus and
