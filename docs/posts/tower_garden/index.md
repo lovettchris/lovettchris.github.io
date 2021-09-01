@@ -46,10 +46,11 @@ Of course, I would not be satisfied with just that, I need to tinker with it. My
 this awesome [hydroponic system built by Kyle
 Gabriel](https://kylegabriel.com/projects/2020/06/automated-hydroponic-system-build.html).
 
-So that's my target, first step I wanted is to get a really nice pH sensor that Kyle chose for his
-system.  I also wanted to use my [Teensy 4.1](https://www.pjrc.com/store/teensy41.html) with the
-[Ethernet Kit](https://www.pjrc.com/store/ethernet_kit.html) because it can do both, talk to the
-sensor, and act as a little wired TCP server on my local network.
+So that's my target, the most useful thing to start with is automated pH sensing. Karl chose really
+nice pH sensor from Atlas Scientific for his system so I got the same one from Amazon.  I also
+wanted to use my [Teensy 4.1](https://www.pjrc.com/store/teensy41.html) with the [Ethernet
+Kit](https://www.pjrc.com/store/ethernet_kit.html) because it can talk directly to the sensor over
+UART, and serve up a nice little HTTP server on my local network.
 
 Getting it hooked up was easy, just drop the sensor in the tank:
 
