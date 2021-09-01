@@ -7,11 +7,11 @@ office.
 
 So instead of waiting for coronavirus to piss off I decided to splurge a little and get myself one
 of these nifty indoor vertical gardens.  I'm happy to report assembly was easy, and within
-practially no time at all I was loaded with fresh greens.
+practically no time at all I was loaded with fresh greens.
 
 ![tower](tower1.png)
 
-I still have a vege garden outside, but out there I have to constantly battel with the rabbits,
+I still have a vege garden outside, but out there I have to constantly battle with the rabbits,
 deer, and the ever present slugs.  Indoors the produce is so perfect it is crazy, every leaf is full
 vibrant perfection, not the slightest damage from pests, and with no insecticides it is super
 healthy and ready to eat any time.
