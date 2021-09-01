@@ -20,14 +20,14 @@ healthy and ready to eat any time.
 
 The thing runs itself, it has automatic lighting on 12 hours per day and  the tank holds lots of
 water and a automatic timer on the pump runs the water down the inside of the tower ever 15 minutes
-so no matter what the plants are happy.  Once a week I top up the tank with fresh water with these
+so, no matter what, the plants are happy.  Once a week I top up the tank with fresh water with these
 nutrients they provided, about 20ml per gallon:
 
 ![nutrients](nutrients.png)
 
-Then the last step is to keep the pH balanced.  My tap water is pretty balanced, but the nutrients
-are slightly acidic, so normally I need about a teaspoon of alkali. They provided a nice little test
-kit:
+Then the last step is to keep the pH balanced.  My filtered tap water is about pH 7.1, but the
+nutrients are slightly acidic, so normally I need about a teaspoon of alkali to keep the tank in
+the recommended range of 5.5 to 6.5. They provided a nice little test kit:
 
 ![ph](phtest.png)
 
@@ -64,8 +64,8 @@ Any web browser in my house can now check the pH levels:
 ![server](server.png)
 
 Great.  So no need for the liquid pH test kit, I now have a much more accurate number.
-Here I see a pH level of 5.9 which is ok, the Tower Garden manual says to keep it
-between 5.5 and 6.5.  I see an very quick response any time I add acid or alkali to the tank.
+Here I see a pH level of 5.9 which is ok.  I see an very quick response any time I add acid or alkali
+to the tank.
 
 The Teensy 4.1 source code lives here [https://github.com/lovettchris/SmartGarden](https://github.com/lovettchris/SmartGarden).
 
