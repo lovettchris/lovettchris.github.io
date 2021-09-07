@@ -32,6 +32,7 @@ nav:
 - Videos: videos/index.md
 - Code: code/index.md
 - Blog:
+  - Genius of Simplicity: posts/simplicity/index.md
   - Tower Garden: posts/tower_garden/index.md
   - Windows Phone - Lessons Learned: posts/windows_phone/index.md
   - VirtualCanvas: posts/virtualcanvas/index.md
