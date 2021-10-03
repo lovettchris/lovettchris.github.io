@@ -13,4 +13,3 @@
 - [XML Notepad](https://microsoft.github.io/XmlNotepad/)
 - [RoboBackups](https://lovettsoftwarestorage.blob.core.windows.net/downloads/RoboBackups/RoboBackups.application)
 - [Software Trails](https://lovettsoftwarestorage.blob.core.windows.net/downloads/SoftwareTrails/SoftwareTrails.application)
-- [Ada](https://lovettsoftwarestorage.blob.core.windows.net/downloads/AdaKiosk/AdaKiosk.application)
