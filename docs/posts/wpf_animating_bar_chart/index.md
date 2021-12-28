@@ -4,8 +4,7 @@
 [![thumb](thumbnail.png)](https://youtu.be/RJA1Hk79Jbs)
 
 So I found this really cool article by the famous Charles Petzold showing how to [Animate a Point
-Collection]
-(https://docs.microsoft.com/en-us/archive/msdn-magazine/2007/july/foundations-extending-the-wpf-animation-classes)
+Collection](https://docs.microsoft.com/en-us/archive/msdn-magazine/2007/july/foundations-extending-the-wpf-animation-classes)
 and it occurred to me that if you can animate a point collection then you can animate a bar chart
 which is exactly what I was wanting to do for my [Money.Net
 application](http://lovettsoftware.com/#posts/mymoney.net/).
