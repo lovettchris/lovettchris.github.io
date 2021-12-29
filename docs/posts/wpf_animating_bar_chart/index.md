@@ -1,5 +1,5 @@
 
-# WPF Animating Bar Chart
+## WPF Animating Bar Chart
 
 [![thumb](thumbnail.png)](https://youtu.be/RJA1Hk79Jbs)
 
