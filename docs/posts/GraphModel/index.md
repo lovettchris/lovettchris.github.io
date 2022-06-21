@@ -372,7 +372,7 @@ public GraphLink Get(GraphNodeId sourceId, GraphNodeId targetId, int index)
 
 And you can find out what index a given link has using the following property
 on GraphLink:
- ```csharp
+```csharp
 public int Index { get; }
 ```
 This returns an optional Index of this link.  Default is zero.
@@ -853,6 +853,3 @@ No actual support for Data Virtualization is provided beyond just this conventio
 ### Trouble Shooting
 
 One common source of bugs is when someone forgets to include a `scope.Complete()` at the end of their `GraphTransactionScope` using block.  This will cause the transaction to roll back, along with any outer GraphTransactionScopes, and it will look like the graph edits didn’t work, when in reality, they are being rolled back.
-
-
-
