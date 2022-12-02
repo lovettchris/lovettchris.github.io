@@ -5,7 +5,7 @@
 Dart is a new up and coming language and so I thought it would be fun to do some
 simple performance comparisons.
 
-See https://github.com/clovett/primes
+See [https://github.com/clovett/primes](https://github.com/clovett/primes).
 
 This is a simple performance benchmarks comparing C#, Dart and Rust for an entirely CPU bound
 problem (no I/O).  The problem is to find all primes under 1,000,000 and test that the [Goldbach
