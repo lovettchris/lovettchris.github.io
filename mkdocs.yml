@@ -32,6 +32,7 @@ nav:
 - Videos: videos/index.md
 - Code: code/index.md
 - Blog:
+  - Fun with Dart: posts/fun_with_dart/index.md
   - Lean Programming: posts/lean/index.md
   - Ada Kiosk: posts/ada_kiosk/index.md
   - WPF Animating Bar Chart: posts/wpf_animating_bar_chart/index.md
