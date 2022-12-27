@@ -4,7 +4,7 @@
 - [MyFitness](https://lovettsoftwarestorage.blob.core.windows.net/downloads/MyFitness/MyFitness.application)
 - [DgmlImage](https://www.nuget.org/packages/DgmlImage/)
 - [Secure Password Vault](https://www.microsoft.com/en-us/p/secure-password-vault/9nblggh2l5wv)
-- [MyMoney.Net](https://clovett.github.io/MyMoney.Net/)
+- [MyMoney.Net](https://moneytools.github.io/MyMoney.Net/)
 - [Magic LED Lights](https://www.microsoft.com/en-us/store/p/magic-led-lights/9nblggh10fch)
 - [PX4 Log Viewer](https://lovettsoftwarestorage.blob.core.windows.net/downloads/Px4LogViewer/Px4LogViewer.application)
 - [Firefly](https://github.com/clovett/firefly)

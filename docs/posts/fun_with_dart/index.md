@@ -13,10 +13,11 @@ Conjecture](https://en.wikipedia.org/wiki/Goldbach%27s_conjecture) holds for all
 
 Times in milliseconds.
 
-| Platform                 | C#     | Dart | Rust |
-|--------------------------|--------|------|------|
-| Windows 11 AMD Ryzen 9   | 40     | 76   | 17*  |
-| Ubuntu 22.04 AMD Ryzen 9 | 43     | 75   | 17*  |
+
+| Platform                 | C#     | Dart | Rust | C++   | Node.js |
+|--------------------------|--------|------|------|-------|---------|
+| Windows 11 AMD Ryzen 9   | 40     | 76   | 17*  | 46    | 372251  |
+| Ubuntu 22.04 AMD Ryzen 9 | 43     | 75   | 17*  | 44    | 357659  |
 
 *Rust at 17ms is using a fast non-cryptographic hash on the HashSet.  Using the normal HashSet you
 get 62ms.

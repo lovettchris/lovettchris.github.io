@@ -3,7 +3,7 @@
 
 A good friend of mine, JP Duplessis and I have been tinkering away on an app for the last 10 years or more, it started out as a replacement for the then cancelled Microsoft Money app.  We built it entirely in C#, it started out as WinForms, we ported it to WPF and XAML and then fixed bugs.
 
-We wanted to open source it but I finally got around to doing it today on GitHub.  See [https://clovett.github.io/MyMoney.Net/](https://clovett.github.io/MyMoney.Net/).
+We wanted to open source it but I finally got around to doing it today on GitHub.  See [https://moneytools.github.io/MyMoney.Net/](https://moneytools.github.io/MyMoney.Net/).
 
 The app is really designed for programmers who want to tinker and add stuff.  JP added a whole module to help deal with rental properties.  The data is stored in sqllite, so it is super easy to extend and add whatever you want.
 
