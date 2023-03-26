@@ -1,5 +1,7 @@
 # Videos
 
+[![thumbnail](DGMLTour.png)<br/>DGML Tour](https://youtu.be/wIjCdOrZj-I)
+
 [![thumbnail](MyMoney.png)<br/>MyMoney](https://lovettsoftwarestorage.blob.core.windows.net/videos/MyMoney.mp4)
 
 [![thumbnail2](CoyoteRefactoring.png)<br/>Refactoring code the fun way](https://lovettsoftwarestorage.blob.core.windows.net/videos/CoyoteRefactoring.mp4)
