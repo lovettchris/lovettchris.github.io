@@ -38,8 +38,8 @@ models on the Qualcomm devices to measure the F1 scores:
 
 Here the F1 score almost reaches 92% and the really fast models that are down under 2ms are still
 above 84% accuracy. This is super cool. You can then pick a model from this pareto curve that
-satisfies your constraints.  For example, some applications may have strick accuracy requirement,
-some have a strick latency budget and power usage goal. For example, if your inference time budget
+satisfies your constraints.  For example, some applications may have strict accuracy requirement,
+some have a strict latency budget and power usage goal. For example, if your inference time budget
 requires the model run in under 4ms then you will need to pick a model on the left of that time.
 On the other hand if accuracy is all that matters you would pick the biggest slowest model on the right.
 This is why Archai produces models on the entire pareto frontier. There is no one best model, it
