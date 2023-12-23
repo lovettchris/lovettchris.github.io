@@ -3,6 +3,12 @@
 
 I was able to stream audio from my Pixel 8 phone phone running Android 14 to my [nrf5340 audio devkit](https://www.nordicsemi.com/Products/Development-hardware/nRF5340-Audio-DK).
 
+![music](music.jpg)
+
+Here you see the bluetooth pairing showing the phone connected to the devkit:
+
+![pairing](pairing.jpg)
+
 First you build the firmware as a headset with CONFIG_AUDIO_DEV=1 flash the firmware and ensure
 it is advertising. You should see this in the console output:
 
