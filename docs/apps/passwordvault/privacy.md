@@ -1,8 +1,10 @@
 ﻿#  Secure Password Vault Privacy Policy
     
 This is the privacy policy for
-<a href="https://www.microsoft.com/store/apps/9nblggh2l5wv"> Secure Password Vault app</a>
+<a href="https://www.microsoft.com/store/apps/9NBLGGH2L5WV"> Secure Password Vault app</a>
 for Windows.
+
+![screenshot](Screenshot.png)
 
 This app does not share anything about you or your passwords with anyone.
 
