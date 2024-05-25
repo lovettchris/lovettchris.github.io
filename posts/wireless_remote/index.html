@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/wireless_remote/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Arduino controlled Remote Light Switch - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Wireless Remote Hack", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="wireless-remote-hack">Wireless Remote Hack</h1>
+<p><em>An Arduino hack on a cheap Wireless Remote Light Switch from Home Depot.</em></p>
+<p>So I bought this remote control switch from Home Depot a couple years ago:</p>
+<p><a href="https://www.homedepot.com/p/Defiant-Wireless-Indoor-Outdoor-Remote-Plug-RC-009A-1/202296039"><img alt="" src="Assets/Logo.png" /></a></p>
+<p>And the battery died in the remote, so I could go find a replacement A53G 12V battery, or I could hack it and control the remote using Arduino.  That way I can turn the lights on and off by computer, based on time of sunset, etc, which is even better than the remote and exactly what I want.  How hard could it be right?</p>
+<p>When you open up the remote it looks like a nice simple circuit, unfortunately no one seems to be able to find a datasheet for that IC labelled AUT980202-B1.  But the transmitter is a common 315 MHz transmitter that you can even <a href="https://www.sparkfun.com/products/10535">get from sparkfun</a>, so that&rsquo;s promising.</p>
+<p><img alt="circuit" src="Assets/circuit.jpg" /></p>
+<p>But since I don&rsquo;t know how the IC is driving the transmitter, it is time to break out the logic analyzer and take a look at the signal coming from the IC.  The IC pin 2 seems to be the pin connected to the transmitter.  There&rsquo;s a couple 0 ohm resistors connected to that trace, so let&rsquo;s probe there.</p>
+<p><img alt="traces" src="Assets/traces.png" /></p>
+<p>Pretty soon you will see a set of simple signals at around 20 kHz, and it looks like there is an initial preamble, then the Off and On buttons produce the sequence 0x6814 and 0x6824.  </p>
+<p>I had 3 of these remotes and when I looked at all of them I could see 0x68 prefix was in common, the next nibble 0x1 or 0x2 was the on off switch and the last nibble 0x0 to 0xF was the address of the remote switch, so you can do up to 16 unique remotes with this I guess.</p>
+<p>Ok, then I grabbed my trusty Arduino Leonardo and bit-banged out a similar signal until the logic analyzer matched as closely as possible.  Here&rsquo;s the Arduino version:</p>
+<p><img alt="arduino" src="Assets/arduino.png" /></p>
+<p>I noticed the original signal did the preamble, then the on or off sequence about 4 times with about 4 ms between each, then repeated with the preamble again.  So I coded up a similar pattern and tried it out.   It didn&rsquo;t work the first time, so I adjusted the timing to be as close as possible, then bingo, it worked as shown in this demo video:</p>
+<p><a href="https://youtu.be/SLlqlntYcEg"><img alt="demo video" src="Assets/thumbnail.png" /></a>:</p>
+<p>I severed the link from the AUT980202 chip by removing a diode from the signal pin.  This way I could use the Arduino to drive the signal instead.  The next step was to bypass the buttons on the remote by soldering a wire to the transitor that controls the transmitter directly so the Arduino can decide when to turn the lights on or off, you can also hard wire the 5 volt output from the Arduino and remove the battery.  Turns out 5 volts is enough and it still works.  </p>
+<p>Lastly, I found that the older version of the remote, that I bought a couple years ago, was essentially the same but it runs the signal at about 2.7 times slower. Perhaps they change the signal speed every now and then to stop the devices from clashing, so no guarentee this code will work on your remote.  But if you find the right scaling factor then you might get lucky.</p>
+<p>We need to use two GPIO pins on the Arduino, one to turn on or off the transmitter and another to drive the transmitted signal. </p>
+<pre><code class="language-cpp">#define SIGNAL_PIN 12
+#define POWER_PIN 3
+
+void setup() {
+  // initialize digital pin SIGNAL_PIN as an output.
+  pinMode(SIGNAL_PIN, OUTPUT);
+  pinMode(POWER_PIN, OUTPUT);
+}
+</code></pre>
+<p>My loop then turns the switch on then off, with a 1 second delay between each using this:</p>
+<pre><code class="language-cpp">void loop() 
+{
+  //float scale = 2.77; // old remote is slower.
+  //uint8_t addr = 0x4; // south lights
+  //uint8_t addr = 0xC; // north lights
+
+  float scale = 1; 
+  uint8_t addr = 0x0; // new switch
+
+  turnOn(addr, scale);
+  delay(1000);  
+
+  turnOff(addr, scale);
+  delay(1000);
+}
+</code></pre>
+<p>The cool thing is this hacked remote can now turn on any of my remote switches simply by changing the 16 bit address, and/or the scale on the speed depending on whether I&rsquo;m controlling old or new switches.  The <code>turnOn</code> and <code>turnOff</code> functions look similar:</p>
+<pre><code class="language-cpp">void turnOn(uint8_t addr, float scale)
+{
+  digitalWrite(POWER_PIN, TOGGLE_ON);
+  delay(1);
+  uint16_t onSignal = makeSignal(true, addr);
+  sendSignal(onSignal, scale);
+  digitalWrite(POWER_PIN, TOGGLE_OFF);
+}
+
+void turnOff(uint8_t addr, float scale)
+{
+  digitalWrite(POWER_PIN, TOGGLE_ON);
+  delay(1); 
+  uint16_t offSignal = makeSignal(false, addr);
+  sendSignal(offSignal, scale);
+  digitalWrite(POWER_PIN, TOGGLE_OFF);
+}
+</code></pre>
+<p>where the helper function <code>makeSignal</code> combines the prefix 0x68 with the on/off nibble and the address nibble:</p>
+<pre><code class="language-cpp">uint16_t makeSignal(bool on, uint8_t addr)
+{
+   uint16_t signal = 0x68;
+   signal &lt;&lt;= 4;
+   if (on) {
+    signal += 0x2;
+   }
+   else {
+     signal += 0x1;
+   }   
+   signal &lt;&lt;= 4;
+   signal += (0xF &amp; addr);
+   return signal;
+}
+</code></pre>
+<p>and the <code>sendSignal</code> function writes the preamble, and 4 repetitions of the signal, just to be sure.  This seems reliable enough, but you could increase this repetition to whatever number you need to get 100% reliability.</p>
+<pre><code class="language-cpp">void sendSignal(uint16_t signal, float scale)
+{
+  writePreamble(48, scale);
+  delay(4);
+  for (int i = 0; i &lt; 4; i++) {
+    writeBits(signal, scale);
+    delay((int)(4.0 * scale));
+  } 
+}
+</code></pre>
+<p>Ok, now down to the actual bit banging on the output line, simply raising it HIGH and LOW at the right time, the <code>writePreamble</code> does 48 fast pulses, at 200 microseconds:</p>
+<pre><code class="language-cpp">void writePreamble(int len, float scale)
+{
+  for (int i = 0; i &lt; len ; i++)
+  {
+    digitalWrite(SIGNAL_PIN, HIGH);
+    delayMicroseconds((int)(200.0 * scale));
+    digitalWrite(SIGNAL_PIN, LOW); 
+    delayMicroseconds((int)(200.0 * scale));
+  }
+}
+</code></pre>
+<p>And <code>writeBits</code> writes out our sequence (like 0x671C) by bit shifting over that signal.  Each bit starts with a rising edge then for a 1 bit, it keeps the pulse high for 600 microseconds, for a 0 bit, it drops that after 200 microseconds and leaves it low for the remaining 400 microseconds, then there&rsquo;s a 200 microsecond low until the next bit.  </p>
+<pre><code class="language-cpp">void writeBits(uint16_t signal, float scale)
+{
+  for (int i = 0; i &lt; 16 ; i++)
+  {
+    int bit = (signal &amp; 0x8000);
+    digitalWrite(SIGNAL_PIN, HIGH);
+    if (bit) {      
+      delayMicroseconds((int)(610.0 * scale));
+    } else {
+      delayMicroseconds((int)(200.0 * scale));
+      digitalWrite(SIGNAL_PIN, LOW); 
+      delayMicroseconds((int)(410.0 * scale));
+    }
+    digitalWrite(SIGNAL_PIN, LOW);
+    delayMicroseconds((int)(210.0 * scale));
+    signal &lt;&lt;= 1; 
+  }
+}
+</code></pre>
+<p>The exact numbers used in these <code>delayMicroseconds</code> calls is needed to match the signal from the IC chip, and the lack of neat round numbers here is probably because the internal oscillators on the IC versus the Arduino are slightly different.  But this seems to work.  The scale factor in the code is just so that I can control old and new remote switches with the same code.</p>
+<p>See <a href="https://github.com/lovettchris/lovettchris.github.io/blob/master/posts/wireless_remote/Remote.ino">Arduino Source Code</a>.</p>
+<p>Now hook that up to a nice little Python script to toggle the lights at sunrise and sunset: <a href="https://github.com/lovettchris/lovettchris.github.io/blob/master/posts/wireless_remote/Lights.py">Python Source Code</a>.</p>
+<p>Fun!</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../dgml_power_tools/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../dgml_power_tools/" class="btn btn-xs btn-link">
+        DGML Power Tools for Visual Studio 2017
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../dgmlimage/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../dgmlimage/" class="btn btn-xs btn-link">
+        DgmlImage
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

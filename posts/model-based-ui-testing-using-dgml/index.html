@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/model-based-ui-testing-using-dgml/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Model Based UI Testing using DGML - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Model Based UI Testing using DGML", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="model-based-ui-testing-using-dgml">Model Based UI Testing using DGML</h1>
+<p>See <a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/DgmlTestModel.mp4">demo video: (MP4 24mb)</a>.</p>
+<p><a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/DgmlTestModel.mp4"><img alt="thumbnail" src="thumbnail.png" /></a></p>
+<p><strong>Transcript</strong>: In this video  I&rsquo;m going to explain how to use the <a href="https://marketplace.visualstudio.com/items?itemName=ChrisLovett.DgmlTestMonitor2015">DgmlTestMonitor</a> that I published to the Visual Studio Gallery. </p>
+<p>I&rsquo;ve got a test project loaded here with some test methods and I have a DGML document.  The Directed Graph Markup Language is supported by Visual Studio 2012 and it allows me to edit these diagrams.  I created this diagram to model the user interface of an application that I&rsquo;m testing.  Not only that, I have a way of executing this model and even setting breakpoints using the DgmlTestMonitor which you will find under View/Other Windows.</p>
+<p>Now I can come in here and set a breakpoint on this node. So whenever it gets into editing transactions and editing categories  the model will stop executing.  Alright, so let&rsquo;s run the test.  Notice I don&rsquo;t actually have to debug the test to get these breakpoints. </p>
+<p><strong>1:00</strong>: This is the application that I&rsquo;m testing, it&rsquo;s a simple financial management tool that allows me to create bank accounts and transactions and so forth, and right there it has edited a category and so the model has paused.  So let&rsquo;s go back to the application and we see it sitting on that node and if we look at the DgmlTestMonitor output we can see everything that it has done up until that point. I can even select through here and watch what it did up until that point.  </p>
+<p><strong>1:30</strong>: If you put Visual Studio on another monitor you will be able to watch the model executing while it&rsquo;s actually testing the application.  Now that&rsquo;s it&rsquo;s reached this point I&rsquo;m going to move the application to another monitor.  Now we can watch the model executing.  Maybe I want to stop it when it adds a transfer.  I&rsquo;ll clear the previous breakpoint, tell it to resume, and off it goes. So the UI test is continuing, it&rsquo;s doing various different steps.  Since I can watch the model executing I can get a feel for whether this is accurately modeling and end-user or not and I can edit the model, I can add links, I can add nodes and I can make the test do different things.  </p>
+<p><strong>2:15</strong>: Now in this case we hit a test bug because if we switch to the Test Explorer we see the test terminated when it was trying to set the date on a transaction.  Now it turns out this is a product bug, sometimes setting the date is a little flakey.  This is the kind of thing that model based testing is really good at, finding edge conditions that are really hard to find any other way, which is why I&rsquo;m a big fan of model based testing.  I&rsquo;m not saying this is going to replace all static testing, but I think this is a very interesting thing to add to your suite of test tools.  </p>
+<p><strong>2:45</strong>: Alright, a lot of magic to explain here.  How does this actually work?  Let&rsquo;s take a look at the test code.  The way you do this is with in normal MSTest [TestMethod] you create a new DgmlTestModel , you give it the filename of the DGML document that you want to load and then you tell the model to run until you&rsquo;re happy.  I&rsquo;ve provided a Predicate that says run until 500 states have been executed.</p>
+<p>All right, now you pass in an object to the DgmlTestModel constructor which is the target object that implements the states - so the test model is connected to my code.  If I double click this node it will take me to that method and this is the implementation of editing a category.  Notice that there&rsquo;s lots of random number generation going on, some keystrokes to tab through various fields until it finds the category and so on. </p>
+<p><strong>3:43</strong>: This framework doesn&rsquo;t change how you build test wrappers, you could use the CodedUI, I created these wrappers so I could automate, using System.Automation, the user interface of my application.   What&rsquo;s new here is the way you can actually visually define the states that you want to travel through and the links that connect the states.  So when I edit a category I can go over here or I can go down there and the test model execution decides randomly which of these paths to take that have multiple choices.  </p>
+<p><strong>4:15</strong>: When you create a group you can encapsulate the complexity of editing transactions and you can define an entrypoint, so a node that has the EntryPoint Category which you can define using the property window, you can add the entry points.  You can also have entry points that are mutually exclusive, so if you choose this one, don&rsquo;t choose that one and so that has a category on it saying it is a singleton.  You can define predicates on a link, so you can add link labels &ldquo;IsSecuritySelected&rdquo; we see that&rsquo;s just a implemented as a Boolean  property.  You can implement all kinds of state machinery in your Boolean properties which will then guide the test in the right way.  For example, IsAccountSelected, or IsEditable and so forth.  So all of these things can encode various state about what your application is doing to make sure your test model doesn&rsquo;t get stuck in a weird state and try to do something that&rsquo;s invalid.  </p>
+<p><strong>5:16</strong>: Now since it is random, you&rsquo;ll want to also be able to reproduce a failure and if you scroll to the bottom of the test output and you will see the &ldquo;Model Seed = 3122235&rdquo;.  This number is the seed to the random number generator.  If I plug this number in I will get the exactly the same test sequence that I got before.  So basically you can create a static test by just copying down these seeds, which is a pretty low maintenance way of creating static regression tests.</p>
+<p><strong>5:43</strong>: Ok, let&rsquo;s edit this model and see if we can make some changes here.  So when we edit the payee we can go to SalesTax, or Deposit or Payment.  Well maybe I always want to have salestax, so I just delete those links and maybe I want to have the memo field be optional, so instead of always going from EditCategory to EditMemo, I&rsquo;ll give it one more route from there to SelectTransaction and now I will only have EditMemo sometimes.  That&rsquo;s it, that&rsquo;s all you have to do, save the document and re-run the test.  Ok, we see it now adding a new transaction, that time it added a memo, this time it didn&rsquo;t, this time it did, and now it added a transfer and it stopped, so let&rsquo;s see what happened.</p>
+<p><strong>6:43</strong>: Ah, that&rsquo;s because we have a breakpoint on AddTransfer, remember?  So I can go to the DgmlTestMonitor and we can see that it hit a breakpoint on that node and I can tell it to resume running the test.  You can also pause the test at any time, using the pause button, which is handy for a UI test because often interrupting a UI test is kind of tricky but when you tell the model to pause it&rsquo;s usually in a pretty good place.  </p>
+<p><strong>7:18</strong>: Alright, so, one more thing and that is you can modify the thickness of these links.  If you go to the Property Window this link has a priority of 10 which means it&rsquo;s going to pick that link more often than this link with Priority 1.  This way you can weight the model so that it&rsquo;s doing various things in a way that&rsquo;s similar to the way a real user would use your product. </p>
+<p><strong>7:40</strong>: Lastly, when the model enters a group, like View Categories, notice there&rsquo;s no exit links from SelectCategory.  Just to make it simple to create these models what happens when it hits a leaf node that has no exit, it will jump back up to the parent group and it will use any exit links that the parent has, and if the parent doesn&rsquo;t have any exit links then it will go back to the root and look for an entry point there, and re-entry the model at the root and keep executing from there.  So that makes it easy, you don&rsquo;t have to specify all possible exit routes and it makes your model a little bit simpler.  </p>
+<p><strong>8:18</strong>: That&rsquo;s it!  I hope you like it.  I&rsquo;ve posted a blog on my website, and in there you&rsquo;ll see a readme that points to the source code that you can download so you can play with it, including sample code on how to wire it up and also documentation on this class, DgmlTestModel.  You will find DgmlTestModel and also the NamedPipeReader that listens to the model while it&rsquo;s executing in case you want to build your own user interface.  </p>
+<p>Thanks for watching!</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../software_trails/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../software_trails/" class="btn btn-xs btn-link">
+        Software Trails
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../first_event_planner/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../first_event_planner/" class="btn btn-xs btn-link">
+        FIRST Event Planner
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>
