@@ -7,6 +7,8 @@ but only to add "web service" since that is now accepted terminology.  It's not 
 the language that says "rule based" with "LLM" and you can see many people are trying to build this
 idea right now.
 
+![image](cube.png)
+
 The idea was centered around three concepts:
 
 1. Totally real speech and voice interface – making a GUI irrelevant.
