@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/nrf5340_pixel/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>LE audio with the nrf5340 rocks - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Connecting nrf5340 audio devkit to Pixel 8 Android Phone", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="connecting-nrf5340-audio-devkit-to-pixel-8-android-phone">Connecting nrf5340 audio devkit to Pixel 8 Android Phone</h1>
+<p>I was able to stream audio from my Pixel 8 phone phone running Android 14 to my <a href="https://www.nordicsemi.com/Products/Development-hardware/nRF5340-Audio-DK">nrf5340 audio devkit</a>.</p>
+<p><img alt="music" src="music.jpg" /></p>
+<p>Here you see the bluetooth pairing showing the phone connected to the devkit:</p>
+<p><img alt="pairing" src="pairing.jpg" /></p>
+<p>First you build the firmware as a headset with CONFIG_AUDIO_DEV=1 flash the firmware and ensure
+it is advertising. You should see this in the console output:</p>
+<pre><code class="language-log">```log
+         nRF5340 Audio nRF5340 Audio DK cpuapp                      
+         NCS base version: 2.5.0                            
+         Cmake run : Mon Dec 04 19:49:23 2023
+HL [00:00:00.256,408] &lt;inf&gt; fw_info: ------- DEBUG BUILD -------
+HL [00:00:00.256,408] &lt;inf&gt; fw_info: HEADSET left device
+HL [00:00:00.267,059] &lt;inf&gt; board_version: Compatible board/HW version found: 1.0.0
+HL [00:00:00.300,750] &lt;inf&gt; sd_card: SD card volume size: 30543 MB
+HL [00:00:00.336,730] &lt;inf&gt; bt_mgmt: Clearing all bonds
+HL [00:00:00.337,066] &lt;inf&gt; bt_mgmt_ctlr_cfg: Controller: LL_ACS_NRF53: Version 5.2 (0x0b), Revision 3393
+HL [00:00:00.338,958] &lt;inf&gt; bt_mgmt: Local identity addr: E9:8C:6F:E2:D2:44 (random)
+HL [00:00:00.370,025] &lt;inf&gt; bt_mgmt_adv: Local addr: 65:C3:C7:DE:D6:EA (random)
+HL [00:00:00.370,513] &lt;inf&gt; bt_mgmt_adv: Advertising successfully started
+</code></pre>
+<p>Next on the Android phone you may need to enable developer mode, then make sure <code>Disable Bluetoioth LE audio</code> is not
+enabled.  Then Click <code>Pair new device</code> under settings -&gt; Connected devices and look for the one named <code>NRF5340_AUDIO</code>
+and click pair.  You should see <code>streamctrl_unicast_server: Connected</code> appear in the log.  </p>
+<pre><code class="language-log">HL [00:00:57.231,292] &lt;inf&gt; streamctrl_unicast_server: Connected
+HL [00:01:04.527,893] &lt;inf&gt; streamctrl_unicast_server: Security changed
+HL [00:01:06.545,898] &lt;inf&gt; bt_content_ctrl_media: Discovery of MCS finished
+HL [00:03:46.232,238] &lt;inf&gt; bt_rend_vol: Volume = 194, mute state = 0
+HL [00:03:55.593,017] &lt;inf&gt; unicast_server: LC3 codec config for sink:
+HL [00:03:55.593,017] &lt;inf&gt; unicast_server:     Frequency: 24000 Hz
+HL [00:03:55.593,017] &lt;inf&gt; unicast_server:     Frame Duration: 10000 us
+HL [00:03:55.593,048] &lt;inf&gt; unicast_server:     Channel allocation: 0x1
+HL [00:03:55.593,048] &lt;inf&gt; unicast_server:     Octets per frame: 60 (48000 bps)
+HL [00:03:55.593,078] &lt;inf&gt; unicast_server:     Frames per SDU: 1
+HL [00:03:55.690,490] &lt;inf&gt; streamctrl_unicast_server: Presentation delay 10000 us is set by initiator
+HL [00:03:56.498,077] &lt;inf&gt; unicast_server: Stream 0x20020e28 started
+</code></pre>
+<p>Here you can see it has negotiated a 24 kHz channel 1 stream. This is because I configured the 
+nrf5340 devkit to run at 24kh because I was testing another device.  I&rsquo;m sure it would also work great
+at 48 kHz.</p>
+<p>Click on the paired device settings icon and enable the switch titled <code>LE Audio</code>.  Now open a youtube video and if the
+audio is coming out of the phone speakers then click the volume button, and click settings, then change the <code>Play Chrome
+on</code> button from This Phone to <code>NRF5340_AUDIO</code> device.</p>
+<p>Note that the nrf5340 chip acts as one channel, since normally you would have 2 chips for each earbud. So you will only
+get the left channel in this case.  You can use 2 nrf5340 audio devkits to get full stereo.</p>
+<p>THe log will show <code>Data received</code> and perhaps some under runs, but it is working fine and the audio sounds great through
+some earbuds.</p>
+<pre><code class="language-log">HL [00:03:56.576,782] &lt;inf&gt; audio_datapath: Drft comp state: CALIB
+HL [00:03:56.577,758] &lt;wrn&gt; audio_datapath: Data received, total underruns: 69
+HL [00:03:56.676,757] &lt;inf&gt; audio_datapath: Drft comp state: OFFSET
+HL [00:03:57.094,177] &lt;wrn&gt; audio_datapath: Data received, total underruns: 75
+HL [00:03:57.114,196] &lt;inf&gt; audio_datapath: Drft comp state: LOCKED
+HL [00:03:57.120,025] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:03:57.168,182] &lt;wrn&gt; audio_datapath: Data received, total underruns: 79
+HL [00:03:57.246,490] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:03:57.256,469] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:03:57.256,713] &lt;inf&gt; audio_datapath: sdu_ref_us not from consecutive frames (diff: 29999 us)
+HL [00:03:57.256,744] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:03:57.257,171] &lt;wrn&gt; audio_datapath: Data received, total underruns: 128
+HL [00:03:57.356,567] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:03:57.366,577] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:03:57.476,562] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:03:57.616,577] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:03:57.626,586] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:03:57.729,187] &lt;wrn&gt; audio_datapath: Data received, total underruns: 141
+HL [00:03:57.736,572] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:03:57.876,586] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:03:57.886,566] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:03:57.996,582] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:03:58.156,494] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:03:58.166,503] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:03:58.170,837] &lt;inf&gt; audio_datapath: sdu_ref_us not from consecutive frames (diff: 30000 us)
+HL [00:03:58.171,203] &lt;wrn&gt; audio_datapath: Data received, total underruns: 196
+HL [00:03:58.172,607] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:03:58.178,497] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:03:58.276,855] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:03:58.416,595] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:03:58.426,574] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:03:58.536,590] &lt;inf&gt; audio_datapath: Pres comp state: LOCKED
+HL [00:03:59.586,578] &lt;inf&gt; audio_datapath: sdu_ref_us not from consecutive frames (diff: 20000 us)
+HL [00:03:59.586,608] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:03:59.588,195] &lt;wrn&gt; audio_datapath: Data received, total underruns: 198
+HL [00:03:59.610,778] &lt;wrn&gt; bt_ascs: CCID 2 is unknown
+HL [00:03:59.650,207] &lt;wrn&gt; audio_datapath: Data received, total underruns: 200
+HL [00:03:59.726,501] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:03:59.736,511] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:03:59.746,490] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:03:59.748,413] &lt;inf&gt; audio_datapath: sdu_ref_us not from consecutive frames (diff: 39999 us)
+HL [00:03:59.749,206] &lt;wrn&gt; audio_datapath: Data received, total underruns: 269
+HL [00:03:59.751,068] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:03:59.756,835] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:03:59.866,577] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:04:00.006,591] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:04:00.016,601] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:04:00.126,586] &lt;inf&gt; audio_datapath: Pres comp state: LOCKED
+HL [00:04:01.306,518] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:04:01.316,528] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:04:01.326,538] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:04:01.336,517] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:04:01.346,527] &lt;wrn&gt; le_audio_rx: BLE ISO RX overrun
+HL [00:04:01.347,869] &lt;inf&gt; audio_datapath: sdu_ref_us not from consecutive frames (diff: 59996 us)
+HL [00:04:01.347,900] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:04:01.348,205] &lt;wrn&gt; audio_datapath: Data received, total underruns: 351
+HL [00:04:01.446,594] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:04:01.456,604] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:04:01.566,619] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:04:01.706,604] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:04:01.716,644] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:04:01.821,228] &lt;wrn&gt; audio_datapath: Data received, total underruns: 356
+HL [00:04:01.829,223] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:04:01.829,193] &lt;inf&gt; audio_datapath: Saved 480000 bytes to wav file.
+HL [00:04:01.966,613] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:04:01.976,623] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:04:02.086,639] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:04:02.226,654] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:04:02.236,602] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:04:02.346,618] &lt;inf&gt; audio_datapath: Pres comp state: LOCKED
+HL [00:05:16.430,084] &lt;wrn&gt; audio_datapath: Data received, total underruns: 0
+HL [00:05:16.483,154] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:05:16.484,100] &lt;wrn&gt; audio_datapath: Data received, total underruns: 53
+HL [00:05:16.490,112] &lt;inf&gt; audio_datapath: Drft comp state: INIT
+HL [00:05:16.491,088] &lt;inf&gt; audio_datapath: Drft comp state: CALIB
+HL [00:05:16.493,133] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:05:16.590,942] &lt;inf&gt; audio_datapath: Drft comp state: OFFSET
+HL [00:05:16.634,948] &lt;wrn&gt; audio_datapath: Data received, total underruns: 54
+HL [00:05:16.930,786] &lt;inf&gt; audio_datapath: Drft comp state: LOCKED
+HL [00:05:16.933,166] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:05:17.043,151] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:05:17.183,166] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:05:17.193,176] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:05:17.303,161] &lt;inf&gt; audio_datapath: Pres comp state: LOCKED
+HL [00:06:43.983,703] &lt;inf&gt; audio_datapath: sdu_ref_us not from consecutive frames (diff: 389990 us)
+HL [00:06:43.983,734] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:06:43.984,344] &lt;wrn&gt; audio_datapath: Data received, total underruns: 425
+HL [00:06:44.085,357] &lt;wrn&gt; audio_datapath: Data received, total underruns: 426
+HL [00:06:44.113,708] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:06:44.123,718] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:06:44.233,734] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:06:44.373,718] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:06:44.383,728] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:06:44.493,713] &lt;inf&gt; audio_datapath: Pres comp state: LOCKED
+HL [00:06:47.333,740] &lt;inf&gt; audio_datapath: sdu_ref_us not from consecutive frames (diff: 159991 us)
+HL [00:06:47.333,770] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:06:47.334,381] &lt;wrn&gt; audio_datapath: Data received, total underruns: 567
+HL [00:06:47.435,394] &lt;wrn&gt; audio_datapath: Data received, total underruns: 568
+HL [00:06:47.463,745] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:06:47.473,754] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:06:47.583,740] &lt;inf&gt; audio_datapath: Pres comp state: WAIT
+HL [00:06:47.723,754] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+HL [00:06:47.733,764] &lt;inf&gt; audio_datapath: Pres comp state: MEAS
+HL [00:06:47.843,750] &lt;inf&gt; audio_datapath: Pres comp state: LOCKED
+</code></pre>
+<p>You can now go back to the bluetooth settings on the phone and tell it to forget this device
+and it will disconnect and go back to advertising.</p>
+<pre><code class="language-log">HL [00:06:53.385,406] &lt;inf&gt; bt_mgmt: Disconnected: 94:45:60:6F:5D:66 (public) (reason 0x13)
+HL [00:06:53.385,437] &lt;inf&gt; streamctrl_unicast_server: Disconnected
+HL [00:06:53.385,467] &lt;inf&gt; unicast_server: Stream 0x20020e28 released
+HL [00:06:53.386,047] &lt;inf&gt; bt_mgmt_adv: Local addr: 65:C3:C7:DE:D6:EA (random)
+HL [00:06:53.386,138] &lt;inf&gt; bt_mgmt_adv: Adv directed to: 94:45:60:6F:5D:66 (public).
+HL [00:06:53.386,779] &lt;inf&gt; bt_mgmt_adv: Advertising successfully started
+HL [00:06:53.389,434] &lt;inf&gt; audio_datapath: Pres comp state: INIT
+</code></pre>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../archai/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../archai/" class="btn btn-xs btn-link">
+        Find better models!
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../inner_self/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../inner_self/" class="btn btn-xs btn-link">
+        InnerSelf device vision from 1996
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>
