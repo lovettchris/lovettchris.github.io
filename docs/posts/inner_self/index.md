@@ -20,8 +20,11 @@ Its purpose in life is to be a personal assistant, counselor, agent and fun toy.
 
 ## Personal Assistant
 Security – first of all it only responds to the voice of its owner.  The owner selects a name for it and addresses it this way.  The data inside is locked up maybe even embedded in a kind of resin to avoid someone stealing it to break it open and hack into your personal information.  (Chip makers use some techniques like this to avoid reverse engineering their designs).
+
 For the purpose of this paper, let’s call it “Computer” – boring I know.
+
 Time Management – to help you wake up, make meetings on time, go to bed, a kid could easily teach it his school class schedule, music practice, etc.
+
 - The night before: “Computer, can you wake me up at six thirty?”
 - Computer: “Ok”.
 - 6:30am “Good morning …. (your name)…” followed by some wake up sound you’ve downloaded into it from the web – let’s say it is the sound of cockatoos screeching in Australia.
@@ -47,10 +50,12 @@ Several important things come up in this scenario:
 
 ## Diary
 A natural progression from day to day activities is to extend this and keep a diary of thoughts and feelings, ambitions and complaints.  Diary entries are prefixed with a special prefix:
+
 - “Log: well, today was challenging and exhilarating.  I really liked getting up in front of class and making everyone laugh.  It was so scary, but when they all laughed at my jokes I felt on top of the world. Maybe I’ll be a comedian one day”.
 - Now the computer also envelopes this with date/time stamp and enough context to understand what you were talking about.
 
 You can replay earlier diary entries:
+
 - “Computer, what did I think about Jeff two years ago?”
 
 Jeff did something to offend you, and you want to think about Jeff for a while.  The computer looks up a diary entry around the time you entered your first impressions of someone new that you met called Jeff, and it plays the recording.  It was saved as text, but played in a simulation of your own voice.
@@ -63,6 +68,7 @@ Again, massive, almost infinite storage that is virtually indestructible is a re
 
 ## Counsellor
 Clearly, it is not a huge leap to connect the diary, and daily schedule with the ability to solve human problems.  The key again is downloadable human intelligence working on your behalf, as follows:
+
 - You “Computer: Susan gets on my nerves soooo much  !!  Why does she always put me down and make me feel so stupid like that?”
 - Yikes, now the computer is being asked to guide a human being through the most important aspect of life – relationships.
 - Here the computer draws upon a rule based system of knowledge about how to deal with people, the owner can configure which source of knowledge you would like it to use.  For example, a religious person would give it the Bible.  A Tony Robbins fan would point the computer at all his books.  Tony Robbins may even provide a web service that connects to this device.
