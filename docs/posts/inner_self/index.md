@@ -9,9 +9,9 @@ idea right now.
 
 The idea was centered around three concepts:
 
-1)	Totally real speech and voice interface – making a GUI irrelevant.
-2)	Indestructible design - it is heavily padded so a kid could take it to school and practically kick it around the playground.
-3)	It becomes an extension of your personal thought life.
+1. Totally real speech and voice interface – making a GUI irrelevant.
+1. Indestructible design - it is heavily padded so a kid could take it to school and practically kick it around the playground.
+1. It becomes an extension of your personal thought life.
 
 It is a soft squishy cube about 4.5 inches across, like this one only with rounded corners.  It has big powerful speakers for awesome sound quality and an array of microphones for input.  It has a matrix of transducers woven into the fabric for detecting pressure, heat, moisture, and also contains internal sensors for detecting acceleration. The device is water resistant and contains massive amounts of indestructible permanent storage and has built in high bandwidth wireless connectivity. It also has a built in GPS system.  Underneath, it has a headset jack for more confined communication, and a power plug for charging.
 
