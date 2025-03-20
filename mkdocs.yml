@@ -32,6 +32,7 @@ nav:
 - Videos: videos/index.md
 - Code: code/index.md
 - Blog:
+  - InnerSelf device vision from 1996: posts/inner_self/index.md
   - LE audio with the nrf5340 rocks: posts/nrf5340_pixel/index.md
   - Find better models!: posts/archai/index.md
   - Fun with Dart: posts/fun_with_dart/index.md
