@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/keyword_spotting/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Keyword Spotting - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Fun with keyword spotting", url: "#_top", children: [
+              {title: "Always listening scenarios\u0026hellip;", url: "#always-listening-scenarios" },
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="fun-with-keyword-spotting">Fun with keyword spotting</h1>
+<p>I&rsquo;ve had a lot of fun lately playing with Deep Neural Networks (DNNs), pytorch, RNN&rsquo;s and keyword spotting models.
+See my <a href="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Running-AI-on-IoT-microcontroller-devices-with-ELL">Channel 9 Video</a>.
+This whole DNN thing is rather addictive.  See my latest quick demo:</p>
+<p><a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/ELL_MXCHIP_Oct2018.mp4"><img alt="image" src="../../videos/KeywordSpotter.png" /></a></p>
+<p>This has turned into an <a href="https://github.com/lovettchris/IoTKeywordSpotter/">official sample app</a> for the
+<a href="https://microsoft.github.io/azure-iot-developer-kit/">Azure MXCHIP IOT DevKit</a> which is a really fun little board
+that as a nice little ARM Cortex-M4f chip and a bunch of sensors including a nice microphone.</p>
+<p>You can run this puppy using only about 80 milliamps always listening for keywords.  Doesn&rsquo;t have to be &ldquo;Hey Siri&rdquo;
+or &ldquo;Hey Google&rdquo; or &ldquo;Hey Cortana&rdquo;,  you could <a href="https://microsoft.github.io/ELL/tutorials/Training-audio-keyword-spotter-with-pytorch/">train your own model</a> that listens to whatever you want.</p>
+<p>On my HP z840 dev box with NVidia 1080 I can train using pytorch in about 3 minutes, compile that using the <a href="https://microsoft.github.io/ELL/tutorials/">ELL compiler</a> in a second, and deploy that to the MXCHIP board using VS code in another few seconds and boom, I&rsquo;m up and running with an intelligent device!</p>
+<p>I&rsquo;m really liking pytorch these days, it has the flexibility you need to try all kinds of crazy things, and all the researchers seem to be adopting it,
+and that&rsquo;s important because the researchers are the ones coming up with all the good algorithms.</p>
+<p>So anyone can build an intelligent device,
+cross-platform apps to light it up, and cloud services on Azure that reach the entire planet.  The opportunity here is enormous.  I seriously think the opportunity for developers is larger than it has every been.  Think about it, a guy starts <a href="https://ring.com/">ring.com</a> because he was tired of his neighbor&rsquo;s dog pooping in his front yard, and a few years later Amazon buys it for $1 billion !!  Granted, ring.com executed really well.  But the number of intelligent devices and scenarios that can be imagined is limitless!</p>
+<h2 id="always-listening-scenarios">Always listening scenarios&hellip;</h2>
+<p>For example, there are so many things we can do with A.I. on audio streams:</p>
+<ul>
+<li><strong>fun</strong>: simple interactive toys, &ldquo;Spot! roll over!&rdquo;</li>
+<li><strong>safety</strong>: left the stove on, garage door is still open</li>
+<li><strong>industrial</strong>: anomaly detection on machines (motor is dying)</li>
+<li><strong>inclusive</strong>: help deaf people hear things that are going on around them</li>
+<li><strong>neighborhood</strong>: dog is barking while I&rsquo;m at work</li>
+<li><strong>relationships</strong>: my spouse is snoring too loud, here&rsquo;s the proof!</li>
+<li><strong>health</strong>: detect the sound of sleep apnea, so people can get help</li>
+</ul>
+<p>It&rsquo;s so easy to do all this, let&rsquo;s just do it!!</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../dgmlimage/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../dgmlimage/" class="btn btn-xs btn-link">
+        DgmlImage
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../px4_topics/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../px4_topics/" class="btn btn-xs btn-link">
+        Using DGML to understand PX4
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

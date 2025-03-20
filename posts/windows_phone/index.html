@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/windows_phone/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Windows Phone - Lessons Learned - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Windows Phone - Lessons Learned", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="windows-phone-lessons-learned">Windows Phone - Lessons Learned</h1>
+<p>This is my &ldquo;developer&rdquo; perspective on why Windows Phone failed in the marketplace.</p>
+<p><img alt="phone" src="phone.png" /></p>
+<p>To understand the failure, you first have to go back to the phenomenal success of iPhone. Remember
+before iPhone there was, way back as far as 2000, palm pilots, and the Windows CE powered <a href="https://en.wikipedia.org/wiki/IPAQ">Compaq
+iPAQ</a> and there were flip phones and everyone knew these were
+going to merge.  Apple had also worked for a decade on their <a href="https://en.wikipedia.org/wiki/Apple_Newton">Apple
+Newton</a> as far back as 1995.  I was on an internal task
+force in 2003 that recommended we merge phones and handheld devices as soon as possible but failed
+to convince the VP of Microsoft mobile at the time.  He was focused on &ldquo;slate&rdquo; devices instead and
+we all know who was talking about slates back then.</p>
+<p>While Microsoft could have beaten Apple to market, they decided to do nothing.  Microsoft was very
+distracted with the big security push and the DOJ at the time.  This gave Apple the time they needed
+to perfect their iPhone and stun the market in 2007 with a gorgeous premium device that every tech
+geek just had to have.  Notice the first iPhone had no app store, so it was not all about apps back
+then, it was about the best possible &ldquo;experience&rdquo;, and this could not have happened without a deal
+with AT&amp;T.  Did Steve Jobs know that a killer phone would create demand from developers?  Their next
+release they opened up an SDK and off to the races on apps. They kept a high bar on their apps too
+which was in line with their premium brand.</p>
+<p>In the meantime, Google took the low road and shipped a free operating system, Android, also
+unveiled in November 2007, clearly Google was working on this long before.  Now remember that iOS is
+based on the XNU kernel of Darwin which is a Unix-like operating system.  This meant iOS apps could
+use all kinds of open-source Linux friendly libraries for computer vision, encryption, https, etc.
+Android is also built on a Linux Kernel and so Android developers found it very easy to port their
+apps over from iOS.  This allowed Google to amass millions of apps almost overnight.  Android was
+also hugely helped by the partnership with Samsung who consistently shipped the best tech specs for
+each new phone they came out with.  So again, success cemented by key partnerships.</p>
+<p>Then late to the party along comes Windows Phone 7 an entirely 3 years later in 2010, wow talk about
+late to the party.  Microsoft chose Nokia as a partner and Nokia phones used Qualcomm chipsets. This
+phone provided only a .NET SDK, so none of the C++ open-source libraries from iOS or Android apps
+could be leveraged.  Apps had to be built from scratch.  I claim all the app developers could have
+chosen to do this and would have gotten lots of apps up and running in a few months, but most chose
+not to.  Why? Because after Microsoft cancelled Zune &amp; Kin, developers didn&rsquo;t believe Microsoft had
+a winning strategy, and the SDK was not rich enough to build interesting apps anyway and with no
+shared code across the 3 phone platforms, Windows usually drew the short straw.</p>
+<p>Along came Windows Phone 8 in 2012 with a C++ SDK, but the Kernel was Windows based, and therefore
+again, all those Linux friendly open-source libraries used in iOS and Android apps could not be
+easily ported to Windows Phone.  Microsoft recognized this problem and tried to create their own
+open source libraries, but it was too little too late. Also, UWP was not Win32 so folks couldn&rsquo;t
+even use established Win32 code either.  Microsoft should have followed Android and started off with
+a Linux compatible phone, but back then Ballmer was very anti-Linux, and that is where Microsoft
+really shot themselves in the foot on the technical side.</p>
+<p>Apple had taken the high road, Google took the low road, which was traditionally Microsoft&rsquo;s strong
+position with the open PC industry, where anyone can build a PC and apps for it.  So, there was no
+room for Microsoft.  Oddly, Microsoft tried to copy Apple but could never deliver the same premium
+quality.  Nokia turned out could not compete with Samsung on phone specs, and Qualcomm really
+screwed Microsoft with very bad windows drivers, full of bugs, and little to no support, so the
+phones would hang and freeze and with 3 companies in the picture all pointing fingers at each other
+- it was a real mess. So, Microsoft was stuck in the middle between Apple and Android, squeezed on
+both ends and with serious quality problems. It was really a huge business mistake to try and copy
+Apple.  A free OS to compete with Android that was able to fully leverage the huge Win32 app
+platform, with C++ support from day one would have attracted better phone makers, and many more app
+developers.  If the kernel was also Linux-based then developers could share app code across the 3
+platforms and have a more manageable story for building, testing and shipping their apps on the 3
+app stores. Microsoft could have acquired 3rd party libraries that emulate Win32 on Linux to enable
+easy porting of Win32 libraries so app developers could leverage the huge Windows legacy. This would
+have been a big job but if they started in 2003 they would have had time to do it right.</p>
+<p>So, what killed Windows Phone?</p>
+<ul>
+<li>Lack of vision to invest early back in 2003-2005.</li>
+<li>Then trying to copy Apple after they launched iPhone.</li>
+<li>Choosing to partner with Nokia and failing to partner Samsung.</li>
+<li>Choosing a source code incompatible Kernel (could not just recompile apps).</li>
+<li>Betting on .NET with no C++ story in the first release.</li>
+<li>UWP cutting off the huge legacy of Win32 apps.</li>
+<li>&ldquo;Windows&rdquo; was not a good brand name to use in a Phone.</li>
+</ul>
+<p>In other words a spectacular string of business and technical mistakes which should make a great
+case study for business schools.</p>
+<p>To highlight the lack of vision - I have a sneaking suspicion that Steve Jobs had a brilliant all up
+strategy where iPhone was only part of the overall vision.  Starting with the most personal of
+devices, like iPods then iPhones, then building on the really strong personal attach these devices
+have, leverage that to create pull up into tablets, laptops and media centers.  This has pulled
+Apple laptops from negligible numbers up into a respectable 9.5% of total laptops sold in 2017.  Of
+both desktops + laptops, Apple had 12% of the global market share in 2018.  That&rsquo;s a LOT of laptops.
+So if it was Steve Jobs&rsquo; strategy to make macOS relevant by putting a phone in everyone&rsquo;s pocket,
+then it was a brilliant strategy that is clearly working.  Did Steve Jobs really envision all this?
+If so, Microsoft really needs to step up their game in the vision and strategy department.</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../virtualcanvas/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../virtualcanvas/" class="btn btn-xs btn-link">
+        VirtualCanvas
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../tower_garden/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../tower_garden/" class="btn btn-xs btn-link">
+        Tower Garden
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

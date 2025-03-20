@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/simplicity/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Genius of Simplicity - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Genius in Simplicity", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="genius-in-simplicity">Genius in Simplicity</h1>
+<p>Someone recently asked me &ldquo;what makes a good software architect&rdquo;?
+Good question.  There are, of course, many books on the subject but
+these are the things that have helped me along the way:</p>
+<ol>
+<li>
+<p>Write a huge amount of code.  Millions of lines.  This gives you a
+    deep grounding in the issues faced by developers everywhere.  I
+    have seen many “architects” get lost in the clouds, they lose
+    perspective if they stop day to day writing code.</p>
+</li>
+<li>
+<p>Find teams that have the best software engineers on the planet and
+    join those teams.  I’ve learned so much from working with amazing
+    people like Erich Gamma, Anders Hejlsberg, Erik Meijer, Clemens
+    Szyperski, Herman Venter, and many others.</p>
+</li>
+<li>
+<p>Learn every product you work on top to bottom, don’t live just in
+    your own little corner of the product. I know that’s hard with
+    some huge products.  But nothing is stopping you from learning the
+    whole system top to bottom.  Use tools to help you understand how
+    it works (logging, diagramming tools, debuggers).  Pretty soon you
+    will find people coming to you to pick your brains.</p>
+</li>
+</ol>
+<p>One of my favorite saying is <strong>“There is Genius in Simplicity”</strong>.  Do
+not be satisfied with a solution until you have gotten to the core
+essence of the problem so you can deliver an elegantly simple
+solution.  So very much software out there does not achieve this kind
+of Simplicity and we all need to work much harder to achieve this.
+Simplicity is not easy to achieve.</p>
+<p>Have you noticed that a professor that really really knows their stuff
+is able to make something really complex seem simple?  But a professor
+who is new is not so good at explaining the same thing?  This is what
+I mean by “genius of simplicity”.  The person who truly understands
+the problem area deeply usually does the best job of coming up with a
+“simple architecture” that “just works” and scales.</p>
+<p>A perfect example of this is <code>git</code>.  Many source control systems
+existed before <code>git</code>, but they all fell over due to complexity, they
+contained bugs, data would go missing when you merged branches, or a
+branch merge would take 12 hours, by which time there were conflicts
+again, and so on, it was horrendous what we had to put up with. Linus
+Torvalds was also fed up with other CVS systems and decided to write
+his own, and he thought long and deeply about it and got to the core
+essence of the problem, and built <code>git</code>. He didn&rsquo;t just architect it
+and hand his grand plans over to a team of people.  He built it.</p>
+<p>This is what I mean by “genius of simplicity”. Notice <code>git</code> is not a
+trivial piece of software.  I&rsquo;m not talking about &ldquo;simplistic&rdquo;
+software. You don&rsquo;t achieve the “genius of simplicity” by cutting
+features. Linus could have made <code>git</code> much simpler if it didn&rsquo;t
+support branches. But of course then you&rsquo;d have a simplistic toy.  I&rsquo;m
+talking about beautiful elegant design, those are the ones that
+achieve true “genius of simplicity”.</p>
+<p>Products that achieve this tend to have a very long life.  We all need
+to do better at achieving this in our own products.  And we need to
+push back on the tyranny of the urgent.  One time I was on a product
+that made a terrible decision to ship something that cost the team 2
+years of embarrassing bug fixing, simply because it would have taken 3
+weeks to fix it before we shipped and that was &ldquo;too much work&rdquo; and
+wouldn&rsquo;t fit the schedule according to the PM&rsquo;s at the time.  That&rsquo;s a
+classic example of when the devs (including me) should have pushed
+back harder.  This kind of professional integrity is required from a
+software architect.  Sometimes the PM&rsquo;s will get quite upset with you
+but over time they will start to notice your products seem to have a
+much longer lifetime.</p>
+<p>There&rsquo;s also a certain &ldquo;completeness&rdquo; to beautiful elegant design. Too
+often we are tempted to cut critical features to meet a deadline and
+we justify it by calling it the Minimum Viable Product (MVP). I say we
+should instead be shooting for the Minimum Lovable Product (MLP) and
+to achieve that you need a kind of functional completeness that
+delights the customer.  When a customer hits a critical missing
+feature they fall off a cliff of complexity trying to work around that
+hole.  Any product that does this to a customer has completely missed
+the target on “genius of simplicity”.  It is simplicity in the core
+design of the product, and simplicity of &ldquo;use&rdquo; by customers. Both are
+equally important.  Most PM&rsquo;s think simplicity of &ldquo;use&rdquo; by customers
+is the only thing that is important.  I say you can&rsquo;t deliver that
+without simplicity in the core design of the product.  At some point
+the ugly monsters lurking in your code will rise up and bite the
+customer.</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../tower_garden/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../tower_garden/" class="btn btn-xs btn-link">
+        Tower Garden
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../wpf_animating_bar_chart/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../wpf_animating_bar_chart/" class="btn btn-xs btn-link">
+        WPF Animating Bar Chart
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>
