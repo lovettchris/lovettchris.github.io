@@ -10,7 +10,8 @@ flowers she let me walk right up close with my phone camera:
 This is an older male in July, wings a bit tatty, but it loves the wild Rose Campions
 that we get around here:
 
-![video](../../images/TigerSwallowtail.mp4)
-
-
+<video width="763" height="429" controls autoplay muted loop>
+<source src="../../images/TigerSwallowtail.mp4" type="video/mp4">
+Your browser does not support the video tag
+</video>
 
