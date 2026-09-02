@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="TopToBottom" Layout="ForceDirected" Offset="-169.662928279201,67.8380700890373" ZoomLevel="1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id=".NET" Category="Product" Bounds="1223.15916585286,621.074841672915,68.7633333333333,78.96" Label="WebData" UseManualLocation="True" />
+    <Node Id="19PatentsFiled,11PatentsGrantedSoFar." Category="Comment" Bounds="908.192653253798,283.407447385423,155.846666666667,41.92" Label="21 patents filed,&#xD;&#xA;16 patents granted so far." UseManualLocation="True" />
+    <Node Id="5f7d8b13-ad2a-4b0c-9ac3-c0f580f582e51" Category="Comment" Bounds="997.711399739583,984.977143505859,249.776666666667,89.8" Label="We built the equivalent of HTML 5 in 1996, including equivalent of integrated&#xD;&#xA;scalable vector graphics which was actually more integrated than SVG is today because we could put any HTML inside any SVG tag." UseManualLocation="True" />
+    <Node Id="Ada" Category="Technology" Bounds="1093.05540505413,103.358070089037,68,78.96" UseManualLocation="True" />
+    <Node Id="AirSim" Category="Technology" Bounds="1429.61877441406,162.109720593904,68,78.96" UseManualLocation="True" />
+    <Node Id="Apple/IBMJointVenture" Category="Comment" Bounds="463.900968669352,972.483287353516,149.27,25.96" Label="Apple/IBM Joint Venture" UseManualLocation="True" />
+    <Node Id="Australia" Category="Place" Bounds="-58.2085469880915,306.181739377736,68,78.96" Label="Australia" UseManualLocation="True" />
+    <Node Id="California" Category="Place" Bounds="558.377377760171,543.762662454588,70.1133333333332,78.96" Label="California" />
+    <Node Id="CommonPoint" Category="Product" Bounds="648.180362955729,1010.44346191406,96.0233333333333,78.96" Label="CommonPoint" UseManualLocation="True" />
+    <Node Id="Coyote" Category="Technology" Bounds="1200.05540505413,70.3580700890373,68,78.96" UseManualLocation="True" />
+    <Node Id="Cupertino" Category="Place" Bounds="610.787041136179,702.093637873885,72.5166666666667,78.96" Label="Cupertino" />
+    <Node Id="DevMgr,2006,2007" Category="Comment" Bounds="1190.43269205729,565.114741672915,125.986666666667,25.96" Label="Dev Mgr, 2006,2007" UseManualLocation="True" />
+    <Node Id="ELL" Category="Technology" Bounds="1330.05541795596,110.985272747787,68,78.96" UseManualLocation="True" />
+    <Node Id="IBM" Category="Company" Bounds="391.881403310835,826.780475918011,84.0145839432057,94.9745839432057" Label="IBM" />
+    <Node Id="IE" Category="Product" Bounds="1129.6796875,730.034941672915,68,78.96" Label="XML" />
+    <Node Id="JavaXMLParser" Category="Technology" Bounds="1062.55417317708,876.017043505859,104.453333333333,78.96" Label="Java XML Parser" UseManualLocation="True" />
+    <Node Id="Linq" Category="Technology" Bounds="1610.88269042969,614.915675138674,68,78.96" Label="Linq" UseManualLocation="True" />
+    <Node Id="Logica" Category="Company" Bounds="226.440108906549,735.233127939846,84.0145839432057,94.9745839432057" Label="Logica" />
+    <Node Id="LosAltos" Category="Place" Bounds="767.303707802845,609.345905499664,68,78.96" Label="Los Altos" UseManualLocation="True" />
+    <Node Id="MLSF" Category="Technology" Bounds="1527.12540527344,489.995575138674,125.33,94.9200000000001" Label="Managed Language&#xD;&#xA;Service Framework" UseManualLocation="True" />
+    <Node Id="MSXML" Category="Technology" Bounds="1222.41747151693,843.293217467059,100.773333333334,78.96" Label="MSXML in C++" UseManualLocation="True" />
+    <Node Id="Microsoft" Category="Company" Bounds="1044.68688831426,531.961561327365,84.0145839432057,94.9745839432057" Label="Microsoft" />
+    <Node Id="MicrosoftResearch" Category="Incubation" Bounds="1146.03931992046,224.778706394015,120.75,78.9794093955506" Label="Microsoft Research" UseManualLocation="True" />
+    <Node Id="NSW" Category="Place" Bounds="133.509221747929,266.052661025457,68,78.96" Label="NSW" UseManualLocation="True" />
+    <Node Id="OS/2" Category="Product" Bounds="238.770716766613,877.417419172327,68,78.96" Label="OS/2" UseManualLocation="True" />
+    <Node Id="Over3MillionDownloads" Category="Comment" Bounds="1447.99767822266,846.291610417574,155.12,25.96" Label="Over 3 million downloads" UseManualLocation="True" />
+    <Node Id="Patents" Category="Company" Bounds="1003.8908106124,361.19454959365,62.6703634568492,76.2972611729023" UseManualLocation="True">
+      <Category Ref="Patent" />
+    </Node>
+    <Node Id="Progression" Category="Technology" Bounds="1394.8742578125,345.115475138674,212.23,110.88" Label="Directed Graph Markup Language&#xD;&#xA;Generated Dependency Graphs&#xD;&#xA;Visualization and Modeling Platform" UseManualLocation="True" />
+    <Node Id="SanJose" Category="Place" Bounds="433.344726365247,661.982617229628,68,78.96" Label="San Jose" />
+    <Node Id="Seattle" Category="Place" Bounds="860.19753452448,393.767827943251,68,78.96" Label="Seattle" />
+    <Node Id="Springwood" Category="Place" Bounds="69.1443167070498,443.371741581564,84.1633333333333,78.96" Label="Springwood" UseManualLocation="True" />
+    <Node Id="Sydney" Category="Place" Bounds="254.571751788535,345.156978815906,68,78.96" Label="Sydney" />
+    <Node Id="System.Xml" Category="Technology" Bounds="1327.12436848958,734.333117467059,80.5233333333333,78.96" Label="System.Xml" UseManualLocation="True" />
+    <Node Id="Taligent" Category="Company" Bounds="643.170968669352,857.331432819967,84.0145839432057,94.9745839432057" Label="Taligent" UseManualLocation="True" />
+    <Node Id="UNSW" Category="Company" Bounds="223.544167508352,547.493082352949,101.856666666667,94.9745839432057" Label="University NSW" UseManualLocation="True" />
+    <Node Id="USA" Category="Place" Bounds="486.352653657019,364.59807438285,68,78.96" Label="USA" />
+    <Node Id="Visual Studio" Category="Product" Bounds="1197.11292236328,456.154641672915,88.3900000000003,78.96" Label="Visual Studio" UseManualLocation="True" />
+    <Node Id="Walkabout" Category="Company" Bounds="890.929856528872,714.414069707096,126.506666666667,94.9745839432057" Label="Walkabout Software" UseManualLocation="True" />
+    <Node Id="Washington" Category="Place" Bounds="670.168061939047,334.052259101496,83.38,78.96" Label="Washington" />
+    <Node Id="WeBuiltXMLHTTPRequestWhichInspiredAJAX" Category="Comment" Bounds="1280.07473347982,952.253298339844,247.123333333333,73.84" Label="Ships in Windows, used in hundreds of MSFT products.  We also built XMLHTTPRequest which inspired AJAX and is now a w3c standard" UseManualLocation="True" />
+    <Node Id="WebBrowser" Category="Product" Bounds="865.34253199931,845.413060570045,132.22,78.96" Label="Web Browser for kids" UseManualLocation="True" />
+    <Node Id="WindowsPhone" Category="Incubation" Bounds="1219.11645345052,342.989920593904,84.1400000000003,78.9794093955505" Label="Mobile Labs" UseManualLocation="True" />
+    <Node Id="X#" Category="Incubation" Bounds="1445.28409525118,614.915675138674,68.0194093955506,78.9794093955506" Label="X#" UseManualLocation="True" />
+    <Node Id="XMLNotepad" Category="Technology" Bounds="1442.99763590495,737.331510417574,93.3666666666668,78.96" Label="XML Notepad" UseManualLocation="True" />
+    <Node Id="XmlEditor" Category="Technology" Bounds="1395.9123836263,500.745572746187,78.1033333333335,78.9600000000001" Label="XML Editor" UseManualLocation="True" />
+    <Node Id="clovett" Category="Person" Bounds="-10.7547126779913,624.014374114931,82.5166666666667,62.96" Label="Chris Lovett" UseManualLocation="True" />
+    <Node Id="f6928647-e0d8-409c-af4c-24e56634a2f01" Category="Comment" Bounds="1314.77971598307,271.069820593904,232.316666666667,41.9200000000001" Label="an incubation team, prototyped an xbox game streaming to windows phone" UseManualLocation="True" />
+    <Node Id="iHTML" Category="Technology" Bounds="839.538818556337,994.961166667915,109.666666666667,78.9600000000002" Label="Interactive HTML" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source=".NET" Target="System.Xml" Category="Contains" Bounds="1291.92249918619,696.004803911812,31.0401593356623,32.0046287170068" Label="PM, 2000" LabelBounds="1256.74356507915,713.399534037881,49.2633333333333,15.9599999999998" />
+    <Link Source=".NET" Target="X#" Category="Contains" Bounds="1291.92249918619,655.597991923289,144.365054642062,4.00340705394694" Label="Incubation, 2003" LabelBounds="1320.03125221404,637.639695154797,88.0366666666664,15.96" />
+    <Link Source=".NET" Target="XMLNotepad" Bounds="1291.92248535156,675.987854003906,143.16064453125,71.2638549804688" Label="side project" LabelBounds="1355.17805773046,687.067460761243,61.6800000000003,15.96" />
+    <Link Source=".NET" Target="XmlEditor" Bounds="1291.92249918619,571.762241035746,96.5413336975384,65.4747910156273" Label="Dev/Architect" LabelBounds="1341.31575325471,606.154870041908,72.2199999999998,15.96" />
+    <Link Source="19PatentsFiled,11PatentsGrantedSoFar." Target="Patents" Bounds="996.953973200224,325.327447385423,14.4123584416892,27.8726154332829" />
+    <Link Source="5f7d8b13-ad2a-4b0c-9ac3-c0f580f582e51" Target="iHTML" Bounds="958.20368617934,1032.37462099324,39.5077135602425,0.790062790982574" />
+    <Link Source="Apple/IBMJointVenture" Target="Taligent" Bounds="562.138514077535,932.25715334852,73.1463139020476,40.226134004996" />
+    <Link Source="Australia" Target="NSW" Category="Contains" Bounds="9.7914530119085,314.493174121259,114.908672489745,24.0519131434633" Label="State" LabelBounds="50.0948332809501,306.558211334128,26.5033333333333,15.96" />
+    <Link Source="California" Target="Cupertino" Category="Contains" Bounds="606.802087568615,622.722662454588,23.988796897256,70.8463977456738" Label="City" LabelBounds="622.802378166771,647.780469353701,20.21,15.96" />
+    <Link Source="California" Target="LosAltos" Category="Contains" Bounds="628.490711093504,594.303102217707,130.230043891235,41.0878070497496" Label="City" LabelBounds="687.560369314307,594.882502543544,20.21,15.96" />
+    <Link Source="California" Target="SanJose" Category="Contains" Bounds="507.910269710111,616.111406703586,50.46710805006,47.3174042260332" Label="City" LabelBounds="534.511775084119,641.229118448795,20.21,15.96" />
+    <Link Source="Cupertino" Target="Taligent" Category="Contains" Bounds="656.267620446248,781.053637873885,15.770724494421,67.5137276332008" />
+    <Link Source="DevMgr,2006,2007" Target=".NET" Bounds="1254.07373496814,591.074741672915,1.04847535881458,21.0112844240234" />
+    <Link Source="IBM" Target="OS/2" Category="Technology" Bounds="315.47132058521,885.382332661196,76.4100827256253,20.2170807446963" Label="Dev Lead on&#xD;&#xA;Database&#xD;&#xA;Integration" LabelBounds="322.490706385139,905.811000213327,65.9300000000001,47.8800000000001" />
+    <Link Source="IBM" Target="Taligent" Category="Work" Bounds="475.895987254041,879.374875957398,158.340767055459,19.2505484389386" Label="join Startup, 1992" LabelBounds="538.736096010476,869.040042531999,92.9300000000001,15.96" />
+    <Link Source="IE" Target="JavaXMLParser" Bounds="1130.86382178852,808.994941672915,19.591460245126,58.4881378936608" Label="Dev, 1997" LabelBounds="1144.66520747257,832.577409386746,52.2033333333334,15.96" />
+    <Link Source="IE" Target="MSXML" Category="Shipped" Bounds="1197.6796875,804.802921157606,30.8408512210467,32.0091566229025" Label="Dev, 1998" LabelBounds="1214.5403663742,803.459814152976,52.2033333333334,15.96" />
+    <Link Source="Logica" Target="IBM" Category="Work" Bounds="310.454692849755,805.965258448236,73.5519410743237,40.7001478575602" />
+    <Link Source="Logica" Target="OS/2" Category="Technology" Bounds="269.977488486399,830.207711883052,1.23130505051387,38.2143755198796" Label="Dev on &#xD;&#xA;Communication&#xD;&#xA;Protocols" LabelBounds="274.593141550018,825.310491086508,84.0633333333333,47.8800000000001" />
+    <Link Source="LosAltos" Target="Walkabout" Category="Contains" Bounds="835.303707802845,673.973593458172,49.0163687524717,36.2543631248923" />
+    <Link Source="Microsoft" Target=".NET" Category="Contains" Bounds="1128.70147225747,599.390964483038,86.3273447000597,40.9821587023007" />
+    <Link Source="Microsoft" Target="IE" Category="Contains" Bounds="1105.9287175457,626.936145270571,38.3809833167927,94.7570994976695" />
+    <Link Source="Microsoft" Target="MicrosoftResearch" Bounds="1104.73205467266,312.171597200962,83.4864149920813,219.789964126403" />
+    <Link Source="Microsoft" Target="Patents" Bounds="1048.60050602386,446.145406675678,24.523391739129,85.8161546516866" />
+    <Link Source="Microsoft" Target="Visual Studio" Bounds="1128.70147225747,523.881332538634,60.4992180347415,32.7958834411729" />
+    <Link Source="Microsoft" Target="WindowsPhone" Bounds="1127.90669959056,428.706049559681,92.3284137323601,104.221556898624" />
+    <Link Source="MicrosoftResearch" Target="Ada" Bounds="1157.78054563295,189.851871930043,22.8258906290464,34.9268344639719" />
+    <Link Source="MicrosoftResearch" Target="AirSim" Bounds="1266.78931992046,212.006121099143,154.085348188011,37.5493801938634" />
+    <Link Source="MicrosoftResearch" Target="Coyote" Bounds="1213.48247946972,158.177279817981,11.9208161431141,66.6014265760344" />
+    <Link Source="MicrosoftResearch" Target="ELL" Bounds="1261.11580267604,180.278241842787,61.6424309296306,44.5004645512279" />
+    <Link Source="NSW" Target="Sydney" Category="Contains" Bounds="201.509221747929,327.748839755351,45.5283229619588,29.7489811822122" Label="City" LabelBounds="225.36737859523,324.989062106758,20.2099999999999,15.96" />
+    <Link Source="Over3MillionDownloads" Target="XMLNotepad" Bounds="1510.44850899745,824.544244377109,9.46183575584428,21.7473660404653" />
+    <Link Source="SanJose" Target="IBM" Category="Contains" Bounds="444.79318089815,740.942617229628,14.9079995305053,77.0019342261942" />
+    <Link Source="Seattle" Target="Microsoft" Category="Contains" Bounds="928.19753452448,459.070796662697,109.322164850819,83.0300836260223" />
+    <Link Source="Springwood" Target="Sydney" Bounds="153.307650040383,407.82655179953,93.3908382571542,51.7202023250864" Label="near" LabelBounds="175.687459537408,415.977038852962,23.3466666666667,15.96" />
+    <Link Source="Sydney" Target="UNSW" Category="Contains" Bounds="278.257475385672,424.116978815906,7.66794455091366,114.396254062815" />
+    <Link Source="Sydney" Target="USA" Category="Near" Bounds="322.571751788535,387.488798115717,154.812394900949,12.9852051655429" Label="Moved to" LabelBounds="376.216958264549,374.021376123331,51.2799999999996,15.96" />
+    <Link Source="Taligent" Target="CommonPoint" Category="Technology" Bounds="688.782650640214,952.306016763173,3.73159957221787,49.1632588158972" Label="Dev on UI&#xD;&#xA;Frameworks" LabelBounds="694.648466926619,960.776277171429,63.6866666666665,31.9200000000001" />
+    <Link Source="Taligent" Target="Walkabout" Category="Work" Bounds="727.185552612558,799.72928515097,155.796366427091,82.7717393015249" Label="Founder of startup, 1996" LabelBounds="673.682048544772,823.388946470794,130.463333333333,15.96" />
+    <Link Source="UNSW" Target="Logica" Category="Work" Bounds="270.260086479662,642.467666296155,2.68841515220157,83.7700928259464" Label="Graduated&#xD;&#xA;top of class&#xD;&#xA;1987" LabelBounds="275.604294585612,660.476865240614,60.2533333333333,47.8800000000001" />
+    <Link Source="USA" Target="California" Category="Contains" Bounds="536.45657987729,443.55807438285,37.4743398388001,91.8711944279494" Label="State" LabelBounds="557.045615050865,472.778294154496,26.5033333333333,15.96" />
+    <Link Source="USA" Target="Washington" Category="Contains" Bounds="554.352653657019,381.599580303423,106.927755458322,17.0553693286281" Label="State" LabelBounds="593.695571270079,370.166949376652,26.5033333333333,15.96" />
+    <Link Source="Visual Studio" Target="Progression" Category="Contains" Bounds="1285.50292236328,442.50254534456,100.92000502894,36.9506339305599" Label="Architect, 2008-2011" LabelBounds="1330.83350869435,464.985777915832,109.553333333333,15.96" />
+    <Link Source="Walkabout" Target="Microsoft" Category="Work" Bounds="988.672099593159,634.21821891711,58.2443711540085,80.1958507899861" Label="Aquired 1997" LabelBounds="944.989379915377,657.180855465938,71.1866666666665,15.96" />
+    <Link Source="Walkabout" Target="WebBrowser" Category="Technology" Bounds="940.384643189966,809.388653650302,5.02220325742508,27.1742821758203" />
+    <Link Source="Washington" Target="Seattle" Category="Contains" Bounds="753.548061939047,387.18559499039,98.096464789638,32.1262648905259" Label="City" LabelBounds="796.792667571743,383.28353622663,20.21,15.96" />
+    <Link Source="WeBuiltXMLHTTPRequestWhichInspiredAJAX" Target="MSXML" Bounds="1328.13676520395,927.772790978512,30.1018582486952,24.4805073613322" />
+    <Link Source="WebBrowser" Target="iHTML" Bounds="906.327156886494,924.373060570045,15.3363283309695,61.852625286205" Label="Dev" LabelBounds="917.99710103162,947.80069726092,20.4366666666667,15.96" />
+    <Link Source="X#" Target="Linq" Category="Influenced" Bounds="1513.30350464673,654.398195247378,88.5791857984161,0.00519137621392929" Label="Influenced" LabelBounds="1529.89798033158,634.440790935485,55.3900000000003,15.96" />
+    <Link Source="XmlEditor" Target="MLSF" Category="Contains" Bounds="1474.01571695963,538.737707561381,44.1111283628361,0.789191995414285" Label="also built" LabelBounds="1474.71911706487,519.122979008163,48.146666666667,15.96" />
+    <Link Source="clovett" Target="Springwood" Bounds="45.2226963615312,530.484568125285,43.7316485116513,93.529805989646" Label="grew up" LabelBounds="21.9567813854189,560.442357812777,43.32,15.96" />
+    <Link Source="clovett" Target="UNSW" Category="Worked" Bounds="71.7619539886754,609.77933097776,143.046917029891,35.4813331132623" Label="study Computer Science" LabelBounds="58.6098780979231,598.687881757313,128.263333333333,15.96" />
+    <Link Source="f6928647-e0d8-409c-af4c-24e56634a2f01" Target="WindowsPhone" Bounds="1311.19926871629,312.989820593904,80.4021180032476,42.8411634870694" />
+  </Links>
+  <Categories>
+    <Category Id="Comment" Label="Comment" Description="Represents a user defined comment on the diagram" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Comments" />
+    <Category Id="Company" />
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="Incubation" />
+    <Category Id="Influenced" />
+    <Category Id="Near" />
+    <Category Id="Patent" Label="Patent" IsTag="True" />
+    <Category Id="Person" />
+    <Category Id="Place" />
+    <Category Id="Product" />
+    <Category Id="Shipped" />
+    <Category Id="Technology" />
+    <Category Id="Work" />
+    <Category Id="Worked" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="LabelBounds" DataType="System.Windows.Rect" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="Offset" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node">
+      <Setter Property="IconPlacement" Value="Top" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Incubation" ValueLabel="True">
+      <Condition Expression="HasCategory('Incubation')" />
+      <Setter Property="Icon" Value="Icons\thinktank.png" />
+      <Setter Property="Shape" Value="None" />
+      <Setter Property="MinWidth" Value="50" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Patent" ValueLabel="True">
+      <Condition Expression="HasCategory('Patent')" />
+      <Setter Property="Icon" Value="Icons\Patent.png" />
+      <Setter Property="Shape" Value="None" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Work" ValueLabel="Link">
+      <Condition Expression="HasCategory('Work')" />
+      <Setter Property="StrokeThickness" Value="2" />
+      <Setter Property="Stroke" Value="#FFC75F5F" />
+      <Setter Property="Background" Value="#FFC75F5F" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Person" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Person')" />
+      <Setter Property="Icon" Value="Icons\User.png" />
+      <Setter Property="Shape" Value="None" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Technology" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Technology')" />
+      <Setter Property="Icon" Value="Icons\Broadcast.png" />
+      <Setter Property="Shape" Value="None" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Place" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Place')" />
+      <Setter Property="Icon" Value="Icons\Earth.png" />
+      <Setter Property="Shape" Value="None" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Team" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Team')" />
+      <Setter Property="Icon" Value="Icons\Product.png" />
+      <Setter Property="Shape" Value="None" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Product" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Product')" />
+      <Setter Property="Icon" Value="Icons\Product.png" />
+      <Setter Property="Shape" Value="None" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Company" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Company')" />
+      <Setter Property="Icon" Value="Icons\Company.png" />
+      <Setter Property="Shape" Value="None" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Comment" ValueLabel="Has comment">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+</DirectedGraph>

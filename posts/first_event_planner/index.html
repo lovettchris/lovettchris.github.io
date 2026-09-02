@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/first_event_planner/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>FIRST Event Planner - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "FIRST Event Planner", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="first-event-planner">FIRST Event Planner</h1>
+<p>Demo <a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/FIRST%20Event%20Planner.mp4">Video: mp4 (24mb)</a></p>
+<p>I received an email from a friend asking for help figuring out a fun math problem.  He works for <a href="http://www.usfirst.org/">FIRST</a> and the problem is figuring out how to match up over 400 teams in Washington State with 5 separate event locations, minimizing the driving distance for each of those teams.  Each event was happening on the same day, and each team gets to compete at only one of these events.</p>
+<p>So I quickly cranked out a nice little Silverlight Application to do the job.  And I hooked up to the <a href="http://www.microsoft.com/maps/developers/web.aspx">BING Mapping API</a> to calculate the actual driving distances from each team to each event location.  Silverlight and BING worked beautifully together.  So far so good, but now for the hard part.  How do you calculate the optimal assignment of teams to events that results in minimal total driving distance?  I hacked out a brute force solution that first assigned every team to their closest venue, but then there were additional constraints that got more interesting.  Each event has a minimum and maximum capacity, so if an event was over populated, some teams had to move to the second or third closest venue.  This wasn&rsquo;t too hard to code, but I quickly realized, the solution I was getting was not necessarily the best.  For example, in the diagram below, let&rsquo;s say the maximum capacity for each event is 3 teams, which means team &ldquo;i&rdquo; needs drive all the way to &ldquo;C&rdquo;.  Clearly this is silly.</p>
+<p><img alt="image1" src="image002.jpg" /></p>
+<p>It is better to move &ldquo;c&rdquo; to &ldquo;B&rdquo; and &ldquo;f&rdquo; to &ldquo;C&rdquo;, making room for &ldquo;i&rdquo; to join &ldquo;A&rdquo;, like this:</p>
+<p><img alt="image1" src="image003.png" /></p>
+<p>But this is a tricky &ldquo;ripple&rdquo; effect that is hard to find programmatically without having to essentially search all combinations of teams to events, but then I quickly realized it would take about 100 years to execute that kind of exhaustive search on my machine because 400 factorial is a large number.</p>
+<p>So this is when I contacted Microsoft Research.  <a href="http://research.microsoft.com/en-us/um/people/levnach/">Lev Nachmanson</a> works there and is a good friend of mine and a powerful magician when it comes to mathematics.  So I presented the problem to him, and he said he&rsquo;d think about it.</p>
+<p>In a short while I got an email back saying he had a solution.  He explained it to me over the phone, I implemented it, and it worked, finding the solution in less than a second.  I was very impressed, but I also a bit skeptical.  I couldn&rsquo;t believe it could be so simple.  I went to his office to get a better understanding of how it worked.</p>
+<p>This is how he explained it to me. The global task is to drive to the minimum the sum of the distances from teams to the events they are assigned to. To initialize a solution assign each team to their closest event, but then think of the remaining optimization problem as a type of traffic flow problem.  We will be shifting the teams between the events, so we need to consider a graph for doing this. The edges of this graph are AB, AC, and BC. (It is called a complete graph.) For example, above we moved &ldquo;c&rdquo; along edge AB, &ldquo;f&rdquo; along BC and &ldquo;i&rdquo; along AC. To find a solution we need to consider all paths on the complete graph that don&rsquo;t repeat an edge. A path can be a cycle, like ABCA, but every edge in it should appear at most once.</p>
+<p>To run one iteration, take a path as described above, then take the first edge of the path and shift a team along it such that shifting it along this edge &ldquo;makes the least damage&rdquo;. Here the total sum can even grow. Take the second edge and do the same, and do it for every edge of the path. When we are done with the path, look at the total sum. If we are lucky and it went down, we accept the move, otherwise, we discard it. When no path gives us a gain we are done!</p>
+<p>Then how many possible paths do we have? Well in this case with 3 events there is AB, AC, BA, BC, CA, CB, ABC, ACB, BAC, BCA, CBA, CAB  plus all the cyclic versions of these: ABA, ACA, BAB, BCB, CAC, CBC, ABCA, ACBA, BACB, BCAB, CBAC, CABC, a total of 24. It is not a huge amount of paths. The last thing to do for running the algorithm fast is to know how efficiently to find a team which can be shifted along an edge with the minimal damage. The best data structure for this is a priority queue.</p>
+<p>The end result was that on my desktop machine I could use this algorithm to find the optimal solution in sub-second times, which is fantastic.  Super thanks to Lev!   I just love it when a nice elegant algorithm makes software work really well.  As I like to say, &ldquo;there&rsquo;s genius in simplicity&rdquo;.</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../model-based-ui-testing-using-dgml/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../model-based-ui-testing-using-dgml/" class="btn btn-xs btn-link">
+        Model Based UI Testing using DGML
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../remote_control_phone/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../remote_control_phone/" class="btn btn-xs btn-link">
+        Remote Control Phone
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

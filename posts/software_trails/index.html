@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/software_trails/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Software Trails - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Software Trails", url: "#_top", children: [
+              {title: "Profiling Very Large Applications", url: "#profiling-very-large-applications" },
+              {title: "Testing", url: "#testing" },
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="software-trails">Software Trails</h1>
+<p>See <a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/SoftwareTrails.mp4">demo video: (MP4 30mb)</a></p>
+<p><a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/SoftwareTrails.mp4"><img alt="thumbnail" src="softwaretrailsscreen.png" /></a></p>
+<p>Download Tool: <a href="https://lovettsoftwarestorage.blob.core.windows.net/downloads/SoftwareTrails/SoftwareTrails.application">SoftwareTrails.application</a></p>
+<p><strong>Transcript</strong>: Hi,</p>
+<p>Have you ever wanted to see what is going on in your program in real
+time?  I built a light weight profiling tool that shows you exactly
+that. Let me show you how it works.  To get started you click the
+Launch button and find the application you want to profile and
+immediately we see a bunch of activity showing what&rsquo;s happening as the
+app launches.  This dashboard is showing a roll up across the top
+level Namespaces and the counters are showing the total number of
+function calls in each area. You can scroll down and see everything
+that is going on.  We can see that there are some Microsoft
+namespaces, but there&rsquo;s also a Walkabout namespace which happens to be
+the code for this application.  So I can take a look at startup again
+without the .NET frameworks by drilling down into the Walkabout
+namespace - this shows me the drill down path and the green blocks
+represent classes and namespaces and the white blocks represent method
+calls.</p>
+<p>So we can now see that we&rsquo;re getting down to the method call level -
+maybe we&rsquo;re interested in seeing what happens during LoadConfig and we
+can click that method and it will search the call information and
+build a conglomerate call stack graph basically showing a combination
+of all call stacks that it has seen involving that method Loadconfig.
+And from this you can actually explore down into WPF or you can
+explore upwards and see what those function calls are doing.  You can
+also try and expand the entire graph but in this case it&rsquo;s not
+recommended because the graph is huge.  When you&rsquo;re done exploring the
+call stack you can close that and go back to the dashboard.</p>
+<p>You can also Filter this information - so maybe I care about anything
+involving the word &ldquo;Transaction&rdquo; and I can see that during the
+launching of the application that there&rsquo;s some Transactions Namespaces
+and I can also see that it shows up over here in the View namespace.
+Let&rsquo;s drill down into some controls and we see a class named
+TransactionView.</p>
+<p>At any point you can clear the buffer and start over and go back to
+<Home> and remember to clear the filter.  When I do that I can see
+that there&rsquo;s actually a heart-beat going on with this application and
+the reason for that if I drill into the MainWindow is that there&rsquo;s an
+OnTick method that is being fired by a DispatcherTimer.</p>
+<p>Ok, let&rsquo;s go back over here and let me show you more about this
+application that I&rsquo;m profiling.  Let me just disconnect for a second
+(you can disconnect at any time if you want to just pause the
+profiling).  I&rsquo;m going to load some sample data into this application.
+It&rsquo;s basically a personal finance application like Quicken and I&rsquo;m
+going to show you the real scenario that I&rsquo;d like to debug, so now I
+have some sample data, the scenario that I want to debug is drag/drop -
+I want to find out why drag drop isn&rsquo;t working in this window here.
+Alright, so I can now reconnect back to that application, the profiler
+is ready for work, probably want to go back home, and let&rsquo;s run the
+drag/drop scenario.  We see a lot of activity, 16 million function
+calls already, even after clearing the buffer, I see some stuff in the
+Walkabout namespace, and the System namespace, so let me apply a
+filter again and just search for anything containing the word &ldquo;Drag&rdquo;.</p>
+<p>Now I could look at the Walkabout code, but first I want to take a
+look at the .NET frameworks.  So in the history of calls that we have
+in the buffer, this is everything that WPF does to implement
+Drag/Drop.  This gives me a really great place to start looking up
+documentation on MSDN to find out what these methods do, OnDragOver,
+OnDragEnter, OnDragLeave and so on, and also I see a method called
+DoDragDrop which sound like an interesting place to start, let&rsquo;s take
+a look at that method, and if I look at the caller, well it&rsquo;s this
+class called MoneyDataGrid.  So now we know the class over here in the
+UI is called MoneyDataGrid.</p>
+<p>So now if we go back to the Walkabout namespace, there I can see the
+Controls namespace and the Views namespace and I can see the classed
+called MoneyDataGrid.  This is the guy that starts the drag/drop
+operation - so let&rsquo;s remove the filter and take a closer look at
+everything he&rsquo;s doing.  He&rsquo;s getting the mouse move which begins the
+drag/drop operation and here we see a flag called
+&ldquo;get_SupportDragDrop&rdquo; and we see the OnQueryContinueDrag method which
+the MSDN documentation tells us is used by WPF to figure out whether
+the drag/drop operation should continue.  So let&rsquo;s select
+OnQueryContinueDrag and see what it calls.  Now I have an excellent
+place to go and look in the code  - it&rsquo;s in MoneyDataGrid, to find out
+why when I drag this window nothing happens.</p>
+<p>Now if I clear the buffer and do it again, now I can see in real time
+a lot of these mouse moves come in, I see the call to
+get_SupportDragDrop and so on.  So being able to see in real time
+what&rsquo;s happening, for example, when I do mouse moves, it&rsquo;s is a really
+useful way to see what&rsquo;s going on in my code.</p>
+<p>I can also see that when I wiggle the mouse there are lots and lots of
+function calls, so if I&rsquo;m worried about performance at all, that
+counter down there, plus the rollup for each Namespace is going to be
+a great way to figure out where I need to optimize and see if I can
+remove some of those calls and get better performance.</p>
+<h3 id="profiling-very-large-applications">Profiling Very Large Applications</h3>
+<p>Ok, enough of that application.  Now what about a bigger application?
+I&rsquo;m going to launch Visual Studio - Visual Studio consists of a huge
+amount of code.  I want to see what the overhead then is of the
+profiler in launching Visual Studio.  Already we can see all the .NET
+framework stuff that&rsquo;s happening, and Visual Studio is already up and
+running in about 10 seconds.  So we can also see here that in order to
+launch Visual Studio it takes about 46 million function calls, but
+there&rsquo;s only about 15 thousand unique functions.  Again, here&rsquo;s the
+top level view, I can see the Microsoft.VisualStudio namespace, which
+is where all the Visual Studio code lives so I can drill down and
+re-run the launch scenario and I can see everything that happens in
+the Microsoft.VisualStudio namespace when it launches.  I can see
+stuff in the Platform, in the Shell, there&rsquo;s some Packages, let&rsquo;s see
+what package is doing, and drill down, and so on.</p>
+<p>The breadcrumb toolbar allows you to go jump back up to any level that
+I want.  Let&rsquo;s go back to VisualStudio. Now the same thing can be done -
+let&rsquo;s say I want to explore a drag/drop scenario inside Visual
+Studio with the &ldquo;Drag&rdquo; filter.  First let&rsquo;s clear the 50 million
+function call history, that was quick, and let&rsquo;s load a DGML graph so
+we can explore drag/drop in DGML.  First off when I load the graph I
+can already see a bunch of classes, &ldquo;GraphDragDrop&rdquo;, and
+&ldquo;DragSourceGesture&rdquo; and these are getting fired up inside Visual
+Studio, so that&rsquo;s promising.  Those things will probably add drag/drop
+support.  Let&rsquo;s zoom in and grab one of these nodes, and do a
+drag/drop.  Just as before I&rsquo;m able to see in real-time everything
+that&rsquo;s happening - the DragSourceGesture did a lot of work, let&rsquo;s
+drill into that and take a look at that again, ok, I&rsquo;ve got too much
+stuff in my buffer, let&rsquo;s clear that and do the drag/drop again, and
+instantly we see exactly what&rsquo;s happening deep down inside Visual
+Studio to support that Drag/Drop operation and now I know where to
+find the code and set breakpoints and continue my debugging.</p>
+<p>So I think you&rsquo;ll find that this profiler scales up to some pretty big software.</p>
+<h3 id="testing">Testing</h3>
+<p>I think this tool will also make a great testing companion.  For
+example, if you own a document editor then there&rsquo;s a special call deep
+down in the VS shell called &ldquo;ReleaseDocument&rdquo; that needs to happen
+when your document window is closed.  Bang, all right, so deep inside
+this Visual Studio namespace,  inside WindowManagement, there should
+be a call to ReleaseDocument.  If that doesn&rsquo;t happen you have a
+pretty bad memory leak in your editor.  So this tool is a great way to
+do an ad hoc test that certain things are happening when they are
+supposed to.</p>
+<p>That&rsquo;s it, I hope you enjoy it, please send your comments to my blog.</p>
+<p>Download Tool: <a href="https://lovettsoftwarestorage.blob.core.windows.net/downloads/SoftwareTrails/SoftwareTrails.application">SoftwareTrails.application</a></p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../password_vault/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../password_vault/" class="btn btn-xs btn-link">
+        Secure Password Vault
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../model-based-ui-testing-using-dgml/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../model-based-ui-testing-using-dgml/" class="btn btn-xs btn-link">
+        Model Based UI Testing using DGML
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/fun_with_ell/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Fun with ELL - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Having fun with ELL", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="having-fun-with-ell">Having fun with ELL</h1>
+<p><a href="https://github.com/Microsoft/ELL/">ELL</a> is a new Open Source library from Microsoft Research.  I&rsquo;m having lots of fun working on it and learning all about Convolutional Neural Networks.  The first time you train one and try it out it definitely feels like magic.  How can a bunch of numbers correctly classify the type of object in a photo?  Granted we&rsquo;re talking millions of numbers, so it&rsquo;s not that magical, but it is still fun.</p>
+<p>Now, of course, I have to combine this with my love of DGML graphs. So in this post I will outline how I&rsquo;ve used ELL to execute neural networks trained on the MNist dataset.  MNist is a classic benchmark for neural networks and it provides a dataset for &ldquo;hand written digits&rdquo;.  This dataset is small since each image is only 28×28 pixels, which makes for a great &ldquo;first time developer experience&rdquo; with neural networks, since you don&rsquo;t have to wait for terabytes of images to be downloaded!</p>
+<p>For example, here&rsquo;s one of their test images which contains a hand written digit &ldquo;8&rdquo;:</p>
+<p><img alt="eight" src="eight.jpg" /></p>
+<p>It turns out the <a href="https://github.com/Microsoft/CNTK">Microsoft CNTK library</a> is an excellent library for training  Neural networks and there is a CNTK sample that can be used to train an MNist model.  See <a href="https://github.com/Microsoft/CNTK/blob/c9b03e49b3e19fca448ff960acda76417ab4dbe8/Examples/Image/DataSets/MNIST/install_mnist.py">install_mnist.py</a>.  After you run that you will have the MNist dataset and then you can run SimpleMNIST.py to train a CNTK model on that dataset.   On my machine I get a file named <strong>mnist.cntk</strong> which is about 640kb.</p>
+<p>So the next thing I want to do is run this on a Raspberry Pi, so I used the ELL library to do that.  If you follow the <a href="https://microsoft.github.io/ELL/tutorials/Getting-started-with-image-classification-on-the-Raspberry-Pi/">Getting Started</a> tutorial you will see how easy it is to build ELL, import a model from CNTK and build a cross-compiled module that will run on the Raspberry Pi.  So in my case I simply do this (after building the ELL repo):</p>
+<pre><code>python d:\git\ell\ell\tools\importers\CNTK\cntk_import.py mnist.cntk
+</code></pre>
+<p>This gives me an &ldquo;mnist.ell&rdquo; model, so what is inside this model? You can use the ELL print tool with -dgml and get this picture:</p>
+<p><img alt="MNistModel" src="MNistModel.png" /></p>
+<p>Of course, this is a very simple neural network.  Try the DGML graph on some of the more complex deep neural networks.   You can then compile this model using the ELL model compiler:</p>
+<pre><code>python d:\git\ell\ell\tools\wrap\wrap.py mnist.ell --target pi3
+</code></pre>
+<p>This gives me a &lsquo;pi3&rsquo; folder already setup with CMakeLists.txt for building on the pi.  You can also copy Demo.py and DemoHelpers.py from ELL\tools\utilities\pythonlibs to get a quick start in using this python module.  Once on the pi do the using cmake build thing outlined in the ELL tutorials, and then we can test it out.
+To test it out we can run this python script:</p>
+<pre><code class="language-python">import cv2
+import numpy as np
+import sys
+sys.path += [ &quot;d:/Temp/MNist/host&quot; ]
+sys.path += [ &quot;d:/Temp/MNist/host/build&quot; ]
+sys.path += [ &quot;d:/Temp/MNist/host/build/Release&quot; ]
+import mnist
+import requests
+r = requests.get(&quot;http://www.lovettsoftware.com/images/eight.jpg&quot;)
+nparr = np.fromstring(r.content, np.uint8)
+image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+plt.imshow(image)
+gray = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)
+output = mnist.predict(gray.ravel())
+result = np.array(output)
+print(&quot;Prediction={}&quot;.format(np.argmax(result)))
+</code></pre>
+<p>which prints the correct output, namely &ldquo;8&rdquo;.
+If you want to get adventurous you can run the ELL model over all the tests images in the MNist test dataset using this python code:</p>
+<pre><code class="language-python">import sys
+import cv2
+import numpy as np
+sys.path.append(&quot;host&quot;)
+sys.path.append(&quot;host/build&quot;)
+sys.path.append(&quot;host/build/Release&quot;)
+import mnist
+input_shape = mnist.get_default_input_shape()
+input_size = input_shape.rows * input_shape.columns
+* input_shape.channels
+output_shape = MNist.get_default_output_shape()
+output_size = output_shape.rows * output_shape.columns
+* output_shape.channels
+nogui = False
+failed = 0
+total = 0
+args = sys.argv[1:]
+if len(args) == 1 and args[0] == &quot;nogui&quot;:
+    nogui = True
+def getLabel(labels):
+    a = labels.split(' ')
+    if a[0] == 'labels':       
+        for i in range(10):
+            if a[i+1] == &quot;1&quot;:
+                return i
+    return 0
+
+def getImage(features):
+    a = features.split(' ')
+    data = []
+    if a[0] == 'features':       
+        for i in range(len(a) - 1):
+            data.append(float(a[i+1]))
+    return np.array(data).reshape((28,28))
+
+def Test(index, line):
+    global total, failed, output_buffer
+    parts = line.split('|')
+    passed = True
+    if len(parts) == 3:
+        labels = parts[1]
+        features = parts[2]
+        answer = getLabel(labels)
+        image = getImage(features)
+        if not nogui:
+            cv2.imshow(&quot;test&quot;, image)
+        output = mnist.predict(image.ravel())
+        prediction = np.argmax(output)
+        result = &quot;passed&quot;
+        if prediction != answer:
+            result = &quot;failed&quot;
+            failed += 1
+            passed= False
+        total += 1
+        print(&quot;%d: predicted %d, answer is %d, test %s&quot;
+             % (index, prediction, answer, result))
+    return passed
+
+def WaitForKey():
+    key = cv2.waitKey(1) &amp; 0xFF
+    while key == 255:
+        key = cv2.waitKey(1) &amp; 0xFF
+    return key
+
+def RunTest(filename):
+    global total, failed
+    index = 1
+    with open(filename) as f:
+        for line in f.readlines():
+            line = line.strip()
+            passed = Test(index, line)
+            index += 1
+            if not nogui and not passed and WaitForKey() == 27:
+                return
+    print(&quot;&quot;)
+
+    print(&quot;Total tests %d, failed = %d, pass rate = %f&quot; % 
+        (total, failed, (total - failed) / total))
+
+RunTest(&quot;Test-28x28_cntk_text.txt&quot;) 
+</code></pre>
+<p>Then the output from this is:</p>
+<pre><code>Total tests 10000, failed = 259, pass rate = 0.974100
+</code></pre>
+<p>Lots &lsquo;o fun!</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../vs_xml_schemas/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../vs_xml_schemas/" class="btn btn-xs btn-link">
+        Visual Studio’s lesser-known Xml Schema features
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../dgml_power_tools/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../dgml_power_tools/" class="btn btn-xs btn-link">
+        DGML Power Tools for Visual Studio 2017
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

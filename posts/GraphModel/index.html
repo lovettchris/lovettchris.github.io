@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/GraphModel/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>GraphModel Specification - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "DGML Graph Model Specifications", url: "#_top", children: [
+              {title: "Goals", url: "#goals" },
+              {title: "Non-Goals", url: "#non-goals" },
+              {title: "Design", url: "#design" },
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="dgml-graph-model-specifications">DGML Graph Model Specifications</h1>
+<p>The Directed Graph Markup Language (.dgml) features of Visual Studio are built on a node/link graph data model.  This data is persisted in DGML documents which is an XML format.  While it is possible to edit the XML directly, it is not fun or productive.  The Graph Model API provides an in-memory representation that is natural for manipulating directed graphs and has become the foundation of all the dependency analysis features in VS.  For this reason the API has been made available anyone extending Visual Studio.</p>
+<h3 id="goals">Goals</h3>
+<ul>
+<li>Performance: Being the platform for lots of features the model needs to be as fast as possible.</li>
+<li>Usability: Close behind however is the fact that the API needs to be simple to use</li>
+<li>Convenience: Where practical helper methods are provided for added convenience, but this is not the top priority of this API.  Helper libraries can always be provided out of band or as sample code.</li>
+<li>Thread safe: Some amount of thread safety and thread isolation is nice for this level of API</li>
+</ul>
+<h3 id="non-goals">Non-Goals</h3>
+<p>The API does not attempt to be the front end to a database.</p>
+<h2 id="design">Design</h2>
+<p>The <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.graphmodel?view=visualstudiosdk-2017">Complete Graph Model API</a> is available on MSDN.  This spec just outlines the core concepts that must be understood in order to use this API.  The Graph model can serialize itself to and from the DGML XML format.</p>
+<h3 id="graphnodeid">GraphNodeId</h3>
+<p>In order to support first class serialization and decoupling of graph operations across components, or in databases, it is important to name the objects in a graph carefully. To this end the Graph Model does not use System.String to name things.  The GraphNodeId class is used instead.  GraphNodeId is a structured identifier that composes nested sets of Name=Value pairs, for example, you can create a GraphNodeId that points to an Assembly like this:</p>
+<pre><code class="language-csharp">GraphNodeId mscorlib = GraphNodeId.GetPartial(CodeNames.AssemblyName,
+    new Uri(typeof(string).Assembly.Location));
+</code></pre>
+<p>This serializes to the following string format:</p>
+<pre><code>    (Assembly=file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll)
+</code></pre>
+<p>Then you can name the System Namespace inside mscorlib by composing the following two names together:</p>
+<pre><code class="language-csharp">GraphNodeId system = mscorlib + GraphNodeId.GetPartial(CodeNames.NamespaceName, &quot;System&quot;);
+</code></pre>
+<p>Then you can name the String Class by adding on to the name of the namespace:</p>
+<pre><code class="language-csharp">GraphNodeId str = system + GraphNodeId.GetPartial(CodeNames.TypeName, &quot;String&quot;);
+</code></pre>
+<p>Then you can name the Join method by adding to the name of the class:</p>
+<pre><code class="language-csharp">GraphNodeId join = str + GraphNodeId.GetPartial(CodeNames.Name, &quot;Join&quot;);
+</code></pre>
+<p>The result is an identifier that remembers the structure you used to build the name and this structure can also be serialized to and from the following string format:</p>
+<pre><code>(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll Namespace=System Class=String Method=Join)
+</code></pre>
+<p>This sort of composition of names allows the application to avoid having to do lots of expensive string parsing operations every time it needs a part of the name.  It also provides hashing advantages so that comparing identifiers is a lot faster and the overall memory used is much less than using strings.</p>
+<p>As you can imagine, naming everything in mscorlib results in many redundant Assembly, Namespace, Class sub strings, so building up identifiers using string addition would be very expensive:</p>
+<pre><code>string mscorlib = “Assembly=file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll”;
+string system = mscorlib + “ Namespace=System”;
+string stringClass = system + “ Type=String”;
+string joinMethod = stringClass + “Method=Join”;
+</code></pre>
+<p>The following table shows the comparison between System.String and GraphNodeId in construction time, comparison and total memory usage measured using all the identifiers in System.Xml.Linq.dll (about 2000 identifiers) and about 4 million comparisons (comparing every identifier against every other).</p>
+<p><img alt="" src="GraphNodeIdComparison.png" /></p>
+<p>The construction time for the GraphNodeId’s here is the worst case and assumes no reuse of in memory ids.  For example, it recreates the Assembly id over and over rather than holding onto one GraphNodeId pointer for that assembly.  This is not typically how the product code will work, but it is the worst case.  It is how Serialization would work, so it essentially measures serialization load time.  For that reason strings are faster to load, but you can see that memory usage and comparison time, GraphNodeId wins considerably, this is because GraphNodeId is “atomized”, so that comparison can be a simple object reference comparison.</p>
+<p>Note: string.Intern doesn’t help the string case here because every identifier is different, and string.Intern would add substantial hit to load time, which would make it slower than GraphNodeId.</p>
+<p>GraphNodeId registration is static so they employ a WeakReference system to garbage collect ids that are not used.</p>
+<h3 id="graphnodeid-value-types">GraphNodeId Value Types</h3>
+<p>The GraphNodeId values can be any type that can be converted to/from a string using TypeConverter. However, the following types are well supported:</p>
+<ul>
+<li>String: &ldquo;Namespace=System.Collections&rdquo;.</li>
+<li>Uri: &ldquo;Assembly=file://mscorlib.dll&rdquo;.</li>
+<li>GraphNodeIdCollection: &ldquo;ParentType=(Assembly=file://mscorlib.dll Namespace=System.Collections Type=ArrayList)&rdquo;.</li>
+</ul>
+<h3 id="graphnodeidname">GraphNodeIdName</h3>
+<p>The name part is a static object called a <code>GraphNodeIdName</code>. The name also determines the type of value that the GraphNodeId can contain, and how a string should be parsed back during string serialization. For example, Namespace will be registered as string, but assembly as URI:</p>
+<pre><code class="language-csharp">class CodeNames
+{
+    public static GraphNodeIdName AssemblyName = GraphNodeIdName.Get(&quot;Assembly&quot;, &quot;Assembly&quot;, typeof(Uri));
+    public static GraphNodeIdName NamespaceName = GraphNodeIdName.Get(&quot;Namespace&quot;, &quot;Namespace&quot;, typeof(string));
+    public static GraphNodeIdName TypeName = GraphNodeIdName.Get(&quot;Type&quot;, &quot;Type&quot;, typeof(object));
+    public static GraphNodeIdName NameName = GraphNodeIdName.Get(&quot;Name&quot;, &quot;Name&quot;, typeof(String));
+    public static GraphNodeIdName GenericParameterCountName = GraphNodeIdName.Get(&quot;GenericParameterCount&quot;, &quot;GenericParameterCount&quot;, typeof(int));
+    public static GraphNodeIdName MemberName = GraphNodeIdName.Get(&quot;Member&quot;, &quot;Member&quot;, typeof(Object));
+    public static GraphNodeIdName OverloadingParametersName = GraphNodeIdName.Get(&quot;OverloadingParameters&quot;, &quot;OverloadingParameters&quot;, typeof(GraphNodeIdCollection));
+}
+
+</code></pre>
+<p>Notice the <code>GraphNodeIdName</code> objects are usually static so they can be shared by the whole process. There are also 3 special names for qualified identifiers. These are non-printed names, and are inferred during parsing.</p>
+<ul>
+<li>
+<p><code>GraphNodeIdName.Nested</code> – a list of GraphNodeIds
+&ldquo;(Assembly=file://mscorlib.dll Namespace=System Type=String)&rdquo;.
+The data type of a Nested value is always GraphNodeIdCollection. In the above case, there are 3 nested identifiers:  Assembly, Namespace and Type.</p>
+</li>
+<li>
+<p><code>GraphNodeIdName.Array</code> – represents a list of GraphNodeId’s where each item in the list has the same type. For example, the arguments to a method each have the same type “MethodParameter”, so think of the array as a way to lift the “MethodParameter” part out of the list, so instead of (MethodParameter=Value MethodParameter=Value MethodParameter=Value) you can say MethodParameter=[Value, Value, Value].  The data type of Array value is always GraphNodeIdCollection – with homogeneousItems =true.</p>
+</li>
+<li>
+<p><code>GraphNodeIdName.Literal</code> - &ldquo;Bing!&rdquo;.  The data type of a Literal is a String.</p>
+</li>
+</ul>
+<p>If a GraphNodeId is being constructed through parsing, and a name is not currently registered, a new name will be registered with a data type of System.Object.</p>
+<p>If you want to reuse the same <code>GraphNodeIdName</code> in some places with a string value and in other places with a nested <code>GraphNodeIdCollection</code> then type the <code>GraphNodeIdName</code> as System.Object.</p>
+<h3 id="parsing-standard-form">Parsing &amp; standard form</h3>
+<p>A standard GraphNodeId always has a Nested outer GraphNodeId, with one or more GraphNodeId inside. A GraphNodeId that&rsquo;s not part of a nested qualified identifier is said to be a partial qualified identifier.  This is why the following method is called GetPartial:</p>
+<pre><code class="language-csharp">GraphNodeId.GetPartial(CodeNames.NamespaceName, &quot;System&quot;);
+</code></pre>
+<p>returns</p>
+<pre><code>&quot;Namespace=System&quot;
+</code></pre>
+<p>To make this a standard identifier wrap it in a GetNested call:</p>
+<pre><code class="language-csharp">GraphNodeId id = GraphNodeId.GetNested(
+                     GraphNodeId.GetPartial(CodeNames.NamespaceName, &quot;System&quot;)
+                 );
+</code></pre>
+<p>This results in the following well formed identifier:</p>
+<pre><code>&quot;(Namespace=System)&quot;
+</code></pre>
+<p>This is important during parsing. Although it is possible to build a partial GraphNodeId using the .GetPartial() API, it is not possible to construct one using .Parse(). Instead, GraphNodeId.Parse(&ldquo;Namespace=System&rdquo;)will instead be parsed as a Literal:</p>
+<pre><code>- id2 {Namespace=System}    Microsoft.VisualStudio.GraphModel.GraphNodeId
+  - LiteralValue &quot;Namespace=System&quot; string
+  - Name {Literal} Microsoft.VisualStudio.GraphModel.GraphNodeIdName
+  - Value   &quot;Namespace=System&quot;  object {string}
+</code></pre>
+<p>This is simply so that the parsing rules are simple, predictable, and as fast as possible.  Any GraphNodeID that is malformed will also be parsed as: &ldquo;Name=Literal, Value=whatever&rdquo;</p>
+<h3 id="nesting">Nesting</h3>
+<p>The following shows how GraphNodeId can be nested to full identify not only a method, but all the fully qualified types of all the parameters.  The method we will describe is the following from mscorlib:</p>
+<pre><code>System.IEquatable&lt;T&gt;.Equals(System.IEquatable&lt;T&gt; other);
+</code></pre>
+<p>First we create some basic partial identifiers that can be reused:</p>
+<pre><code class="language-csharp">    GraphNodeId mscorlib = GraphNodeId.GetPartial(CodeNames.AssemblyName, new Uri(typeof(string).Assembly.Location));
+    GraphNodeId system = GraphNodeId.GetPartial(CodeNames.NamespaceName, &quot;System&quot;);
+    GraphNodeId iequatable = GraphNodeId.GetPartial(CodeNames.NameName, &quot;IEquatable&quot;);
+    GraphNodeId equals = GraphNodeId.GetPartial(CodeNames.NameName, &quot;Equals&quot;);
+</code></pre>
+<p>Next we build a nested identifier representing the generic type <code>IEquatable&lt;T&gt;</code>, which is represented by combining a GenericParameterCountName of 1 with the name &ldquo;IEquatable&rdquo;.  The fact that the generic parameter is called T does not need to be remembered here:</p>
+<pre><code class="language-csharp">    GraphNodeId iequatableGeneric = GraphNodeId.GetNested(new GraphNodeId[] {iequatable, GraphNodeId.GetPartial(CodeNames.GenericParameterCountName, 1) });
+</code></pre>
+<p>Now we can say <code>TypeName=IEquatable&lt;T&gt;</code> like this:</p>
+<pre><code class="language-csharp">    GraphNodeId typeName = GraphNodeId.GetPartial(CodeNames.TypeName, iequatableGeneric);
+</code></pre>
+<p>Now we can describe the method parameters using this nested name:</p>
+<pre><code class="language-csharp">    GraphNodeId methodParameters = GraphNodeId.GetPartial(CodeNames.OverloadingParametersName,
+        new GraphNodeIdCollection(true, GraphNodeId.GetNested(new GraphNodeId[] {
+            mscorlib, system, typeName })));
+</code></pre>
+<p>Now we can describe the &ldquo;Equals&rdquo; method and it&rsquo;s parameters using this:</p>
+<pre><code class="language-csharp">    GraphNodeId method = GraphNodeId.GetPartial(CodeNames.MemberName,
+        GraphNodeId.GetNested(new GraphNodeId[] { equals, methodParameters }));
+</code></pre>
+<p>Now we can fully type the method by adding assembly, namespace and type</p>
+<pre><code class="language-csharp"> GraphNodeId result = GraphNodeId.GetNested(new GraphNodeId[] {
+       mscorlib, system, typeName, method });
+</code></pre>
+<p>This results in the following serialized identifier:</p>
+<pre><code>(Assembly=&quot;file://c:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll&quot;  Namespace=System Type=(Name=IEquatable GenericParameterCount=1)  Member=(Name=Equals OverloadingParameters=[(Assembly = &quot;file://c:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll&quot; Namespace = System  Type = (Name = IEquatable GenericParameterCount = 1))]))}
+</code></pre>
+<p>Notice how in the construction of the GraphNodeId that many sub-parts can be shared across many GraphNodeIds and this is how it can achieve performance and memory wins.</p>
+<h3 id="core-model">Core Model</h3>
+<p><img alt="" src="CoreModel.png" /></p>
+<p>The core graph model begins with the container called Graph. You can simply create a new empty Graph object as follows:</p>
+<pre><code class="language-csharp">Graph graph = new Graph();
+</code></pre>
+<p>This object can also be serialized to and from disk using the Load/Save methods (See Serialization for details):</p>
+<pre><code class="language-csharp">Graph graph = Graph.Load(dgmlFile);
+</code></pre>
+<p>A graph can contain Nodes and Links which you can add using the Nodes and Links collections:</p>
+<pre><code class="language-csharp">GraphNode a = graph.Nodes.GetOrCreate(&quot;a&quot;);
+GraphNode b = graph.Nodes.GetOrCreate(&quot;b&quot;);
+GraphLink link = graph.Links.GetOrCreate(a, b);
+</code></pre>
+<p>This could be visualized as the following:</p>
+<p><img alt="" src="SimpleGraph.png" /></p>
+<p>The Graph model is fully editable, you can insert or delete any node or link, and all expected ripple effects are taken care of.  For example, when you add a Link, both end point nodes are added automatically if they are not there.  If you Remove a node, all Links connected to that node are removed automatically.  In this way the Graph is always left in a valid state after any editing operation.</p>
+<p>Graph nodes and links cannot belong to multiple Graph objects at the same time.  If you add a node to a different Graph than it was created in, then that will become an “import” operation and a new GraphNode instance will be created.</p>
+<p>To that end there are many helper methods dealing with copying subsets of a Graph to and from other Graph objects.  See Copy, ImportSubset  and Merge methods.</p>
+<p>For improved performance you should always wrap edit operations in a <code>GraphTransactionScope</code>.  This will be covered in more detail below.</p>
+<h3 id="categories-properties">Categories &amp; Properties</h3>
+<p><img alt="" src="CategoriesAndProperties.png" /></p>
+<p>The root <code>Graph</code>, <code>GraphNode</code> and <code>GraphLink</code> can all contain properties and categories.  There is a common base class called <code>GraphObject</code>.  GraphObject has a collection of Properties and Categories. For example, the following node has the category “Vegetable” and the “Background” property with the value “Green”:</p>
+<pre><code class="language-xml">&lt;Node Id=&quot;A&quot; Label=&quot;Tree&quot; Category=&quot;Vegetable&quot; Background=&quot;Green&quot;/&gt;
+</code></pre>
+<p>And the following node has the category “Element” and a “FontStyle” property with value “Italic”:</p>
+<pre><code class="language-xml">&lt;Node Id=&quot;B&quot; Label=&quot;Water&quot; Category=&quot;Element&quot; FontStyle=&quot;Italic&quot;/&gt;
+</code></pre>
+<p>The following link has the category “Drinks” with a “Weight” property with the value “5”.</p>
+<pre><code class="language-xml">&lt;Link Source=&quot;A&quot; Target=&quot;B&quot; Category=&quot;Drinks&quot; Weight=&quot;5&quot; /&gt;
+</code></pre>
+<p>In code you get and set properties using the GetValue/SetValue/ClearValue methods, and you get or set categories using HasCategory and AddCategory, and RemoveCategory.</p>
+<p>Properties and Categories can be used for all sorts of things.  The GraphModel itself has some special built in properties and categories used to describe some things like grouping.</p>
+<p><code>GraphCategory</code> and <code>GraphProperty</code> can also contain extra metadata describing what they are about.  You could think of a GraphCategory as a property that has no value. But categories have one other feature, namely, GraphObject can inherit properties defined on the GraphCategory and categories can inherit properties from other categories via a <code>BasedOn</code> property.  This allows you to setup loose taxonomies using this metadata system.</p>
+<p>For example, we can promote the <code>Backgound</code> and <code>FontStyle</code> properties to the GraphCategory and thereby every node that has the Category=&rdquo;Vegetable&rdquo; will be italic and every node with the Category=&rdquo;Element&rdquo; will be blue.</p>
+<pre><code class="language-xml">&lt;Category Id=&quot;Element&quot; Background=&quot;Blue&quot; /&gt;
+&lt;Category Id=&quot;Plant&quot; FontStyle=&quot;Italic&quot; /&gt;
+</code></pre>
+<p>Now anything with the category Plant will have a tree icon, including anything that has the category Tree, since the Tree category is “BasedOn” the Plant category.</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;DirectedGraph GraphDirection=&quot;LeftToRight&quot;
+               xmlns=&quot;http://schemas.microsoft.com/vs/2009/dgml&quot;&gt;
+  &lt;Nodes&gt;
+    &lt;Node Id=&quot;A&quot; Category=&quot;Tree&quot; Label=&quot;Tree&quot; /&gt;
+    &lt;Node Id=&quot;B&quot; Category=&quot;Element&quot; Label=&quot;Water&quot; /&gt;
+  &lt;/Nodes&gt;
+  &lt;Links&gt;
+    &lt;Link Source=&quot;A&quot; Target=&quot;B&quot; /&gt;
+  &lt;/Links&gt;
+  &lt;Categories&gt;
+    &lt;Category Id=&quot;Element&quot; Background=&quot;#FF0000FF&quot; /&gt;
+    &lt;Category Id=&quot;Plant&quot; FontStyle=&quot;Italic&quot; /&gt;
+    &lt;Category Id=&quot;Tree&quot; Icon=&quot;Tree.png&quot; BasedOn=&quot;Plant&quot; Shape=&quot;None&quot; /&gt;
+  &lt;/Categories&gt;
+  &lt;Properties&gt;
+    &lt;Property Id=&quot;Background&quot; Label=&quot;Background&quot; Description=&quot;The background color&quot; DataType=&quot;System.Windows.Media.Brush&quot; /&gt;
+    &lt;Property Id=&quot;GraphDirection&quot; DataType=&quot;Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation&quot; /&gt;
+    &lt;Property Id=&quot;Icon&quot; Label=&quot;Icon&quot; Description=&quot;Icon&quot; DataType=&quot;System.String&quot; /&gt;
+    &lt;Property Id=&quot;Shape&quot; DataType=&quot;System.String&quot; /&gt;
+    &lt;Property Id=&quot;FontStyle&quot; DataType=&quot;System.Windows.FontStyle&quot; /&gt;
+  &lt;/Properties&gt;
+&lt;/DirectedGraph&gt;
+</code></pre>
+<p>Which could be visualized like this:</p>
+<p><img alt="" src="Demo1.png" /></p>
+<p>Notice also that properties can have labels, datatypes and descriptions.</p>
+<p>A “HasCategory” method is provided which will return true if the given category is found on the GraphObject or in anyway in the BasedOn chain.</p>
+<p>To define your own properties and categories see Schemas.</p>
+<h3 id="grouping">Grouping</h3>
+<p><img alt="" src="Grouping.png" /></p>
+<p>A Graph can model the concept of grouping by using GraphLink to establish “Contains” relationships between two nodes and a “Group” property on the container node, like this:</p>
+<pre><code class="language-xml">&lt;Nodes&gt;
+  &lt;Node Id=&quot;Child&quot; /&gt;
+  &lt;Node Id=&quot;Group&quot; Group=&quot;Expanded&quot; /&gt;
+&lt;/Nodes&gt;
+&lt;Links&gt;
+  &lt;Link Source=&quot;Group&quot; Target=&quot;Child&quot; Category=&quot;Contains&quot; /&gt;
+&lt;/Links&gt;
+</code></pre>
+<p>This describes a Graph that could be visualized like this:</p>
+<p><img alt="" src="Group1.png" /></p>
+<p>Nested containments can be described the same way and the Graph model provides helper methods for finding ancestors and descendants along these “Contains” link relationships.</p>
+<p><img alt="" src="GroupNested.png" /></p>
+<p>The GraphModel also allows any number of links between nodes, so you could model multiple containment relationships and create a Graph that could be visualized like this:</p>
+<p><img alt="" src="GroupsMulticontainment.png" /></p>
+<p><strong>Note</strong>: Visual Studio does not support visualizing multi-containment.</p>
+<p>The Graph Model even allows a child to contain a parent and a parent to contain a child.  This is called circular containment.  This can be tricky to program, so the Graph Model provides helper methods for searching for ancestors and descendants without getting stuck in infinite loops caused by circularity.</p>
+<p>The Graph Model also provides a helper class called GraphGroup which wraps each GraphNode that has a Group property and exposes additional properties like ChildNodes and ChildGroups and Parents to make it even easier to deal with groups.</p>
+<p>But it is important to note that GraphGroup is a helper class and just a wrapper object on GraphNode.  These objects are not constructed unless you ask for them and can come and go as the inner GraphNode is edited.</p>
+<p>For additional convenience you can also set properties and categories on the GraphGroup object and that will be passed down to the inner GraphNode object.  So the GraphGroup always reflects the same categories and properties as the node that it wraps.</p>
+<p>The Graph object then also provides the following helper methods for dealing with groups:
+- AllGroups – returns a list of all GraphGroup objects
+- Groups – returns a list of top level groups
+- VisibleTopLevelGroups – returns  a list of visible top level groups
+- FindCommonAncestor - return the common ancestor of all the given nodes
+- FindGroup – return the GraphGroup wrapper for a node that has a Group property
+- GetGroupDescendants – provides a way to walk the group hierarchy.</p>
+<h3 id="multilinks">MultiLinks</h3>
+<p>The Graph model can also support multiple links between the same two nodes:</p>
+<p><img alt="" src="Multilinks.png" /></p>
+<p>These are known as multigraphs and are useful in modeling state machines where multiple different transitions can take you from one state to another.</p>
+<p>GraphLinks are distinguished from each other by providing a unique “Index” property on each one using the following API:</p>
+<pre><code class="language-csharp">public GraphLink GetOrCreate(string sourceId, string targetId, int index)
+public GraphLink GetOrCreate(GraphNodeId sourceId, GraphNodeId targetId, int index)
+</code></pre>
+<p>The index property that becomes part of the unique identifier of this link, so the unique identifier of a link is the source node id + target node id + index.  So the index only needs to be unique between the same two nodes.</p>
+<p>If you specify an index that already exists then you will not be creating a new link, instead you will get back the existing link, which is the normal semantics for all Graph Model &ldquo;GetOrCreate&rdquo; methods.</p>
+<p>You can find the link with specific index using the following new overloads:</p>
+<pre><code class="language-csharp">public GraphLink Get(string sourceId, string targetId, int index)
+public GraphLink Get(GraphNodeId sourceId, GraphNodeId targetId, int index)
+</code></pre>
+<p>And you can find out what index a given link has using the following property
+on GraphLink:</p>
+<pre><code class="language-csharp">public int Index { get; }
+</code></pre>
+<p>This returns an optional Index of this link.  Default is zero.
+This index can be specified when you create a link, providing different index values makes it possible to create multiple links between the same source and target nodes.</p>
+<p>The following graph is using multilinks where the “References” link has Index=1 and the &ldquo;Calls&rdquo; links has default index 0:</p>
+<p><img alt="" src="MultilinkDemo1.png" /></p>
+<p>And if you copy &amp; paste that into the following graph, where this link has been manually edited to have Index=3:</p>
+<p><img alt="" src="MultilinkDemo2.png" /></p>
+<p>Then the link indexes will be preserved via serialization and you will get the following combined graph:</p>
+<p><img alt="" src="MultilinkDemo3.png" /></p>
+<p>The idea is that the &ldquo;Index&rdquo; belongs to the end user, if they specify it, then they want it preserved.  The GraphModel does not do any automatic re-writing of link indexes.</p>
+<h3 id="searching-graphs">Searching Graphs</h3>
+<p>The following helper method makes navigating Graphs easier.</p>
+<pre><code class="language-csharp">public IEnumerable&lt;GraphNode&gt; FindRelatedNodes(GraphSearchDirection searchDirection, Predicate&lt;GraphLink&gt; traverseLink, Predicate&lt;GraphNode&gt; traverseNode, Predicate&lt;GraphNode&gt; acceptNode)
+</code></pre>
+<p>This method finds the dgml nodes that match the acceptNode predicate and are related in a way that matches the traverseLink and traverseNode predicates.</p>
+<p>Nodes are found by doing a breadth first search along links matching the traverseLink predicate, in the Source or Target direction designated by the searchDirection parameter.</p>
+<p>If the node matches the traverseNode predicate it keeps searching recursively through that node in the same direction and returns all nodes that match the acceptNode predicate. The search can handle circularity in the graph.</p>
+<p>The following example searches through all nodes reachable via all links from the start node and returns all nodes that have the Method category:</p>
+<pre><code class="language-csharp">node.FindRelatedNodes(GraphSearchDirection.Target, l =&gt; true, n =&gt; true,
+                       n =&gt; HasCategory(MethodCategory);
+</code></pre>
+<h3 id="eventing-change-tracking">Eventing (Change Tracking)</h3>
+<p>All changes to the graph model can be tracked using the following change events on the Graph object:</p>
+<pre><code class="language-csharp">public event EventHandler&lt;GraphUpdatedEventArgs&gt; Updated;
+public event EventHandler&lt;GraphUpdatedEventArgs&gt; Updating;
+</code></pre>
+<p>The Updating method happens while a transaction is being committed so you can see the old property values before they are changed.   The Updated event happens after a successful Commit happens and the GraphUpdatedEventArgs contains all the changes that happened within that transaction.</p>
+<p>You can listen to these events by doing the following:</p>
+<pre><code class="language-csharp">Graph g = new Graph();
+g.Updated += OnGraphUpdated;
+</code></pre>
+<p>It is highly recommended that you use <code>GraphTransactionScope</code> when you change multiple objects in the Graph like this:</p>
+<pre><code class="language-csharp">using (var scope = g.BeginUpdate(Guid.NewGuid(), &quot;Add stuff&quot;, UndoOption.Add))
+{
+    GraphNode foo = g.Nodes.GetOrCreate(&quot;foo&quot;);
+    GraphNode bar = g.Nodes.GetOrCreate(&quot;bar&quot;);
+
+    GraphLink calls = g.Links.GetOrCreate(foo.Id, bar.Id, 0);
+
+    GraphLink references = g.Links.GetOrCreate(foo.Id, bar.Id, 1);
+
+    scope.Complete();
+}
+</code></pre>
+<p>Notice the important <code>scope.Complete()</code> call at the end of this block.  See the section on Transactions below.</p>
+<p>When the transaction scope is completed, all these edits are rolled up into one batch operation so your OnGraphUpdated method will be given a GraphUpdatedEventArgs that contains the added nodes and added links:</p>
+<pre><code class="language-csharp">static void OnGraphUpdated(object sender, GraphUpdatedEventArgs e)
+{
+    var nodes = e.AddedNodes;
+    var links = e.AddedLinks;
+}
+</code></pre>
+<p>This style of batching up updates results in much more efficient processing in an application because UI objects can respond to graph changes in batch updates, rather than being evented to death with too many fine grained singleton events.</p>
+<p>This style of batching also makes it trivial to implement Undo/Redo.</p>
+<p><strong>Note</strong>: there is an important rule that you must obey in your OnGraphUpdated events.  You must not create another GraphTransactionScope inside that event handler on the same Graph object.  If you do attempt to do this you will get an invalid operation exception.</p>
+<p>If you really want fine grained events, you can also listen to the lower level PropertyChanged and CategoryChanged events on GraphObject.  This is useful for UI Data Binding scenarios.</p>
+<h3 id="undoredo-support">Undo/Redo Support</h3>
+<p>The following classes can be used to build an Undo/Redo stack for graph operations using the change tracking events</p>
+<ul>
+<li>GraphUndoUnit</li>
+<li>GraphUndoManager<T></li>
+<li>UndoableGraphTransactionScope</li>
+<li>UndoOptions</li>
+</ul>
+<h3 id="transactions">Transactions</h3>
+<p>As mentioned above in Eventing, it is highly recommended that you use <code>GraphTransactionScope</code>.  In fact, if you don’t use GraphTransactionScope then implicit scopes will be created for every individual edit, which can end up being a lot more expensive.</p>
+<p>GraphTransactionScopes support the following features:
+1. If your code throws an exception before the <code>scope.Complete</code> call then all the changes inside that scope are rolled back, leaving the Graph in a consistent state.
+2. Other threads are isolated from your changes until <code>scope.Complete</code>.  This allows other threads to “read” the graph and see a consistent state until and your changes then appear atomically to them.  (<strong>Note</strong>: the Graph is not thread safe for Write operations. See Threading Model).
+3. GraphTransactionScope supports nesting.  For example your could call a method and that method creates another GraphTransactionScope and completes it before returning back to you.  In this case the inner transaction is not really completed until the outer most GraphTransactionScope is completed.  Similarly, if the inner scope is aborted, it is not aborted until the outer GraphTransactionScope is completed.  Note: abort can be tricky, because an inner scope can cause all the outer scopes to be aborted.   This can be a source of bugs. See Trouble Shooting.</p>
+<h3 id="threading-model">Threading Model</h3>
+<p>The Graph object model is thread safe for “read” but not for “write”, there can only be one writer at a time.  The <code>GraphTransactionScopes</code> provide thread isolated storage, so each reader sees a consistent view of the Graph model until each transaction is committed or rolled back.  During commit however, the readers are not isolated while the changes stored in isolated storage are being merged back into the real storage.</p>
+<p>GraphNodeId, GraphCategory and GraphProperty are thread-safe for read and write.</p>
+<h3 id="graph-metadata">Graph Metadata</h3>
+<p><img alt="" src="GraphMetadata.png" /></p>
+<p>The metadata associated with properties and categories is not stored directly in the GraphProperty or GraphCategory.  Instead the metadata is stored in the Graph. In this way different instances of Graph could have different metadata associated with the same category or property. Conversly two Graphs could share the same metadata and reduce the overhead of copying all that redundant information.</p>
+<p>For example, one Graph might want the Background color of anything with the Plant category to be Green, while another Graph might want the Background color of anything with the same category to be Brown.  This is possible, because the <em>“metadata is local to the Graph”</em> and it is not statically shared.</p>
+<p>To enable this, the construction of GraphMetadata properties is done lazily via a “Factory Pattern”, where you provide the factory for the metdata when you register your property or category as follows:</p>
+<pre><code class="language-csharp">GraphCategory Vegetable = Schema.Categories.AddNewCategory(&quot;Vegetable&quot;, () =&gt;
+{
+    GraphMetadata meta = new GraphMetadata(GraphMetadataOptions.Default);
+    meta.SetValue(Background, Brushes.Green);
+    return meta;
+ });
+</code></pre>
+<p>One other advantage of this lazy metadata model is that this metadata is only created when someone actually asks for it.  The <code>GraphMetadataOptions</code> provide the following additional semantics associated with your property or category:</p>
+<ul>
+<li>Immutable - The property cannot be changed once set.</li>
+<li>Removable - The property can be removed after it is set. Otherwise it can only be changed, and not removed.</li>
+<li>Browsable - The property is visible in the UI (such as in tool tips and the property grid</li>
+<li>Serializable - The property will be serialized to DGML when the graph is serialized.</li>
+<li>Substitutable - File path values will be replaced with aliases during serialization.</li>
+<li>Sharable - The property will be transferred along with the GraphObject when the GraphObject is being copied to another graph.  Sometimes it is useful to have
+private properties for you app state only that are not shared across
+copy/paste operations.</li>
+<li>Undoable - The property might not be serializble, but it needs to be saved on the undo stack and made undoable.  Serializable is automatically also undoable, but you might also want properties that are not serializable but are undoable.</li>
+</ul>
+<p>The default set of metadata options is <code>Serializable | Removable | Browsable | Sharable</code>.</p>
+<h3 id="schemas">Schemas</h3>
+<p>Typically applications will want to define a set of related properties and categories, give that set a name and be able to reference the set that way.  This is called a <code>GraphSchema</code>.  A Graph can contain multiple different GraphSchemas.  Typically GraphSchemas are defined statically and hooked into the common schema so they are discoverable from anywhere in the process, this ensures that properties are typed the same way throughout the process which is important.</p>
+<p>The following shows an example schema that defines a <code>Background</code> property of type Brush and a <code>Vegetable</code> category that has a default typed value of Green for the Background property.</p>
+<pre><code class="language-csharp">using Microsoft.VisualStudio.GraphModel.Schemas;
+public static class MySchema
+{
+    static GraphSchema Schema;
+    public static GraphCategory Vegetable;
+    public static GraphProperty Background;
+
+    static MySchema()
+    {
+        Schema = new GraphSchema(&quot;MySchema&quot;);
+        GraphCommonSchema.Schema.AddSchema(Schema);
+
+        Background = Schema.Properties.AddNewProperty(&quot;Background&quot;, typeof(Brush));
+        Vegetable = Schema.Categories.AddNewCategory(&quot;Vegetable&quot;, () =&gt;
+        {
+            GraphMetadata meta = new GraphMetadata(
+                &quot;Vegetable&quot;,
+                &quot;This is a description of the category&quot;,
+                &quot;Living Things&quot;,
+                GraphMetadataOptions.Default);
+            meta.SetValue(Background, Brushes.Green);
+            return meta;
+        });
+    }
+}
+</code></pre>
+<p>You can then use your category like this:</p>
+<pre><code class="language-csharp">Graph g = new Graph();
+g.Nodes.GetOrCreate(&quot;foo&quot;, null, MySchema.Vegetable);
+g.Save(@&quot;d:\temp\graph.dgml&quot;);
+</code></pre>
+<p>And the result will be serialized to the following DGML:</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;DirectedGraph xmlns=&quot;http://schemas.microsoft.com/vs/2009/dgml&quot;&gt;
+  &lt;Nodes&gt;
+    &lt;Node Id=&quot;foo&quot; Category=&quot;Vegetable&quot; /&gt;
+  &lt;/Nodes&gt;
+  &lt;Links /&gt;
+  &lt;Categories&gt;
+    &lt;Category Id=&quot;Vegetable&quot; Background=&quot;#FF008000&quot; /&gt;
+  &lt;/Categories&gt;
+  &lt;Properties&gt;
+    &lt;Property Id=&quot;Background&quot; DataType=&quot;System.Windows.Media.Brush&quot; /&gt;
+  &lt;/Properties&gt;
+&lt;/DirectedGraph&gt;
+
+</code></pre>
+<p>You can also fetch the metadata using the <code>GetMetadata</code> method on
+<code>GraphProperty</code> and <code>GraphCategory</code>:</p>
+<pre><code class="language-csharp">Graph g = new Graph();
+var node = g.Nodes.GetOrCreate(&quot;foo&quot;, null, MySchema.Vegetable);
+GraphCategory c = node.Categories.First();
+GraphMetadata m = c.GetMetadata(g);
+Console.WriteLine(m.Description);
+</code></pre>
+<p>This prints the message <code>This is a description of the category</code>.</p>
+<p>Notice that to get the metadata for a given category or property you need to
+provide the owing <code>Graph</code> object.</p>
+<p><code>GraphMetadata</code> belongs to a graph instance, it is not static.
+This makes it easier to compose Graph objects in a large product like Visual Studio without without having to force every plugin to use a fixed common schema.</p>
+<h3 id="default-schema">Default Schema</h3>
+<p>The following default schema is provided with every Graph by default.  It defines categories and properties that are used by the Graph Model API itself and are common enough to be shared by all Graph instances.</p>
+<pre><code class="language-csharp">public static class GraphCommonSchema
+{
+    public static GraphSchema Schema { get; }
+    public static GraphProperty Visibility { get; }
+    public static GraphProperty UniqueId { get; }
+    public static GraphProperty TargetNode { get; }
+    public static GraphProperty SourceNode { get; }
+    public static GraphProperty Label { get; }
+    public static GraphProperty IsTag { get; }
+    public static GraphProperty IsPseudo { get; }
+    public static GraphProperty IsContainment { get; }
+    public static GraphProperty Group { get; }
+    public static GraphProperty ValueLabel { get; }
+    public static GraphCategory Contains { get; }
+    public static GraphProperty GroupLabel { get; }
+    public static GraphProperty Value { get; }
+    public static GraphProperty TargetType { get; }
+    public static GraphProperty Property { get; }
+    public static GraphProperty Expression { get; }
+    public static GraphProperty IsEnabled { get; }
+    public static GraphProperty IsCursorContainingMethod { get; }
+    public static GraphProperty IsDragSource { get; }
+    public static GraphProperty DelayedCrossGroupLinksState { get; }
+    public static GraphProperty DelayedChildNodesState { get; }
+    public static GraphProperty BaseUri { get; }
+    public static GraphProperty ToolTip { get; }
+    public static GraphProperty Version { get; }
+}
+</code></pre>
+<h3 id="styles">Styles</h3>
+<p>The GraphModel provides a way to define GraphProperty values in a “conditional” way based on conditional expressions stored in Conditional Styles.  While the name “Style” has user interface connotations, this is not the only reason to use styles.  You could also think of Styles as a system for generating “Computed Property  Values”.</p>
+<p>You’ll see the following classes in the <code>Microsoft.VisualStudio.GraphModel.Styles</code> namespace:</p>
+<p><img alt="" src="GraphStyles.png" /></p>
+<p>Conditional styles look similar to WPF styles, but the expressions can be more powerful.  The following is a conditional style serialized as DGML.</p>
+<pre><code class="language-xml">&lt;Style TargetType=&quot;Node&quot; GroupLabel=&quot;Class&quot; ValueLabel=&quot;Has category&quot;&gt;
+    &lt;Condition Expression=&quot;HasCategory('Class')&quot; /&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#D3DCEF&quot; /&gt;
+    &lt;Setter Property=&quot;Icon&quot; Value=&quot;CodeSchema_Class&quot; /&gt;
+&lt;/Style&gt;
+</code></pre>
+<p>This style defines a Background and Icon property value for all nodes that have the “Class” category.  The side effect of having this style associated with the Graph object is that any time you call GetValue on a node that also has any category based on the “Class” category, you will get back the Background property value defined above.</p>
+<pre><code class="language-csharp">GraphNode foo = g.Nodes.GetOrCreate(&quot;foo&quot;, null, MySchema.Class);
+Brush brush = foo.GetValue&lt;Brush&gt;(MySchema.Background);
+</code></pre>
+<p>This example is the same as storing the Background property on the GraphCategory metadata, however the conditional style expression can be a lot richer.  For example, the following expression will cause the style to be applied only if the class is public and has more than 10 outgoing links.</p>
+<pre><code class="language-xml">&lt;Condition Expression=&quot;IsPublic and OutgoingLinkCount &gt; 10&quot; /&gt;
+</code></pre>
+<p>The property setters can also provide expressions instead of fixed values, so that you can have computed values. The following example shows how you can combine these ideas to produce interesting results:</p>
+<pre><code class="language-xml">&lt;Style TargetType=&quot;Node&quot; GroupLabel=&quot;Coverage&quot; ValueLabel=&quot;Good&quot;&gt;
+    &lt;Condition Expression=&quot;Coverage &amp;gt; 80&quot; /&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot; /&gt;
+&lt;/Style&gt;
+&lt;Style TargetType=&quot;Node&quot; GroupLabel=&quot;Coverage&quot; ValueLabel=&quot;Ok&quot;&gt;
+    &lt;Condition Expression=&quot;Coverage &amp;gt; 50&quot; /&gt;
+    &lt;Setter Property=&quot;Background&quot; Expression=&quot;Color.FromRgb(180 * Math.Max(1, (80 - Coverage) / 30), 180, 0)&quot; /&gt;
+&lt;/Style&gt;
+&lt;Style TargetType=&quot;Node&quot; GroupLabel=&quot;Coverage&quot; ValueLabel=&quot;Bad&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Expression=&quot;Color.FromRgb(180, 180 * Coverage / 50, 0)&quot; /&gt;
+&lt;/Style&gt;
+</code></pre>
+<p>This set of styles breaks the nodes into groups.  The first group has “Coverage” property &gt; 80, the next has Coverage &gt; 50, and the last one has all the others.  Then a Background color property is computed based on the Coverage property values so that the result is a gradation of colors between green and red that illustrate the amount of Coverage that each node has:</p>
+<p><img alt="" src="GraphStyleDemo.png" /></p>
+<p>This shows that Styles are applied in a given order (they order in which they are added to the <code>ConditionalStyleCollection</code>), and the style that matches first owns the properties it is setting.  In other words, the following Styles that also match, will only be able to affect different properties on the nodes.  Another way to say it is that the properties affected by matching styles are mututally exlusive.</p>
+<p>Styles can have a TargetType of Node, Link or Group.</p>
+<h3 id="style-compilation-evaluation">Style Compilation &amp; Evaluation</h3>
+<p>Styles will not automatically be applied to your Graph unless you Compile the style set using the <code>Compile</code> method on the <code>GraphConditionalStyleCollection</code>.</p>
+<h3 id="style-eventing">Style Eventing</h3>
+<p>Your application may want to receive PropertyChange events on nodes and links whenever the style is changed, or the property values on which they are conditionally evaluated change.  For example, in the above example if I change the “Coverage” property from 50 to 80, then I expect the “Background” property value to change in the user interface.  But how does this work?</p>
+<p>A Graph “Updated” event will not be fired automatically in this case and the GraphNode PropertyChange event will not be fired automatically when you set the Coverage property.</p>
+<p>Once you Compile your GraphConditionalStyleCollection , it will then start tracking changes to properties in the Graph and it will remember if it sees any property change that has a conditional expression or setter expression that references that property.</p>
+<p>Then at the time you want your user interface updated you must call the <code>RaisePendingPropertyChangeEvents</code> passing in the nodes you want updated.  You might limit it to just the visible nodes in your user interface for example.</p>
+<p>This will then raise <code>OnPropertyChange</code> events for all the affected style setters, in this case the “Background” properties change events are raised and it raises it only on graph objects that match the conditional expressions.</p>
+<p>See Data Binding for more information.</p>
+<h3 id="psuedo-nodes-and-links">Psuedo Nodes and Links</h3>
+<p>Sometimes it is handy to generate fake nodes and links in your Graph object that you do not want serialized back to disk.  In this case you can add the IsPseudo property to them and when you save the Graph they will disappear:</p>
+<pre><code class="language-csharp">GraphNode fake = g.Nodes.GetOrCreate(&quot;fake&quot;);
+fake.IsPseudo = true;
+</code></pre>
+<h3 id="serialization">Serialization</h3>
+<p>The Graph model can serialize itself to and from the DGML XML format.  The easiest way to serialize a graph is using the Load and Save methods:</p>
+<pre><code class="language-csharp">Graph graph = Graph.Load(dgmlFile);
+graph.Save(@&quot;d:\temp\graph.dgml&quot;);
+</code></pre>
+<p>That is pretty much all you will ever need to know. There is a GraphSerializationSettings class that allows you to control sorting and do some error handling.  You can also use it to re-write the GraphNodeIds during serialization which can be handy way to transform names.</p>
+<h3 id="graphdataobject">GraphDataObject</h3>
+<p>Related to the topic of serialization is the <code>GraphDataObject</code> helper class which implements the WPF <code>IDataObject</code> interface and provides a way to exchange graph objects in copy/paste and/or drag/drop operations.  In order to make this possible the Graph object itself is also <code>ISerializable</code>.  It’s implementation just uses it’s built in DGML serialization abilities.</p>
+<p>When you create a GraphDataObject you can decide which clipboard formats you want it to publish using this method:</p>
+<pre><code class="language-csharp">public static IDataObject Create(IEnumerable&lt;GraphNode&gt; selection, Guid sourceGraphId, int levels, DataFormat[] formats)
+</code></pre>
+<p>Or you can use the other method and get the default set AllDgmlFormats which include DGML, XML, Text and UnicodeText.  The Text format is DGML, so some applications like to publish only DGML and XML and switch the Text format to something more readable.</p>
+<p>The GraphDataObject also provides helper methods for efficiently sniffing the clipboard to see if it contains something like valid DGML:</p>
+<pre><code class="language-csharp">public static bool IsClipboardDgml()
+</code></pre>
+<p>and</p>
+<pre><code class="language-csharp">public static bool IsDgml(string markup)
+</code></pre>
+<h3 id="merging-dragdrop">Merging Drag/Drop</h3>
+<p>If you bring subsets of a Graph across in multiple drag/drop operations, you will probably want the “links” to hook up.  For example, suppose you have this graph:</p>
+<p><img alt="" src="DragDrop1.png" /></p>
+<p>Now suppose you grab the “Foo” node and drag it or copy/paste it to a new graph.  You will want this:</p>
+<p><img alt="" src="DragDrop2.png" /></p>
+<p>Now go back to the original graph and bring over the comment.  You will probably expect to see this:</p>
+<p><img alt="" src="DragDrop3.png" /></p>
+<p>For this to work the GraphDataObject needs to contain more than just the selected nodes.  Usually, you call <code>GraphDataObject.Create</code> with the selection, and pass the “levels” parameter value 1 so that it includes all nodes 1 link away from the selection.</p>
+<p>Then on the drop/paste side you want to “Merge” that GraphDataObject into your target Graph object, and delete the extra information that was not needed.  For example, in the first drop operation you do not want the comment or the link.  In the second drop operation you do want the link but you don’t need Foo because you already have it, so you want it merged.</p>
+<p>To enable all this, the <code>GraphDataObject.Create</code> method does the following:
+1.  It marks the selected nodes with an <code>GraphCommonSchema.IsDragSource</code> property.
+2.  It marks all nodes that are not in the selection with :
+<code>SetValue(GraphCommonSchema.Visibility, System.Windows.Visibility.Hidden)</code></p>
+<p>Then on the Merge side you can:
+1.  Make sure not to override Visibility on the target nodes
+2.  Do not create nodes or links if the dropped node is hidden and the target nodes didn’t already exist
+3.  Select all nodes with <code>IsDragSource</code> property, then remove this temporary property.</p>
+<p>In this way you can get the above semantics in your application.</p>
+<h3 id="advanced-serialization">Advanced Serialization</h3>
+<p>You are welcome to read about advanced compression techniques below, but few people will need to know about this because the Graph Load and Save methods hide all this gory detail from you.  If you look at a serialized DGML file, however, you may notice some of these things and wonder how they work.</p>
+<h4 id="file-path-substitution">File Path Substitution</h4>
+<p>You might have many repetitions of a long file path in your node ids or in property values.  For example, a graph of mscorlib could contain thousands of copies of the string <code>file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll</code>.  In this case it is possible to tell the Graph to give this path a name, let’s call it “FxUri” and then everywhere this path is found it can write out the variable substitution instead which is much shorter:
+$(FxUri)/mscorlib.dll</p>
+<p>These path names are defined in the <code>GraphPathSerializationDictionary</code> which is available from the CommonPaths property on the Graph object.  This property is static so you can define the common paths before you call Graph.Load.  This makes it possible to also map these common paths to different locations on your machine, which can help to make DGML documents more “portable”.</p>
+<p>The Graph serializer sets up a bunch of common paths by default, basically all the Environment.GetSpecialFolders plus .NET frameworks, reference assemblies and your current directory.  Your application can listen to the CommonPathsAdded event on the GraphPathSerializationDictionary to add any more paths that are not predefined that way.</p>
+<h4 id="graphnodeid-aliasing">GraphNodeId aliasing</h4>
+<p>GraphNodeIds can also contain many redundant sub-parts, as shown in the top section on GraphNodeId.  Serializing all this back out can result in lots of redundant text.  So the Graph serializer creates integer values for each unique GraphNodeId called “aliases” and uses those instead of the long serialized text.  Then it writes the aliases to disk in a special section of the DGML file as follows:</p>
+<pre><code class="language-xml">&lt;IdentifierAliases&gt;
+&lt;Alias n=&quot;1&quot; Uri=&quot;Assembly=$(fxUri)/mscorlib.dll&quot; /&gt;
+&lt;Alias n=&quot;2&quot; Id=&quot;Namespace=System&quot; /&gt;
+&lt;Alias n=&quot;3&quot; Id=&quot;(@1 @2)&quot; /&gt;
+&lt;Alias n=&quot;4&quot; Id=&quot;(@1 @2 Type=String)&quot; /&gt;
+&lt;Alias n=&quot;6&quot; Id=&quot;(@1 @2 Type= String Member=Join)&quot; /&gt;
+&lt;/IdentifierAliases&gt;
+</code></pre>
+<p>Then the ids in the nodes and links can be very small like this:</p>
+<pre><code class="language-xml">&lt;Link Source=&quot;@3&quot; Target=&quot;@4&quot; Category=&quot;Contains&quot; /&gt;
+&lt;Link Source=&quot;@3&quot; Target=&quot;@5&quot; Category=&quot;Contains&quot; /&gt;
+&lt;Link Source=&quot;@4&quot; Target=&quot;@6&quot; Category=&quot;Contains&quot; /&gt;
+&lt;Link Source=&quot;@4&quot; Target=&quot;@7&quot; Category=&quot;IndirectlyContains&quot; /&gt;
+&lt;Link Source=&quot;@6&quot; Target=&quot;@7&quot; Category=&quot;Contains&quot;&gt;
+</code></pre>
+<p>Notice that the aliases can use the path substition as well.</p>
+<p>Note: you will never see path variables or aliases in memory after you do Graph.Load.</p>
+<h3 id="linq-extensions">Linq Extensions</h3>
+<p><code>GraphEnumerable</code> provides the following extension methods:
+- AsNodes – this method makes it easier to deal with heterogeneous collections of GraphNode and GraphGroup by unwrapping the GraphGroup objects, returning only GraphNodes.
+- GetGroups – this method returns only GraphGroup objects stripping out any objects that are not groups.
+- GetDescendants – this method returns all descendants of the given graph objects, independent of whether those objects are GraphNodes or GraphGroups.</p>
+<h3 id="data-binding">Data Binding</h3>
+<p>In order to support dynamic languages and WPF data binding the GraphObject implements the following interfaces:</p>
+<ul>
+<li>IDynamicMetaObjectProvider</li>
+<li>INotifyPropertyChanged</li>
+<li>GraphNodeIdPropertyDescriptor</li>
+</ul>
+<p>The dynamic meta object provides BindGetMember and BindSetMember as a way to set properties on the graph.  This makes it possible to interact with GraphProperties using dynamics like this:</p>
+<pre><code class="language-csharp">dynamic node = g.Nodes.GetOrCreate(&quot;Foo&quot;);
+node.Color = Colors.Red;
+</code></pre>
+<p>This combined with <code>INotifyPropertyChanged</code> allows WPF to you to bind to the properties stored in a GraphObject to a visual element and WPF will know how to watch for property change events on those properties.</p>
+<p>The <code>GraphNodeIdPropertyDescriptor</code> is a specialized class that makes it possible to present a GraphNodeId in a property window in a structured way like this:</p>
+<p><img alt="" src="GraphNodeIdPropertyDescriptor.png" /></p>
+<h3 id="graph-providers">Graph Providers</h3>
+<p>Some interfaces are defined for those who want to create a plugin model that provides Graph subsets to other parts of the application.  This is used in Visual Studio - it is how languages extend Solution Explorer with type information.</p>
+<p>Graph generators like to share common concepts in the form of graph schemas containing common GraphNodeIdNames, GraphCategories and GraphProperites.  These shared classes are described in GraphProvider.docx spec.</p>
+<h3 id="data-virtualization">Data Virtualization</h3>
+<p>Sometimes you might want a graph that represents only a portion of what is available in a data base.  In this case it is handy to remember which groups are fully populated and which are not.  The following GraphProperties helps with this:</p>
+<ul>
+<li>DelayedChildNodesState</li>
+<li>DelayedCrossGroupLinksState</li>
+<li>IsDelayedCrossGroupLink</li>
+<li>DelayedDataState</li>
+</ul>
+<p>No actual support for Data Virtualization is provided beyond just this convention for annotating where you are doing Data Virtualization in your Graph objects.  This could help for example, in creating visuals that know how to represent this concept in a user interface, independent of the implementation behind it.</p>
+<h3 id="trouble-shooting">Trouble Shooting</h3>
+<p>One common source of bugs is when someone forgets to include a <code>scope.Complete()</code> at the end of their <code>GraphTransactionScope</code> using block.  This will cause the transaction to roll back, along with any outer GraphTransactionScopes, and it will look like the graph edits didn’t work, when in reality, they are being rolled back.</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="../password_vault/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../password_vault/" class="btn btn-xs btn-link">
+        Secure Password Vault
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

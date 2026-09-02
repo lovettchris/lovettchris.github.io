@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/password_vault/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Secure Password Vault - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "PasswordVault", url: "#_top", children: [
+              {title: "Implementation", url: "#implementation" },
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="passwordvault">PasswordVault</h1>
+<p>See <a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/PasswordVault.mp4">demo video (mp4 13mb)</a></p>
+<p><a href="http://www.lovettsoftware.com/downloads/passwordvault/PasswordVault.application">Password Vault</a> is my latest little ClickOnce app, built on the <a href="http://www.microsoft.com/download/en/details.aspx?id=17851">.NET Framework 4.0.</a></p>
+<p>NEW: I&rsquo;ve also added a windows store app, see <a href="https://www.microsoft.com/store/apps/9nblggh2l5wv">Secure Password Vault app</a> and associated <a href="https://lovettsoftwarestorage.blob.core.windows.net/videos/PasswordVault.mp4">new demo video</a>.</p>
+<p>Managing online accounts is a real hassle these days. I have 180 separate userids and passwords to manage. Who can remember all that? And it&rsquo;s not just userids and passwords any more, it&rsquo;s also secret questions, password images, secure credit card numbers, links to specific URLs, license keys, and all sorts of other miscellaneous information associated with my online accounts.</p>
+<p>The temptation of course is to get sloppy and use the same user id and password on every site and use real &ldquo;secret&rdquo; questions that I can remember but a wise person once said &ldquo;don&rsquo;t put all your eggs in one basket&rdquo;. If a hacker breaks into one site I don&rsquo;t want them to be able to steal my entire identity across all my other accounts, so I&rsquo;ve diligently kept separate unique userids and passwords on every site and fake random unique secret questions. I also use strong passwords, combinations of digits, letters, and other special characters. But managing all this unique secure information for every account is a big hassle.</p>
+<p>Up till now I&rsquo;ve used a <a href="http://office.microsoft.com/en-us/help/password-protect-documents-workbooks-and-presentations-HA010148333.aspx#BM1">password encrypted Microsoft Word</a> file. Being a free-form text editor Word lets me paste anything I want, including all those annoying &ldquo;secret questions&rdquo;, even password image keys that some sites are now using, like Bank of America. But I want these passwords to be readily available on every machine that I use. Since the Word document is itself password encrypted, I can store it on my OneDrive folder which is automatically copied to all my machines.</p>
+<p>But then if I edit the password file on one machine while it is offline then edit the file on another machine before it syncs then I have a conflict and will have to manually merge the two slightly different Word documents which is a real hassle.</p>
+<p>So I wanted something that is a bit more structured that can handle automatic merging for me, but also without losing the flexibility of free form text editing for all that other random information besides the core web site, userid and password fields.</p>
+<p>So I built <a href="http://www.lovettsoftware.com/downloads/passwordvault/PasswordVault.application">Password Vault</a>.</p>
+<p>The screen shot below shows a typical password file. Highlighted in various shades of green are the most recent changes. This green highlight fades over time, disappearing after one month.</p>
+<p><img alt="PasswordVault1.png" src="PasswordVault1.png" /></p>
+<p>When you select a row the 5th field appears containing a full rich text editor where you can paste any other details like secret questions or even an image key. You can cut &amp; paste anything you want into this field and and it can be as big as you want. This field is also searchable.</p>
+<p><img alt="PasswordVault2.png" src="PasswordVault2.png" /></p>
+<p>When the program first starts the focus will be on the search field since you typically have some place in mind already before you launch the app. After you type in your search term (which is not case sensitive) the view will automatically filter down to show any matching rows:</p>
+<p><img alt="PasswordVault3.png" src="PasswordVault3.png" /></p>
+<p>From there you can select the row you want and press F12 to open that URL, and then you can copy the user name and password into the web site login page.</p>
+<h3 id="implementation">Implementation</h3>
+<p>I realize there&rsquo;s a million similar apps out there, I just wanted to see how easy it would be to build one. The following is the solution I came up with.</p>
+<p><img alt="PasswordVault4.png" src="PasswordVault4.png" /></p>
+<p><a href="http://lovettsoftware.com/LovettSoftware/DGML/Demos/Design/PasswordVault.dgml">Design.dgml (276.06 kb)</a></p>
+<p>PasswordVault is about 1000 lines of code and shows the power of .NET Framework. It uses the .NET Cryptography api to encrypt/decrypt your password files using 256 bit encryption, and it uses WPF for the User Interface including a RichTextBox for the free form text editing part. PasswordVault also uses the <a href="http://windows.microsoft.com/en-US/windows7/What-is-Credential-Manager">Microsoft Credential Manager</a> to safely store your master password so you don&rsquo;t have to keep entering the master password every time you open your password file.</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../GraphModel/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../GraphModel/" class="btn btn-xs btn-link">
+        GraphModel Specification
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../software_trails/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../software_trails/" class="btn btn-xs btn-link">
+        Software Trails
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>

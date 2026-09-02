@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight"
+               xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="A" Category="Tree" Label="Tree" />
+    <Node Id="B" Category="Element" Label="Water" />
+  </Nodes>
+  <Links>
+    <Link Source="A" Target="B" />
+  </Links>
+  <Categories>
+    <Category Id="Element" Background="#FF0000FF" />
+    <Category Id="Plant" FontStyle="Italic" />
+    <Category Id="Tree" Icon="Tree.png" BasedOn="Plant" Shape="None" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="Background" Description="The background color" DataType="System.Windows.Media.Brush" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="Icon" Label="Icon" Description="Icon" DataType="System.String" />
+    <Property Id="Shape" DataType="System.String" />
+    <Property Id="FontStyle" DataType="System.Windows.FontStyle" />
+  </Properties>
+</DirectedGraph>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="canonical" href="https://lovettchris.github.io/posts/tower_garden/">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Tower Garden - Lovett Software</title>
+    <link href="/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="/css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link href="../../css/main.css" rel="stylesheet">
+    <link href="../../css/syntax.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap-3.3.7.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Tower Garden Yumminess!", url: "#_top", children: [
+              {title: "Tinkering\u0026hellip;", url: "#tinkering" },
+          ]},
+        ];
+
+    </script>
+    <script src="/js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-UA-89203408-1', 'lovettsoftware.com');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<div id="cookie-banner"></div>
+
+
+<div class="wrapper wm-page-content">
+  <div class="container-fluid">
+    <a name="_top"></a>
+      
+
+      <h1 id="tower-garden-yumminess">Tower Garden Yumminess!</h1>
+<p>I love gardening and I first learned about this really good <a href="https://www.towergarden.com/">Tower
+Garden</a> at Microsoft where they have a bunch of them around campus and
+they used to grow food for the salad bar back in those days when people used to actually go into the
+office.</p>
+<p>So instead of waiting for coronavirus to piss off I decided to splurge a little and get myself one
+of these nifty indoor vertical gardens.  I&rsquo;m happy to report assembly was easy, and within
+practically no time at all I was loaded with fresh greens.</p>
+<p><img alt="tower" src="tower1.png" /></p>
+<p>I still have a vege garden outside, but out there I have to constantly battle with the rabbits,
+deer, and the ever present slugs.  Indoors the produce is so perfect it is crazy, every leaf is full
+vibrant perfection, not the slightest damage from pests, and with no insecticides it is super
+healthy and ready to eat any time.</p>
+<p><img alt="lettuce" src="lettuce.png" /></p>
+<p>The thing runs itself, it has automatic lighting on 12 hours per day and  the tank holds lots of
+water and a automatic timer on the pump runs the water down the inside of the tower ever 15 minutes
+so, no matter what, the plants are happy.  Once a week I top up the tank with fresh water with these
+nutrients they provided, about 20ml per gallon:</p>
+<p><img alt="nutrients" src="nutrients.png" /></p>
+<p>Then the last step is to keep the pH balanced.  My filtered tap water is about pH 7.1, but the
+nutrients are slightly acidic, so normally I need about a teaspoon of alkali to keep the tank in
+the recommended range of 5.5 to 6.5. They provided a nice little test kit:</p>
+<p><img alt="ph" src="phtest.png" /></p>
+<p>So this is about 10 minutes once a week.  Planting is easy whenever I devour one of the plants that
+is ready for harvesting I simply plop in a new starter.  You can buy the starter plants from Tower
+Garden, or grow them yourself from seeds. They provide an easy way to do that too.</p>
+<p>All up the entire system works really well.  I&rsquo;ve had it now for about 2 months and it has produced
+all the leafy greens I need for me and Heidi for the last month already.  I also have some yummy
+herbs growing, from Chocolate Mine, to Italian Parsley, and a huge basil.  I&rsquo;ve never seen such huge
+basil leaves before and they taste amazing.</p>
+<h2 id="tinkering">Tinkering&hellip;</h2>
+<p>Of course, I would not be satisfied with just that, I need to tinker with it. My son, Zach, found
+this awesome <a href="https://kylegabriel.com/projects/2020/06/automated-hydroponic-system-build.html">hydroponic system built by Kyle
+Gabriel</a>.</p>
+<p>So that&rsquo;s my target, the most useful thing to start with is automated pH sensing. Karl chose really
+nice pH sensor from Atlas Scientific for his system so I got the same one from Amazon.  I also
+wanted to use my <a href="https://www.pjrc.com/store/teensy41.html">Teensy 4.1</a> with the <a href="https://www.pjrc.com/store/ethernet_kit.html">Ethernet
+Kit</a> because it can talk directly to the sensor over
+UART, and serve up a nice little HTTP server on my local network.</p>
+<p>Getting it hooked up was easy, just drop the sensor in the tank:</p>
+<p><img alt="sensor" src="phsensor.png" /></p>
+<p>and connect it to my Teensy, plug my Teensy into the network and voilà !</p>
+<p><img alt="teensy" src="teensy.png" /></p>
+<p>Any web browser in my house can now check the pH levels:</p>
+<p><img alt="server" src="server.png" /></p>
+<p>Great.  So no need for the liquid pH test kit, I now have a much more accurate number.
+Here I see a pH level of 5.9 which is ok.  I see an very quick response any time I add acid or alkali
+to the tank.</p>
+<p>The Teensy 4.1 source code lives here <a href="https://github.com/lovettchris/SmartGarden">https://github.com/lovettchris/SmartGarden</a>.</p>
+<p>Next step the automatic pumping of acid/alkali to keep it balanced&hellip;  fun fun fun&hellip;</p>
+
+    <br>
+      
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../windows_phone/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../windows_phone/" class="btn btn-xs btn-link">
+        Windows Phone - Lessons Learned
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../simplicity/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../simplicity/" class="btn btn-xs btn-link">
+        Genius of Simplicity
+      </a>
+    </div>
+    
+  </div>
+
+      <br>
+  </div>
+</div>
+
+<footer class="wm-page-content">
+
+  <section class="footer-join pt-40 pb-80">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+      </div>
+    </div>
+    <div class="row">
+      Lovett Software
+   </div>
+  </div>
+</section>
+</footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).addClass("table");
+        $(this).addClass("table-bordered");
+        $(this).addClass("table-striped");
+        $(this).addClass("table-condensed");
+      });
+
+    });
+</script>
+
+</body>
+</html>
